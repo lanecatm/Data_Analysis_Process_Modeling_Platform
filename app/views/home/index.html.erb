@@ -1,0 +1,87 @@
+<div class="jumbotron">
+    <!-- 搜索框 -->
+    <div class="container">
+        <!--
+        <div class = "row">
+            <div class="col-md-offset-3 col-md-6">
+                <h3>Data Analysis Process Modeling Platform</h3>
+            </div>
+        </div>
+        -->
+        <div class="col-md-offset-3 col-md-6">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#bycategory" aria-controls="bycategory" role="tab" data-toggle="tab">Title</a></li>
+                <li role="presentation"><a href="#bytag" aria-controls="bytag" role="tab" data-toggle="tab">Keyword</a></li>
+                <!--<li role="presentation"><a href="#bykeyword" aria-controls="bykeyword" role="tab" data-toggle="tab">关键字</a></li>-->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="bycategory">
+                    <%= form_for :search_request, url:process_informations_search_path do |f| %>
+                        <div class="input-group">
+                            <%= f.text_field:search_content, :class=>"form-control", :placeholder => "Search for title" %>
+                            <span class="input-group-btn">
+                                <%= f.submit:"Search",:class => "btn btn-primary" %>
+                            </span>
+                        </div><!-- /input-group -->
+                    <% end %>
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane" id="bytag">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for tag ...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">Search</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div>
+
+                <!--
+                <div role="tabpanel" class="tab-pane" id="bykeyword">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for tag ...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">搜索</button>
+                        </span>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div><!-- /col-md-12 -->
+    </div><!-- /container -->
+</div>
+
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Category 1</h2>
+            <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" data-holder-rendered="true" style="width: 200px; height: 200px;">
+            <p>Introduction to category 1</p>
+            <p><a class="btn btn-default" href="./Example1.htm" role="button">More »</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Category 2</h2>
+            <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" data-holder-rendered="true" style="width: 200px; height: 200px;">
+            <p>Introduction to category 2</p>
+            <p><a class="btn btn-default" href="./Example1.htm" role="button">More »</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Category 3</h2>
+            <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" data-holder-rendered="true" style="width: 200px; height: 200px;">
+            <p>Instruction to category 3</p>
+            <p><a class="btn btn-default" href="./Example1.htm" role="button">More »</a></p>
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+    <p>© SJTU 2017</p>
+    </footer>
+</div> <!-- /container -->
+
+
+
+
