@@ -3,17 +3,17 @@
 one:
   name: MyString
   introduction: MyText
-  author: MyString
-  createtime: 2017-02-19 16:13:01
-  version: MyString
-  algorithm: MyString
   functional_description: MyText
+  createtime: 2017-03-06 20:45:51
+  edittime: 2017-03-06 20:45:51
+  version: MyString
+  version_num: 1
 
 two:
   name: MyString
   introduction: MyText
-  author: MyString
-  createtime: 2017-02-19 16:13:01
-  version: MyString
-  algorithm: MyString
   functional_description: MyText
+  createtime: 2017-03-06 20:45:51
+  edittime: 2017-03-06 20:45:51
+  version: MyString
+  version_num: 1

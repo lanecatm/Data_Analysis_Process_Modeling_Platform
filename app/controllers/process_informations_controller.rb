@@ -6,7 +6,8 @@ class ProcessInformationsController < ApplicationController
         @process_information = ProcessInformation.new(info_params)
 
         @process_information.save
-        redirect_to @process_information
+        #redirect_to @process_information
+        redirect_to edit_process_information_path(@process_information.id)
     end
 
     def show
@@ -24,6 +25,10 @@ class ProcessInformationsController < ApplicationController
         else
             @process_informations = ProcessInformation.where("name like ?", "%" + @search_request.search_content + "%").all
         end
+    end
+
+    def edit
+        @process_information = ProcessInformation.find(params[:id])
     end
 
     def destroy

@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220114552) do
+ActiveRecord::Schema.define(version: 20170306125524) do
+
+  create_table "algorithms", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "column_informations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -25,14 +53,25 @@ ActiveRecord::Schema.define(version: 20170220114552) do
 
   add_index "comments", ["process_information_id"], name: "index_comments_on_process_information_id"
 
+  create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "formats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "process_informations", force: :cascade do |t|
     t.string   "name"
     t.text     "introduction"
-    t.string   "author"
-    t.datetime "createtime"
-    t.string   "version"
-    t.string   "algorithm"
     t.text     "functional_description"
+    t.datetime "createtime"
+    t.datetime "edittime"
+    t.string   "version"
+    t.integer  "version_num"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -42,6 +81,26 @@ ActiveRecord::Schema.define(version: 20170220114552) do
     t.string   "search_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "separators", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

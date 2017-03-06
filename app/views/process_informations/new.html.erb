@@ -1,430 +1,81 @@
 
-<!-- 页面标题 -->
-<div class="container">
-    <h1 class="text-center" >Create a new model</h1>
-    <hr/>
-</div>
 
 <!-- 表单 -->
 <div class="container">
     <div class = "row">
-        <div class="col-md-2">
-            <ul class="nav nav-stacked" data-spy="affix" role="tablist">
-                <!--
-                <li>
-                <%= link_to 'Create', new_process_information_path %>
-                </li>
-                <ul class="nav nav-stacked" data-spy = "affix" data-offset-top="25" >
-                    -->
-                    <li role="presentation" class="active"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">&nbsp; &nbsp; Basic Information</a></li>
-                    <li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">&nbsp; &nbsp; Data format</a></li>
-                    <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">&nbsp; &nbsp; Flow diagram</a></li>
-                    <li role="presentation"><a href="#input" aria-controls="input" role="tab" data-toggle="tab">&nbsp; &nbsp; Algorithm input</a></li>
-                    <li role="presentation"><a href="#version" aria-controls="version" role="tab" data-toggle="tab">&nbsp; &nbsp; Version</a></li>
-                    <!--
-                </ul>
-                -->
-            </ul>
+        <div class="col-md-3">
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-6">
             <div class = "row">
                 <!-- Nav tabs -->
-
+                <!-- 页面标题 -->
+                <h3> <!--class="text-center" -->Create a new model
+                </h3>
+                <h4>
+                    <small> A model include xxxxx </small> 
+                </h4>
+                <hr/>
+                <br/>
                 <%= form_for :process_information, :html => {:class => "form-horizontal", :role => "form"}, url:process_informations_path do |f|%>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="preview">
-                            <br/>
-
-                            <!--<form class="form-horizontal" role="form">-->
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Model name</label>
-                                    <div class="col-md-9">
-                                        <%= f.text_field :name, :class => "form-control", :placeholder => "" %>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Model introduction</label>
-                                    <div class="col-md-9">
-                                        <%= f.text_area :introduction, :class => "form-control", :placeholder => "" %>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Author</label>
-                                    <div class="col-md-4">
-                                        <%= f.text_field :author, :class => "form-control", :placeholder => "Username" %>
-                                    </div>
-                                    <label class="col-md-1 control-label">Create time</label>
-                                    <div class="col-md-4">
-                                        <%= f.text_field :createtime, :class => "form-control", :value => Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Version</label>
-                                    <div class="col-md-4">
-                                        <%= f.text_field :version, :class => "form-control", :value => "0.0.1" %>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Category</label>
-                                    <div class="col-md-4">
-                                        <select class="form-control">
-                                            <option>Category 1</option>
-                                            <option>Category 2</option>
-                                            <option>Category 3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Tag</label>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" placeholder="Tag name">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-default">New</button>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <p>
-                                        <span class="label label-default">Tag 1</span>
-                                        <span class="label label-default">Tag 2</span>
-                                        <span class="label label-default">Tag 3</span>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Algorithm</label>
-                                    <div class="col-md-9">
-                                        <%= f.text_field :algorithm, :class => "form-control", :placeholder => "" %>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Functional description</label>
-                                    <div class="col-md-9">
-                                        <%= f.text_area :functional_description, :class => "form-control", :rows => "5"  %>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <!-- Button trigger modal -->
-                                    <div class="col-md-offset-9 col-md-1">
-                                        <%= f.submit :"Save", :class => "btn btn-primary" %>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <%= f.submit :"Next", :class => "btn btn-primary" %>
-                                    </div>
-                                </div>
-
-
-                            </div><!-- tab -->
-                            <div role="tabpanel" class="tab-pane" id="information">
-                                <br/>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Separator</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control">
-                                            <option>separator space</option>
-                                            <option>separator ,</option>
-                                            <option>separator ;</option>
-                                            <option>separator tab</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-default">Add</button>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Input format</label>
-                                    <div class="col-md-5">
-                                        <input type="text" class="form-control" placeholder="Column name">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <select class="form-control">
-                                            <option>int</option>
-                                            <option>double</option>
-                                            <option>string</option>
-                                            <option>time</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-default">Add</button>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <p>
-                                        <span class="label label-default">Column1 int</span>
-                                        <span class="label label-default">Column2 double</span>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Output format</label>
-                                    <div class="col-md-5">
-                                        <input type="text" class="form-control" placeholder="Column name">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <select class="form-control">
-                                            <option>int</option>
-                                            <option>double</option>
-                                            <option>string</option>
-                                            <option>time</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-default">Add</button>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <p>
-                                        <span class="label label-default">Column1 int</span>
-                                        <span class="label label-default">Column2 double</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Case</label>
-                                    <div class="col-md-2">
-                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-                                            New case
-                                        </button>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="form-group">
-                                    <!-- Button trigger modal -->
-                                    <div class="col-md-offset-1 col-md-1">
-                                        <%= f.submit :"Last", :class => "btn btn-primary" %>
-                                    </div>
-                                    <div class="col-md-offset-6 col-md-1">
-                                        <%= f.submit :"Save", :class => "btn btn-primary" %>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <%= f.submit :"Next", :class => "btn btn-primary" %>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="comment">
-
-                                <div class= "row">
-                                    <div class="col-md-12">
-                                        <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" data-holder-rendered="true" src="/assets/image_for_drawing.png">
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class= "row">
-                                    <div class="form-group">
-                                        <!-- Button trigger modal -->
-                                        <div class="col-md-1">
-                                            <%= f.submit :"Last", :class => "btn btn-primary" %>
-                                        </div>
-                                        <div class="col-md-offset-9 col-md-1">
-                                            <%= f.submit :"Save", :class => "btn btn-primary" %>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <%= f.submit :"Next", :class => "btn btn-primary" %>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="input">
-
-
-
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="input_match" class="active"><a href="#input1" aria-controls="input1" role="tab" data-toggle="tab">1  Input-> Algorithm A</a></li>
-                                    <li role="input_match"><a href="#input2" aria-controls="input2" role="tab" data-toggle="tab">2 Algorithm A -> Algorithm B</a></li>
-                                    <li role="input_match"><a href="#input3" aria-controls="input3" role="tab" data-toggle="tab">3 Algorithm B -> Output</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="input1">
-                                        <br/>
-                                        <form class="form-horizontal" role="form">
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">Algorithm A input id</label>
-                                                <div class="col-sm-6">
-                                                    <select class="form-control">
-                                                        <option>User input column attribute 1</option>
-                                                        <option>User input column attribute 2</option>
-                                                        <option>User input column attribute 3</option>
-                                                        <option>User input column attribute 4</option>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">Algorithm A input attribute 1</label>
-                                                <div class="col-sm-6">
-                                                    <select class="form-control">
-                                                        <option>User input column attribute 1</option>
-                                                        <option>User input column attribute 2</option>
-                                                        <option>User input column attribute 3</option>
-                                                        <option>User input column attribute 4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">Algorithm A input attribute 2 (array)</label>
-                                                <div class="col-sm-6">
-                                                    <select class="form-control">
-                                                        <option>User input column attribute 1</option>
-                                                        <option>User input column attribute 2</option>
-                                                        <option>User input column attribute 3</option>
-                                                        <option>User input column attribute 4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-4"></div>
-                                                <div class="col-sm-6">
-                                                    <select class="form-control">
-                                                        <option>User input column attribute 1</option>
-                                                        <option>User input column attribute 2</option>
-                                                        <option>User input column attribute 3</option>
-                                                        <option>User input column attribute 4</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-sm-2">
-
-                                                    <button class="btn">New</button>
-                                                </div>
-                                            </div>
-
-                                            <br/>
-                                            <div class="form-group">
-                                                <!-- Button trigger modal -->
-                                                <div class="col-md-1">
-                                                    <%= f.submit :"Last", :class => "btn btn-primary" %>
-                                                </div>
-                                                <div class="col-md-offset-8 col-md-1">
-                                                    <%= f.submit :"Save", :class => "btn btn-primary" %>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <%= f.submit :"Publish", :class => "btn btn-primary" %>
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane" id="input2">
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane" id="input3">
-                                    </div>
-                                </div>
-
-
-
-
-
-
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="version">
-
-                                <div class="col-md-12">
-                                    <h4> Version operation </h4>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-md-2">
-                                        &nbsp;
-                                    </div>
-
-                                    <div class="col-md-10">
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                Create a new version based on origin.
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                Change the origin version.
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-                                                Create a new model.
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <!-- Button trigger modal -->
-                                    <div class="col-md-1">
-                                        <%= f.submit :"Last", :class => "btn btn-primary" %>
-                                    </div>
-                                    <div class="col-md-offset-8 col-md-1">
-                                        <%= f.submit :"Save", :class => "btn btn-primary" %>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <%= f.submit :"Publish", :class => "btn btn-primary" %>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-12 ">Model name</label>
+                        <div class="col-md-12">
+                            <%= f.text_field :name, :class => "form-control", :placeholder => "" %>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Model introduction <small class="text-muted">(optional)</small></label>
+                        <div class="col-md-12">
+                            <%= f.text_area :introduction, :class => "form-control", :placeholder => "" %>
+                        </div>
+                    </div>
+                    <hr/>
 
-                        <!-- </form> -->
+                    <div class="form-group">
+                        <div class="col-md-10"></div>
+                        <div class="col-md-2">
+                            <%= f.submit :"Create", :class => "btn btn-primary btn-block" %>
+                        </div>
+                    </div>
                 <% end %>
             </div>
         </div>
     </div>
-</div>
-            </div>
-        </div> <!-- /container -->
-        <div class="container">
-            <hr>
-            <footer>
-            <p>© SJTU 2017</p>
-            </footer>
-        </div> <!-- /container -->
+</div> <!-- /container -->
+<div class="container">
+    <hr>
+    <footer>
+    <p>© SJTU 2017</p>
+    </footer>
+</div> <!-- /container -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">New case</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                        <div class="form-group">
-                            <label>Case description</label>
-                            <textarea type="text" class="form-control" placeholder="Description"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="caseInputFile">Upload input file</label>
-                            <input type="file" id="caseInputFile">
-                        </div>
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Submit</button>
-                    </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">New case</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <div class="form-group">
+                    <label>Case description</label>
+                    <textarea type="text" class="form-control" placeholder="Description"></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="caseInputFile">Upload input file</label>
+                    <input type="file" id="caseInputFile">
+                </div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
             </div>
         </div>
+    </div>
+</div>
 
 
