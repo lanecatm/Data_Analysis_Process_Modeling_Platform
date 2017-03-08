@@ -3,17 +3,25 @@
 one:
   name: MyString
   introduction: MyText
-  functional_description: MyText
-  createtime: 2017-03-06 20:45:51
-  edittime: 2017-03-06 20:45:51
+  author_id: 
+  last_editor_id: 
+  createtime: 2017-03-07 16:45:16
+  edittime: 2017-03-07 16:45:16
   version: MyString
-  version_num: 1
+  version_parent_id: 
+  category_id: 
+  functional_description: MyText
+  separator_id: 
 
 two:
   name: MyString
   introduction: MyText
-  functional_description: MyText
-  createtime: 2017-03-06 20:45:51
-  edittime: 2017-03-06 20:45:51
+  author_id: 
+  last_editor_id: 
+  createtime: 2017-03-07 16:45:16
+  edittime: 2017-03-07 16:45:16
   version: MyString
-  version_num: 1
+  version_parent_id: 
+  category_id: 
+  functional_description: MyText
+  separator_id: 

@@ -290,7 +290,7 @@
                             </tr>
                             <tr>
                                 <th>Category</th>
-                                <td>Category 1</td>
+                                <td><%= @category_id %></td>
                             </tr>
 
                             <tr>
@@ -389,7 +389,8 @@
                             <h2>Comments</h2>
                             </li>
                             -->
-                            <% @process_information.comments.each do |comment| %>
+                            <!--
+                            < @process_information.comments.each do |comment| >
                                 <li class="list-group-item">
                                 <div class="media">
                                     <div class="media-left">
@@ -402,16 +403,17 @@
                                             <h4>Comment</h4>
                                         </div>
                                         <p>
-                                        <%= raw(comment.body) %>
+                                        <= raw(comment.body) >
                                         Author:Admin
                                         Score:
-                                        <%= comment.score %>
+                                        <= comment.score >
                                         </p>
                                     </div>
                                 </div>
                                 </li>
 
-                            <% end %>
+                            < end >
+                            -->
                             <!--
                             <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
                             -->
@@ -424,14 +426,15 @@
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading">New comment</h4>
+                                    <!--
+                                    < form_for([@process_information, @process_information.comments.build]) do |f| >
 
-                                    <%= form_for([@process_information, @process_information.comments.build]) do |f| %>
-
-                                        <%= f.text_field :score, :class => "rating", :value => "5", :type => "number", :min=>"0", :max=>"5", :step=>"1", :"data-size" => "xs" %>
-                                        <%= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120 %>
-                                        <%= tinymce %>
-                                        <%= f.submit:"create comment", :class =>"btn btn-default" %>
-                                    <% end %>
+                                        <= f.text_field :score, :class => "rating", :value => "5", :type => "number", :min=>"0", :max=>"5", :step=>"1", :"data-size" => "xs" >
+                                        <= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120 >
+                                        <= tinymce >
+                                        <= f.submit:"create comment", :class =>"btn btn-default" >
+                                    < end >
+                                    -->
                                 </div>
                                 </li>
 
