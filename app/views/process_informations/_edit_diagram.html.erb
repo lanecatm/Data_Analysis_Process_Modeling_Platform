@@ -1,0 +1,27 @@
+
+<%= form_for :process_information, :html => {:class => "form-horizontal", :role => "form"}, url:process_informations_path do |f|%>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" data-holder-rendered="true" src="/assets/image_for_drawing.png">
+            </div>
+        </div>
+        <div class="row">
+        <hr/>
+            <div class="form-group">
+                <!-- Button trigger modal -->
+                <div class="col-md-2">
+                    <%= f.submit :"Last", :class => "btn btn-primary btn-block" %>
+                </div>
+                <div class="col-md-offset-6 col-md-2">
+                    <%= f.submit :"Save", :class => "btn btn-primary btn-block" %>
+                </div>
+                <div class="col-md-2">
+                    <%= f.submit :"Next", :class => "btn btn-primary btn-block" %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<% end %>
