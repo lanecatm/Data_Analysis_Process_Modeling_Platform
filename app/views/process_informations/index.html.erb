@@ -1,229 +1,81 @@
 <!DOCTYPE html>
 <!-- saved from url=(0041)http://v3.bootcss.com/examples/jumbotron/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="http://v3.bootcss.com/favicon.ico">
 
-    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
 
-    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-        <title>Jumbotron Template for Bootstrap</title>
+<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+<div style="background-color:#E0E0E0;">
+    <br/>
+    <h1 class="text-center">LOGO</h1>
+    <br/>
+    <%= render '/process_informations/search_bar' %>
+    <br/>
+    <br/>
+    <div class="container">
+        <div class="col-md-offset-3 col-md-6">
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" class="active"><a href="#">Title</a></li>
+                <li role="presentation"><a href="#">Tag</a></li>
+                <li role="presentation"><a href="#">Attribute</a></li>
+                <li role="presentation"><a href="#">More</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap.min.css" rel="stylesheet">
+<div class="container">
+    <!-- Example row of columns -->
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+    <ul class="list-unstyled">
+            <%= @process_informations.each do |process_information| %>
+                <li>
+                <h3>
+                    <%= link_to process_information.name, process_information_path(process_information) %>
+                    <a>
+                        &nbsp;
+                        <small><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></small>
+                        <small><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></small>
+                    </a>
 
-        <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
-
-        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-        <script src="ie-emulation-modes-warning.js"></script>
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
-            .en-markup-crop-options {
-                top: 18px !important;
-                left: 50% !important;
-                margin-left: -100px !important;
-                width: 200px !important;
-                border: 2px rgba(255,255,255,.38) solid !important;
-                border-radius: 4px !important;
-            }
-
-            .en-markup-crop-options div div:first-of-type {
-                margin-left: 0px !important;
-            }
-    </style></head>
-
-    <body>
-
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <%= link_to 'LOGO', root_path, :class => "navbar-brand" %>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                    <%= link_to 'Search', root_path %>
-                    </li>
-                    <li>
-                    <%= link_to 'Create', new_process_information_path %>
-                    </li>
-                    <li class="dropdown">
-                    <a href="./View.htm" class="dropdown-toggle" data-toggle="dropdown">History <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><%= link_to 'Running record', root_path %></li>
-                        <li><%= link_to 'Creating record', root_path %></li>
-                    </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                    <span class="glyphicon glyphicon-user" aria-hidden="false"></span>
-                    </li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a>Settings</a></li>
-                        <li><a>Sign out</a></li>
-                    </ul>
-                    </li>
-                    <ul>
-
-                        <!--
-                        <form class="navbar-form navbar-right" role="form">
-                            <div class="form-group">
-                                <input type="text" placeholder="Email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="Password" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-success">Sign in</button>
-                        </form>
-                        -->
-                    </div><!--/.navbar-collapse -->
+                </h3>
+                <p>
+                <%= process_information.introduction %>
+                </p>
+                <div>
+                    <p>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <%= process_information.author %> 
+                    &nbsp;
+                    <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                    类别1 
+                    &nbsp;
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    4
+                    </p>
                 </div>
-                </nav>
-
-                <!-- Main jumbotron for a primary marketing message or call to action -->
-                <!--
-                <div class="jumbotron">
-                    <div class="container">
-                        <h1>数据分析流程模型平台</h1>
-                        <p>数据分析流程模型平台的介绍数据分析流程模型平台的介绍数据分析流程模型平台的介绍数据分析流程模型平台的介绍数据分析流程模型平台的介绍</p>
-                        <p><a class="btn btn-primary btn-lg" href="./Instructions.htm" role="button">使用说明»</a></p>
-                    </div>
+                <div>
+                    <span class="label label-default">标签1</span>
+                    <span class="label label-default">标签2</span>
+                    <span class="label label-default">标签3</span>
                 </div>
-                -->
-                <div class="jumbotron">
-                    <!-- 搜索框 -->
-                    <div class="container">
-                        <!--
-                        <div class = "row">
-                        <div class="col-md-offset-3 col-md-6">
-                            <h3>Data Analysis Process Modeling Platform</h3>
-                            </div>
-                        </div>
-                        -->
-                        <div class="col-md-offset-3 col-md-6">
-                            <ul class="nav nav-tabs">
-                                <li role="presentation" class="active"><a href="#bycategory" aria-controls="bycategory" role="tab" data-toggle="tab">Title</a></li>
-                                <li role="presentation"><a href="#bytag" aria-controls="bytag" role="tab" data-toggle="tab">Keyword</a></li>
-                                <!--<li role="presentation"><a href="#bykeyword" aria-controls="bykeyword" role="tab" data-toggle="tab">关键字</a></li>-->
-                            </ul>
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="bycategory">
-                                    <%= form_for :search_request, url:process_informations_search_path do |f| %>
-                                        <div class="input-group">
-                                            <%= f.text_field:search_content, :class=>"form-control", :placeholder => "Search for title" %>
-                                            <span class="input-group-btn">
-                                                <%= f.submit:"Search",:class => "btn btn-primary" %>
-                                            </span>
-                                        </div><!-- /input-group -->
-                                    <% end %>
-                                </div>
-
-
-                                <div role="tabpanel" class="tab-pane" id="bytag">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search for tag ...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button">Search</button>
-                                        </span>
-                                    </div><!-- /input-group -->
-                                </div>
-
-                                <!--
-                                <div role="tabpanel" class="tab-pane" id="bykeyword">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search for tag ...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button">搜索</button>
-                                        </span>
-                                    </div>
-                                </div>
-                                -->
-                            </div>
-                        </div><!-- /col-md-12 -->
-                    </div><!-- /container -->
-                </div>
-
-
-
-            <div class="container">
-                <!-- Example row of columns -->
-                <ul class="list-unstyled">
-                    <div class="col-md-offset-3 col-md-9">
-
-                        <%= @process_informations.each do |process_information| %>
-                            <li>
-                            <h3>
-                                <%= link_to process_information.name, process_information_path(process_information) %>
-                                <a>
-                                    &nbsp;
-                                    <small><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></small>
-                                    <small><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></small>
-                                </a>
-
-                            </h3>
-                            <p>
-                            <%= process_information.introduction %>
-                            </p>
-                            <div>
-                                <p>
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                <%= process_information.author %> 
-                                &nbsp;
-                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-                                类别1 
-                                &nbsp;
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                4
-                                </p>
-                            </div>
-                            <div>
-                                <span class="label label-default">标签1</span>
-                                <span class="label label-default">标签2</span>
-                                <span class="label label-default">标签3</span>
-                            </div>
-                            </li>
-                            <hr/>
-
-                        <% end %>
-                    </div>
-
-                </ul>
-
+                </li>
                 <hr/>
 
-                <footer>
-                <p>© SJTU 2017</p>
-                </footer>
-            </div> <!-- /container -->
+            <% end %>
+
+    </ul>
+
+        </div>
+        </div>
+    <hr/>
+
+    <div class = "row">
+    <footer>
+    <p>© SJTU 2017</p>
+    </footer>
+    </div>
+</div> <!-- /container -->
 
 
-            <!-- Bootstrap core JavaScript
-            ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="jquery.min.js"></script>
-            <script src="bootstrap.min.js"></script>
-            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-            <script src="ie10-viewport-bug-workaround.js"></script>
 
-
-    </body></html>

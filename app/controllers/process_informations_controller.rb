@@ -17,8 +17,21 @@ class ProcessInformationsController < ApplicationController
     def show
         @process_information = ProcessInformation.find(params[:id])
         #redirect_to @process_information
-        @category_id = @process_information.category.name
-        #@category_name = Category.find(@category_id)
+
+        @category = @process_information.category
+        if @category == nil
+            @category_name = "None"
+        else
+            @category_name = @category.name
+        end
+
+        @separator = @process_information.separator
+        if @separator == nil
+            @separator_name = "None"
+        else
+            @separator_name = @separator.name
+        end
+
     end
 
     def index
@@ -37,13 +50,17 @@ class ProcessInformationsController < ApplicationController
     def edit
         @process_information = ProcessInformation.find(params[:id])
         @categories = Category.all.collect{ |c| [c.name, c.id] }
+        @seperators = Separator.all.collect{ |s| [s.name, s.id] }
+        @support_types = SupportType.all.collect{ |t| [t.name, t.id] }
+
     end
 
     def update
         #@category = Category.find(params[:category])
         @process_information = ProcessInformation.find(params[:id])
-        params[:category] = Category.find(info_params[:category_id])
-        if @process_information.update(info_params)
+        params[:category] = Category.find(update_params[:category_id])
+        params[:separator] = Separator.find(update_params[:separator_id])
+        if @process_information.update(update_params)
             redirect_to @process_information
         else
             render 'edit'
@@ -62,6 +79,9 @@ class ProcessInformationsController < ApplicationController
         params.require(:process_information).permit(:name, :introduction, :author, :createtime, :version, :algorithm, :functional_description, :category_id, :category)
     end
 
+    def update_params
+        params.require(:process_information).permit(:name, :introduction, :author, :createtime, :version, :algorithm, :functional_description, :category_id, :category)
+    end
     def search_params
         params.require(:search_request).permit(:search_content)
     end
