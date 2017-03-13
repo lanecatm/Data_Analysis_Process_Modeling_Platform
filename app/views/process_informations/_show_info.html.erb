@@ -1,31 +1,12 @@
 <table class="table table-bordered">
     <tr>
-        <th rowspan="10">Basic information</th>
+        <th rowspan="4">Basic information</th>
         <th> Model name</th>
         <td><%= @process_information.name %></td>
     </tr>
     <tr>
         <th>Model introduction</th>
         <td><%= @process_information.introduction %></td>
-    </tr>
-    <tr>
-        <th>Author</th>
-        <td><%= @process_information.author %></td>
-    </tr>
-
-    <tr>
-        <th>Create time</th>
-        <td><%= @process_information.createtime %></td>
-    </tr>
-
-    <tr>
-        <th>Version</th>
-        <td><%= @process_information.version %></td>
-    </tr>
-
-    <tr>
-        <th>Last version</th>
-        <td> </td>
     </tr>
     <tr>
         <th>Category</th>
@@ -42,81 +23,58 @@
     </tr>
 
     <tr>
-        <th>Algorithm</th>
-        <!--
-        <td><%= @process_information.algorithm %></td>
-        -->
-        <td></td>
+        <th rowspan="5">Jurisdiction</th>
+        <th>Author</th>
+        <td><%= @process_information.author %></td>
+    </tr>
+    <tr>
+        <th>Last editor</th>
+        <td><%= @process_information.author %></td>
+    </tr>
+    <tr>
+        <th>Edit jurisdiction</th>
+        <td><%= @process_information.author %></td>
+    </tr>
+    <tr>
+        <th>Delete jurisdiction</th>
+        <td><%= @process_information.author %></td>
+    </tr>
+    <tr>
+        <th>Execute jurisdiction</th>
+        <td>All</td>
     </tr>
 
+    <tr>
+        <th rowspan="5">Version</th>
+        <th>Version</th>
+        <td><%= @process_information.version %></td>
+    </tr>
+    <tr>
+        <th>Create time</th>
+        <td><%= @process_information.createtime %></td>
+    </tr>
 
+    <tr>
+        <th>Update time</th>
+        <td><%= @process_information.createtime %></td>
+    </tr>
+    <tr>
+        <th>Last version</th>
+        <td> </td>
+    </tr>
     <tr>
         <th>Functional description</th>
         <td><%= @process_information.functional_description %></td>
     </tr>
 
     <tr>
-        <th rowspan="3">Data format</th>
-        <th>Separator</th>
+        <th rowspan="1">Algorithm</th>
+        <th>Algorithm</th>
         <td>
-            Space
-        </td>
-    </tr>
-    <tr>
-        <th>Input format</th>
-        <td>
-            <span class="label label-default">Column1 int</span>
-            <span class="label label-default">Column2 double</span>
+            <span class="label label-default">Algorithm 1</span>
         </td>
     </tr>
 
-
-    <tr>
-        <th>Output format</th>
-        <td>
-            <span class="label label-default">Column1 int</span>
-            <span class="label label-default">Column2 double</span>
-        </td>
-    </tr>
-    <tr>
-        <th rowspan="6">Case download</th>
-        <td rowspan="2">Case1</td>
-        <td>
-            Case1 description
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <button type="button" class="btn btn-primary btn-right">Download</button>
-        </td>
-    </tr>
-
-    <tr>
-        <td rowspan="2">Case2</td>
-        <td>
-            Case2 description
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <button type="button" class="btn btn-primary btn-right">Download</button>
-        </td>
-    </tr>
-
-    <tr>
-        <td rowspan="2">Case3</td>
-        <td>
-            Case3 description
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <button type="button" class="btn btn-primary btn-right">Download</button>
-        </td>
-    </tr>
 
 
 </table>

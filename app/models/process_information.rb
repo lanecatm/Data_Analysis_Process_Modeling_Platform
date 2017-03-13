@@ -4,6 +4,7 @@ class ProcessInformation < ActiveRecord::Base
   belongs_to :parent, class_name: "ProcessInformation"
   belongs_to :category
   belongs_to :separator
+  has_many :comments, foreign_key: "workflow_id"
   has_many :input_format
   has_many :output_format
   has_many :process_information, foreign_key: "parent"

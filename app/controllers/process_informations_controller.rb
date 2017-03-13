@@ -38,6 +38,9 @@ class ProcessInformationsController < ApplicationController
         @process_informations = ProcessInformation.all
     end
 
+    def hostory
+    end
+
     def search
         @search_request = SearchRequest.new(search_params)
         if @search_request.search_content == nil

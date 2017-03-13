@@ -1,15 +1,16 @@
 <form class="form-horizontal" role="form">
     <!-- 抄的运行 -->
-    <div class="row">
-        <div class="col-md-2"><h4>Input data</h4></div>
+    <div class="form-group">
+        <div class="col-md-12"><h4>Input data</h4></div>
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label">Input data from local file</label>
-        <div class="col-md-3">
+        <label class="col-md-12">Input data from local file</label>
+        <div class="col-md-4">
             <input type="file" id="caseInputFile">
         </div>
-        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group">
         <div class="col-md-2">
             <button class="btn btn-primary btn-block">Submit</button>
         </div>
@@ -18,7 +19,7 @@
 
     <br/>
 
-    <div class="row">
+    <div class="form-group">
         <div class="col-md-12">
             <table class="table table-bordered">
                 <tr>
@@ -67,44 +68,41 @@
     </div>
     <hr/>
 
-    <div class="row">
+    <div class="form-group">
         <div class="col-md-8">
             <h4>Adjust parameters</h4>
         </div>
     </div>
     <div class="form-group">
-        <div class="row">
-            <label class="col-md-3 control-label">Choose parameters</label>
+            <label class="col-md-12">Choose parameters</label>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <select class="form-control">
                     <option> </option>
                     <option>Algorithm A result 1</option>
                     <option>Algorithm B result 2</option>
                 </select>
             </div>
-        </div>
         <br/>
-        <div class="row">
-            <label class="col-md-3 control-label">Parameter 1</label>
-            <div class="col-md-3">
+    </div>
+    <div class="form-group">
+            <label class="col-md-12">Parameter 1</label>
+            <div class="col-md-4">
                 <input type="text" class="form-control">
             </div>
-            <label class="col-md-3 control-label">Parameter 2</label>
-            <div class="col-md-3">
+            <label class="col-md-12">Parameter 2</label>
+            <div class="col-md-4">
                 <input type="text" class="form-control">
             </div>
-        </div>
     </div>
     <br/>
-    <div class="row">
-        <div class="col-md-10"></div>
+    <div class="form-group">
         <div class="col-md-2">
             <button class="btn btn-primary btn-block">Run</button>
         </div>
     </div>
     <hr/>
-    <div class="row">
+    <div class="form-group">
         <div class="col-md-12">
             <h4> Progress rate </h4>
         </div>
@@ -115,13 +113,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12">
+            <label> Now running Algorithm A</label>
+        </div>
     </div>
     <hr/>
 
-    <div class="row">
-        <div class="col-md-8"><h4>Output data</h4></div>
+    <div class="form-group">
+        <div class="col-md-12"><h4>Output data</h4></div>
     </div>
-    <div class="row">
+    <div class="form-group">
         <div class="col-md-12">
             <table class="table table-bordered">
                 <tr>
@@ -167,36 +168,44 @@
                 </li>
             </ul>
         </div>
-    </div>
 
+    </div>
     <br/>
 
     <!-- 结束抄的运行 -->
     <div class="form-group">
-        <div class="col-md-10">
+        <label class="col-md-12">Output filename</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Algorithm A output i">
         </div>
         <div class="col-md-2">
-            <button class="btn btn-primary btn-block">Download</button>
+            <button class="btn btn-default btn-block">Save in server</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-block">Download</button>
         </div>
     </div>
     <hr/>
-    <h4>Share</h4>
     <div class="form-group">
-        <label class="col-md-3 control-label">Output filename</label>
-        <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Algorithm A output i">
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-primary btn-block">Share output</button>
+        <div class="col-md-12">
+            <h4>Save as use case</h4>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-3 control-label">Parameters name</label>
-        <div class="col-md-6">
+        <label class="col-md-12">Use case name</label>
+        <div class="col-md-4">
             <input type="text" class="form-control" placeholder="Algorithm A parameters i">
         </div>
-        <div class="col-md-3">
-            <button class="btn btn-primary btn-block">Share parameters</button>
+    </div>
+    <div class="form-group">
+        <label class="col-md-12">Use case description</label>
+        <div class="col-md-8">
+            <textarea class="form-control" row="5" placeholder="Algorithm A parameters i"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-block">Save use case</button>
         </div>
     </div>
 

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   post 'process_informations/search/', to: 'process_informations#search'
 
+  get 'history/', to: 'process_informations#history'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

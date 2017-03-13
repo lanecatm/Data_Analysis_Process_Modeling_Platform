@@ -1,3 +1,3 @@
 class Comment < ActiveRecord::Base
-  belongs_to :process_information
+  belongs_to :workflow, class_name: "process_information"
 end

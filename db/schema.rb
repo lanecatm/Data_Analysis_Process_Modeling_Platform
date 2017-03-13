@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308063237) do
+ActiveRecord::Schema.define(version: 20170312084242) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,23 @@ ActiveRecord::Schema.define(version: 20170308063237) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "score"
+    t.integer  "author_id"
+    t.integer  "comment_parent_id"
+    t.integer  "workflow_id"
+    t.integer  "process_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "comments", ["author_id"], name: "index_comments_on_author_id"
+  add_index "comments", ["comment_parent_id"], name: "index_comments_on_comment_parent_id"
+  add_index "comments", ["process_id"], name: "index_comments_on_process_id"
+  add_index "comments", ["workflow_id"], name: "index_comments_on_workflow_id"
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
