@@ -1,27 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  workflow_information_id: 
   name: MyString
-  introduction: MyText
-  author_id: 
-  last_editor_id: 
-  createtime: 2017-03-07 16:45:16
-  edittime: 2017-03-07 16:45:16
-  version: MyString
-  version_parent_id: 
-  category_id: 
-  functional_description: MyText
-  separator_id: 
+  description: MyText
+  creater_id: 
+  user_id: 
+  is_shared: false
+  parent_case_id: 
+  persistent: false
+  state: MyText
+  case_type: 1
 
 two:
+  workflow_information_id: 
   name: MyString
-  introduction: MyText
-  author_id: 
-  last_editor_id: 
-  createtime: 2017-03-07 16:45:16
-  edittime: 2017-03-07 16:45:16
-  version: MyString
-  version_parent_id: 
-  category_id: 
-  functional_description: MyText
-  separator_id: 
+  description: MyText
+  creater_id: 
+  user_id: 
+  is_shared: false
+  parent_case_id: 
+  persistent: false
+  state: MyText
+  case_type: 1

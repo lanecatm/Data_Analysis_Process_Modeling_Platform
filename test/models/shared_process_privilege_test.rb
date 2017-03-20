@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SeparatorTest < ActiveSupport::TestCase
+class SharedProcessPrivilegeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

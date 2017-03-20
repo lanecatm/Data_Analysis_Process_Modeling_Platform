@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DepartmentTest < ActiveSupport::TestCase
+class WorkflowTagTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

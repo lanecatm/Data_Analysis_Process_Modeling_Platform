@@ -11,132 +11,143 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312084242) do
+ActiveRecord::Schema.define(version: 20170320075713) do
 
-  create_table "categories", force: :cascade do |t|
+  create_table "department_informations", force: :cascade do |t|
+    t.text     "name"
+    t.integer  "parent_department_id"
+    t.text     "description"
+    t.integer  "layer"
+    t.integer  "manager_id"
+    t.integer  "vice_manager_id"
+    t.text     "duty"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "department_informations", ["manager_id"], name: "index_department_informations_on_manager_id"
+  add_index "department_informations", ["parent_department_id"], name: "index_department_informations_on_parent_department_id"
+  add_index "department_informations", ["vice_manager_id"], name: "index_department_informations_on_vice_manager_id"
+
+  create_table "person_informations", force: :cascade do |t|
+    t.string   "person_name"
+    t.string   "user_name"
+    t.string   "gender"
+    t.datetime "birthday"
+    t.text     "description"
+    t.string   "phone_number"
+    t.string   "email"
+    t.string   "technical_post"
+    t.integer  "state"
+    t.string   "password"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "process_informations", force: :cascade do |t|
+    t.integer  "workflow_information_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "creater_id"
+    t.integer  "user_id"
+    t.boolean  "is_shared"
+    t.integer  "parent_case_id"
+    t.boolean  "persistent"
+    t.text     "state"
+    t.integer  "case_type"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "process_informations", ["creater_id"], name: "index_process_informations_on_creater_id"
+  add_index "process_informations", ["parent_case_id"], name: "index_process_informations_on_parent_case_id"
+  add_index "process_informations", ["user_id"], name: "index_process_informations_on_user_id"
+  add_index "process_informations", ["workflow_information_id"], name: "index_process_informations_on_workflow_information_id"
+
+  create_table "shared_process_privileges", force: :cascade do |t|
+    t.integer  "process_id"
+    t.integer  "edit_department_id"
+    t.integer  "execute_department_id"
+    t.integer  "delete_department_id"
+    t.boolean  "isSharedSampleInput"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "shared_process_privileges", ["delete_department_id"], name: "index_shared_process_privileges_on_delete_department_id"
+  add_index "shared_process_privileges", ["edit_department_id"], name: "index_shared_process_privileges_on_edit_department_id"
+  add_index "shared_process_privileges", ["execute_department_id"], name: "index_shared_process_privileges_on_execute_department_id"
+  add_index "shared_process_privileges", ["process_id"], name: "index_shared_process_privileges_on_process_id"
+
+  create_table "workflow_categories", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "workflow_comments", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.integer  "score"
     t.integer  "author_id"
     t.integer  "comment_parent_id"
-    t.integer  "workflow_id"
+    t.integer  "workflow_information_id"
     t.integer  "process_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  add_index "comments", ["author_id"], name: "index_comments_on_author_id"
-  add_index "comments", ["comment_parent_id"], name: "index_comments_on_comment_parent_id"
-  add_index "comments", ["process_id"], name: "index_comments_on_process_id"
-  add_index "comments", ["workflow_id"], name: "index_comments_on_workflow_id"
+  add_index "workflow_comments", ["author_id"], name: "index_workflow_comments_on_author_id"
+  add_index "workflow_comments", ["comment_parent_id"], name: "index_workflow_comments_on_comment_parent_id"
+  add_index "workflow_comments", ["process_id"], name: "index_workflow_comments_on_process_id"
+  add_index "workflow_comments", ["workflow_information_id"], name: "index_workflow_comments_on_workflow_information_id"
 
-  create_table "departments", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "departments", ["parent_id"], name: "index_departments_on_parent_id"
-
-  create_table "input_formats", force: :cascade do |t|
-    t.integer  "column_index"
-    t.string   "column_name"
-    t.integer  "column_type_id"
-    t.integer  "process_information_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "input_formats", ["column_type_id"], name: "index_input_formats_on_column_type_id"
-  add_index "input_formats", ["process_information_id"], name: "index_input_formats_on_process_information_id"
-
-  create_table "null_models", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "ref1_id"
-    t.integer  "ref2_id"
-    t.integer  "ref3_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "null_models", ["ref1_id"], name: "index_null_models_on_ref1_id"
-  add_index "null_models", ["ref2_id"], name: "index_null_models_on_ref2_id"
-  add_index "null_models", ["ref3_id"], name: "index_null_models_on_ref3_id"
-
-  create_table "output_formats", force: :cascade do |t|
-    t.integer  "column_index"
-    t.string   "column_name"
-    t.integer  "column_type_id"
-    t.integer  "process_information_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "output_formats", ["column_type_id"], name: "index_output_formats_on_column_type_id"
-  add_index "output_formats", ["process_information_id"], name: "index_output_formats_on_process_information_id"
-
-  create_table "process_informations", force: :cascade do |t|
+  create_table "workflow_informations", force: :cascade do |t|
     t.string   "name"
     t.text     "introduction"
+    t.text     "detial_description"
+    t.text     "version_name"
+    t.integer  "category_id"
+    t.integer  "tag_id"
     t.integer  "author_id"
     t.integer  "last_editor_id"
-    t.datetime "createtime"
-    t.datetime "edittime"
-    t.string   "version"
-    t.integer  "version_parent_id"
-    t.integer  "category_id"
-    t.text     "functional_description"
-    t.integer  "separator_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
     t.integer  "status"
-  end
-
-  add_index "process_informations", ["author_id"], name: "index_process_informations_on_author_id"
-  add_index "process_informations", ["category_id"], name: "index_process_informations_on_category_id"
-  add_index "process_informations", ["last_editor_id"], name: "index_process_informations_on_last_editor_id"
-  add_index "process_informations", ["separator_id"], name: "index_process_informations_on_separator_id"
-  add_index "process_informations", ["version_parent_id"], name: "index_process_informations_on_version_parent_id"
-
-  create_table "search_requests", force: :cascade do |t|
-    t.string   "search_content"
-    t.string   "search_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  create_table "separators", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "process_information_id"
+    t.datetime "createtime"
+    t.datetime "valid_from"
+    t.datetime "valid_to"
+    t.boolean  "persistent"
+    t.integer  "priority"
+    t.integer  "most_possible_duration"
+    t.integer  "minimal_duration"
+    t.integer  "maximal_duration"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "separators", ["process_information_id"], name: "index_separators_on_process_information_id"
+  add_index "workflow_informations", ["author_id"], name: "index_workflow_informations_on_author_id"
+  add_index "workflow_informations", ["category_id"], name: "index_workflow_informations_on_category_id"
+  add_index "workflow_informations", ["last_editor_id"], name: "index_workflow_informations_on_last_editor_id"
+  add_index "workflow_informations", ["tag_id"], name: "index_workflow_informations_on_tag_id"
 
-  create_table "support_types", force: :cascade do |t|
+  create_table "workflow_privileges", force: :cascade do |t|
+    t.integer  "workflow_information_id"
+    t.integer  "edit_department_id"
+    t.integer  "execute_department_id"
+    t.integer  "delete_department_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "workflow_privileges", ["delete_department_id"], name: "index_workflow_privileges_on_delete_department_id"
+  add_index "workflow_privileges", ["edit_department_id"], name: "index_workflow_privileges_on_edit_department_id"
+  add_index "workflow_privileges", ["execute_department_id"], name: "index_workflow_privileges_on_execute_department_id"
+  add_index "workflow_privileges", ["workflow_information_id"], name: "index_workflow_privileges_on_workflow_information_id"
+
+  create_table "workflow_tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "password"
-    t.integer  "department_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "users", ["department_id"], name: "index_users_on_department_id"
 
 end

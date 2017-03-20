@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  introduction: MyText
+  detial_description: MyText
+  version_name: MyText
+  category_id: 
+  tag_id: 
+  author_id: 
+  last_editor_id: 
+  status: 1
+  createtime: 2017-03-20 15:57:05
+  valid_from: 2017-03-20 15:57:05
+  valid_to: 2017-03-20 15:57:05
+  persistent: false
+  priority: 1
+  most_possible_duration: 1
+  minimal_duration: 1
+  maximal_duration: 1
+
+two:
+  name: MyString
+  introduction: MyText
+  detial_description: MyText
+  version_name: MyText
+  category_id: 
+  tag_id: 
+  author_id: 
+  last_editor_id: 
+  status: 1
+  createtime: 2017-03-20 15:57:05
+  valid_from: 2017-03-20 15:57:05
+  valid_to: 2017-03-20 15:57:05
+  persistent: false
+  priority: 1
+  most_possible_duration: 1
+  minimal_duration: 1
+  maximal_duration: 1

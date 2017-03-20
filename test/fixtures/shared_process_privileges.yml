@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  process_id: 
+  edit_department_id: 
+  execute_department_id: 
+  delete_department_id: 
+  isSharedSampleInput: false
+
+two:
+  process_id: 
+  edit_department_id: 
+  execute_department_id: 
+  delete_department_id: 
+  isSharedSampleInput: false

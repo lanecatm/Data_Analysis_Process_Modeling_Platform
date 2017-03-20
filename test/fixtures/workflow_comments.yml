@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  body: MyText
+  score: 1
+  author_id: 
+  comment_parent_id: 
+  workflow_information_id: 
+  process_id: 
+
+two:
+  title: MyString
+  body: MyText
+  score: 1
+  author_id: 
+  comment_parent_id: 
+  workflow_information_id: 
+  process_id: 

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  parent_department_id: 
+  description: MyText
+  layer: 1
+  manager_id: 
+  vice_manager_id: 
+  duty: MyText
+
+two:
+  name: MyText
+  parent_department_id: 
+  description: MyText
+  layer: 1
+  manager_id: 
+  vice_manager_id: 
+  duty: MyText
