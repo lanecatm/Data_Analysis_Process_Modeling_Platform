@@ -1,0 +1,81 @@
+<table class="table table-bordered">
+    <tr>
+        <th rowspan="4">Basic information</th>
+        <th> Model name</th>
+        <td><%= @workflow_information.name %></td>
+    </tr>
+    <tr>
+        <th>Model introduction</th>
+        <td><%= @workflow_information.introduction %></td>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <td><%= @category_name %></td>
+    </tr>
+
+    <tr>
+        <th>Tag</th>
+        <td>
+            <span class="label label-default">Tag 1</span>
+            <span class="label label-default">Tag 2</span>
+            <span class="label label-default">Tag 3</span>
+        </td>
+    </tr>
+
+    <tr>
+        <th rowspan="5">Jurisdiction</th>
+        <th>Author</th>
+        <td><%= @workflow_information.author %></td>
+    </tr>
+    <tr>
+        <th>Last editor</th>
+        <td><%= @workflow_information.author %></td>
+    </tr>
+    <tr>
+        <th>Edit jurisdiction</th>
+        <td><%= @workflow_information.workflow_privilege.edit_department.name %></td>
+    </tr>
+    <tr>
+        <th>Delete jurisdiction</th>
+        <td><%= @workflow_information.workflow_privilege.delete_department.name %></td>
+    </tr>
+    <tr>
+        <th>Execute jurisdiction</th>
+        <td><%= @workflow_information.workflow_privilege.execute_department.name %></td>
+    </tr>
+
+    <tr>
+        <th rowspan="5">Version</th>
+        <th>Version</th>
+        <td><%= @workflow_information.version_name %></td>
+    </tr>
+    <tr>
+        <th>Create time</th>
+        <td><%= @workflow_information.createtime %></td>
+    </tr>
+
+    <tr>
+        <th>Update time</th>
+        <td><%= @workflow_information.createtime %></td>
+    </tr>
+    <tr>
+        <th>Last version</th>
+        <td> </td>
+    </tr>
+    <tr>
+        <th>Functional description</th>
+        <td><%= @workflow_information.detial_description %></td>
+    </tr>
+
+    <tr>
+        <th rowspan="1">Algorithm</th>
+        <th>Algorithm</th>
+        <td>
+            <span class="label label-default">Algorithm 1</span>
+        </td>
+    </tr>
+
+
+
+</table>
+

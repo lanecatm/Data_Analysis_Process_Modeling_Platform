@@ -1,0 +1,87 @@
+
+<%= form_for :workflow_information, :html => {:class => "form-horizontal", :role => "form"}, url:workflow_informations_path do |f|%>
+<div class="form-group">
+    <label class="col-md-12">Separator</label>
+    <div class="col-md-4">
+        <%=f.select :separator_id, @seperators, {}, { class: "form-control" } %> 
+        <%= select_tag 'user', "<option>CFC</option>" %>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-12">Input format</label>
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Column name">
+    </div>
+    <div class="col-md-4">
+        <select class="form-control">
+            <option>int</option>
+            <option>double</option>
+            <option>string</option>
+            <option>time</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-default">Add</button>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-12">
+        <p>
+        <span class="label label-default">Column1 int</span>
+        <span class="label label-default">Column2 double</span>
+        </p>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-12">Output format</label>
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Column name">
+    </div>
+    <div class="col-md-4">
+        <select class="form-control">
+            <option>int</option>
+            <option>double</option>
+            <option>string</option>
+            <option>time</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-default">Add</button>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-10">
+        <p>
+        <span class="label label-default">Column1 int</span>
+        <span class="label label-default">Column2 double</span>
+        </p>
+    </div>
+</div>
+<hr/>
+<div class="form-group">
+    <label class="col-md-12">Case</label>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+            New case
+        </button>
+    </div>
+</div>
+<hr/>
+<div class="form-group">
+    <!-- Button trigger modal -->
+    <div class="col-md-2">
+        <%= f.submit :"Last", :class => "btn btn-primary btn-block" %>
+    </div>
+    <div class="col-md-offset-6 col-md-2">
+        <%= f.submit :"Save", :class => "btn btn-primary btn-block" %>
+    </div>
+    <div class="col-md-2">
+        <%= f.submit :"Next", :class => "btn btn-primary btn-block" %>
+    </div>
+</div>
+
+<% end %>

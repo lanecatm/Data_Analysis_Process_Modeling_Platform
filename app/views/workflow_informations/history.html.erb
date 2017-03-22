@@ -1,0 +1,58 @@
+
+<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+<br/>
+<br/>
+<!-- 表单 -->
+<div class="container">
+    <div class = "row">
+        <div class="col-md-3">
+            <div class = "row">
+                <div class="col-md-12">&nbsp;</div>
+                <div class="col-md-2"> </div>
+                <div class="col-md-8">
+                    <h3>&nbsp;</h3>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-stacked nav-pills" data-spy = "affix" >
+                        <li role="presentation" class="active"><a href="#model" aria-controls="model" role="tab" data-toggle="tab">My model</a></li>
+                        <li role="presentation"><a href="#usecase" aria-controls="usecase" role="tab" data-toggle="tab">My use case</a></li>
+                        <li role="presentation"><a href="#record" aria-controls="record" role="tab" data-toggle="tab">Running record</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class = "row">
+                        <h3>
+                            My history
+                        </h3>
+                        <hr/>
+            </div>
+            <div class = "row">
+                <!-- Nav tabs -->
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="model">
+                                <%= render '/process_informations/history_model_table' %>
+                    </div><!-- tab -->
+                    <div role="tabpanel" class="tab-pane" id="record">
+                                <%= render '/process_informations/history_record_table' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="usecase">
+                                <%= render '/process_informations/history_usecase_table' %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+<div class="container">
+    <hr>
+    <footer>
+    <p>© SJTU 2017</p>
+    </footer>
+</div> <!-- /container -->
+
+
+

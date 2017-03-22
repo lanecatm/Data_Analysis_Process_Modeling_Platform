@@ -1,0 +1,92 @@
+<div class="jumbotron">
+    <!-- 搜索框 -->
+    <div class="container">
+        <div class="col-md-offset-3 col-md-6">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#bycategory" aria-controls="bycategory" role="tab" data-toggle="tab">标题</a></li>
+                <li role="presentation"><a href="#bytag" aria-controls="bytag" role="tab" data-toggle="tab">关键字</a></li>
+                <!--<li role="presentation"><a href="#bykeyword" aria-controls="bykeyword" role="tab" data-toggle="tab">关键字</a></li>-->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="bycategory">
+                    <%= form_for :search_request, url:process_informations_search_path do |f| %>
+                        <div class="input-group">
+                            <%= f.text_field:search_content, :class=>"form-control", :placeholder => "搜索标题" %>
+                            <span class="input-group-btn">
+                                <%= f.submit:"搜索",:class => "btn btn-primary" %>
+                            </span>
+                        </div><!-- /input-group -->
+                    <% end %>
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane" id="bytag">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for tag ...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">搜索</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div>
+
+                <!--
+                <div role="tabpanel" class="tab-pane" id="bykeyword">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for tag ...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">搜索</button>
+                        </span>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div><!-- /col-md-12 -->
+    </div><!-- /container -->
+</div>
+
+
+<div class="container">
+    <!-- Example row of columns -->
+    <ul class="list-unstyled">
+        <div class="col-md-offset-3 col-md-9">
+
+            <%= @process_informations.each do |process_information| %>
+                <li>
+                <h3>
+                    <%= link_to process_information.name, process_information_path(process_information) %>
+                </h3>
+                <p>
+                <%= process_information.introduction %>
+                </p>
+                <div>
+                    <p>作者:
+                    <%= process_information.author %> 
+                    类别:类别1 评分:
+
+                    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
+                    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
+                    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
+                    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
+                    </p>
+                </div>
+                <div>
+                    <span class="label label-default">标签1</span>
+                    <span class="label label-default">标签2</span>
+                    <span class="label label-default">标签3</span>
+                </div>
+                </li>
+                <hr/>
+
+            <% end %>
+        </div>
+
+    </ul>
+
+    <hr/>
+
+    <footer>
+    <p>© SJTU 2017</p>
+    </footer>
+</div> <!-- /container -->
+
+

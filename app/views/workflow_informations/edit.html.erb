@@ -1,0 +1,117 @@
+
+<br/>
+<br/>
+<!-- 表单 -->
+<div class="container">
+    <div class = "row">
+        <div class="col-md-3">
+            <div class = "row">
+                <div class="col-md-12">&nbsp;</div>
+                <div class="col-md-2"> </div>
+                <div class="col-md-8">
+                    <h3>&nbsp;</h3>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-stacked nav-pills" data-spy = "affix" >
+                        <li role="presentation" class="active"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">Basic Information</a></li>
+                        <!--
+                        <li role="presentation"><a href="#format" aria-controls="format" role="tab" data-toggle="tab">Data format</a></li>
+                        -->
+                        <li role="presentation"><a href="#diagram" aria-controls="diagram" role="tab" data-toggle="tab">Flow diagram</a></li>
+                        <!--
+                        <li role="presentation"><a href="#input" aria-controls="input" role="tab" data-toggle="tab">Algorithm input</a></li>
+                        -->
+                        <li role="presentation"><a href="#jurisdiction" aria-controls="input" role="tab" data-toggle="tab">Jurisdiction</a></li>
+                        <li role="presentation"><a href="#version" aria-controls="version" role="tab" data-toggle="tab">Version</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class = "row">
+                <div class="col-md-8">
+                    <div class = "row">
+                        <h3>
+                            <%= @workflow_information.name %>
+                        </h3>
+                        <h4>
+                            <small><%= @workflow_information.introduction %></small> 
+                        </h4>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+            <div class = "row">
+                <!-- Nav tabs -->
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="information">
+                        <div class="col-md-8">
+                            <div class = "row">
+                                <%= render '/workflow_informations/edit_info' %>
+                            </div>
+                        </div>
+                    </div><!-- tab -->
+                    <div role="tabpanel" class="tab-pane" id="diagram">
+                        <div class="col-md-8">
+                            <div class = "row">
+                                <%= render '/workflow_informations/edit_diagram' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="version">
+                        <div class="col-md-8">
+                            <div class = "row">
+                                <%= render '/workflow_informations/edit_version' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="jurisdiction">
+                        <div class="col-md-8">
+                            <div class = "row">
+                                <%= render '/workflow_informations/edit_jurisdiction' %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+<div class="container">
+    <hr>
+    <footer>
+    <p>© SJTU 2017</p>
+    </footer>
+</div> <!-- /container -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">New case</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <div class="form-group">
+                    <label>Case description</label>
+                    <textarea type="text" class="form-control" placeholder="Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="caseInputFile">Upload input file</label>
+                    <input type="file" id="caseInputFile">
+                </div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

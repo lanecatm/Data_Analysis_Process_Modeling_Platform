@@ -1,0 +1,219 @@
+
+<div class="bootstrap-table">
+    <div class="fixed-table-toolbar">
+        <div class="columns columns-right btn-group pull-right">
+            <button class="btn btn-default" type="button" name="paginationSwitch" aria-label="pagination Switch" title="Hide/Show pagination"><i class="glyphicon glyphicon-collapse-down icon-chevron-down"></i></button>
+            <button class="btn btn-default" type="button" name="refresh" aria-label="refresh" title="Refresh"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
+            <button class="btn btn-default" type="button" name="toggle" aria-label="toggle" title="Toggle"><i class="glyphicon glyphicon-list-alt icon-list-alt"></i></button>
+            <div class="keep-open btn-group" title="Columns">
+                <button type="button" aria-label="columns" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th icon-th"></i> <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li role="menuitem"><label><input type="checkbox" data-field="id" value="1" checked="checked" /> 2017.3.ID</label></li>
+                    <li role="menuitem"><label><input type="checkbox" data-field="name" value="2" checked="checked" /> 2017.3.Name</label></li>
+                    <li role="menuitem"><label><input type="checkbox" data-field="price" value="3" checked="checked" /> 2017.3.Price</label></li>
+                    <li role="menuitem"><label><input type="checkbox" data-field="operate" value="4" checked="checked" /> 2017.3.Operate</label></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pull-right search">
+            <input class="form-control" type="text" placeholder="Search" />
+        </div>
+    </div>
+    <div class="fixed-table-container" >
+        <div class="fixed-table-header">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="detail">
+                            <div class="fht-cell" style="width: 30px;"></div></th>
+                        <th class="bs-checkbox " style="text-align: center; vertical-align: middle; width: 36px; " rowspan="2" data-field="state" tabindex="0">
+                            <div class="th-inner ">
+                            </div>
+                            <div class="fht-cell" style="width: 35px;"></div></th>
+                        <th style="text-align: center; vertical-align: middle; " data-field="id" tabindex="0">
+                            <div class="th-inner sortable both">
+                                Use case name
+                            </div>
+                            <div class="fht-cell" style="width: 100px;"></div></th>
+                        <th style="text-align: center; " data-field="name" tabindex="0">
+                            <div class="th-inner sortable both">
+                                Model name
+                            </div>
+                            <div class="fht-cell" style="width: 120px;"></div></th>
+                        <th style="text-align: center; " data-field="price" tabindex="0">
+                            <div class="th-inner sortable both">
+                                Update time
+                            </div>
+                            <div class="fht-cell" style="width: 120px;"></div></th>
+                        <th style="text-align: center; " data-field="operate" tabindex="0">
+                            <div class="th-inner ">
+                                Introduction
+                            </div>
+                            <div class="fht-cell" style="width: 220px;"></div></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="fixed-table-body">
+            <div class="fixed-table-loading" style="top: 82px; display: none;">
+                Loading, please wait...
+            </div>
+            <table id="table" data-toolbar="#toolbar" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-show-export="true" data-detail-view="true" data-detail-formatter="detailFormatter" data-minimum-count-columns="2" data-show-pagination-switch="true" data-pagination="true" data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]" data-show-footer="false" data-side-pagination="server" data-url="/examples/bootstrap_table/data" data-response-handler="responseHandler" class="table table-hover" style="margin-top: -81px;"> 
+                <thead>
+                    <tr>
+                        <th class="detail" rowspan="2">
+                            <div class="fht-cell"></div></th>
+                        <th class="bs-checkbox " style="text-align: center; vertical-align: middle; width: 36px; " rowspan="2" data-field="state" tabindex="0">
+                            <div class="th-inner ">
+                                <input name="btSelectAll" type="checkbox" />
+                            </div>
+                            <div class="fht-cell"></div></th>
+                        <th style="text-align: center; vertical-align: middle; " rowspan="2" data-field="id" tabindex="0">
+                            <div class="th-inner sortable both">
+                                Version
+                            </div>
+                            <div class="fht-cell"></div></th>
+                        <th style="text-align: center; " colspan="3" tabindex="0">
+                            <div class="th-inner ">
+                                2017.3.Detail
+                            </div>
+                            <div class="fht-cell"></div></th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center; " data-field="name" tabindex="0">
+                            <div class="th-inner sortable both">
+                                2017.3.Name
+                            </div>
+                            <div class="fht-cell"></div></th>
+                        <th style="text-align: center; " data-field="price" tabindex="0">
+                            <div class="th-inner sortable both">
+                                2017.3.Price
+                            </div>
+                            <div class="fht-cell"></div></th>
+                        <th style="text-align: center; " data-field="operate" tabindex="0">
+                            <div class="th-inner ">
+                                2017.3.Operate
+                            </div>
+                            <div class="fht-cell"></div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-index="0"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 0</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="0" data-value="Model x 0.0.0" class="editable editable-click">Model x 0.0.0</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="0" data-value="2017.3.0" class="editable editable-click">2017.3.0</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="1"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 1</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="1" data-value="Model x 0.0.1" class="editable editable-click">Model x 0.0.1</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="1" data-value="2017.3.1" class="editable editable-click">2017.3.1</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="2"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 2</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="2" data-value="Model x 0.0.2" class="editable editable-click">Model x 0.0.2</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="2" data-value="2017.3.2" class="editable editable-click">2017.3.2</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="3"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 3</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="3" data-value="Model x 0.0.3" class="editable editable-click">Model x 0.0.3</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="3" data-value="2017.3.3" class="editable editable-click">2017.3.3</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="4"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 4</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="4" data-value="Model x 0.0.4" class="editable editable-click">Model x 0.0.4</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="4" data-value="2017.3.4" class="editable editable-click">2017.3.4</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="5"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 5</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="5" data-value="Model x 0.0.5" class="editable editable-click">Model x 0.0.5</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="5" data-value="2017.3.5" class="editable editable-click">2017.3.5</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="6"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 6</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="6" data-value="Model x 0.0.6" class="editable editable-click">Model x 0.0.6</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="6" data-value="2017.3.6" class="editable editable-click">2017.3.6</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="7"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 7</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="7" data-value="Model x 0.0.7" class="editable editable-click">Model x 0.0.7</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="7" data-value="2017.3.7" class="editable editable-click">2017.3.7</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="8"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 8</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="8" data-value="Model x 0.0.8" class="editable editable-click">Model x 0.0.8</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="8" data-value="2017.3.8" class="editable editable-click">2017.3.8</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                    <tr data-index="9"> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-pencil icon-pencil"></i> </a> </td> 
+                        <td> <a class="detail-icon" href="#"> <i class="glyphicon glyphicon-remove icon-remove"></i> </a> </td> 
+                        <td style="text-align: center; vertical-align: middle; ">Use case 9</td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="price" data-pk="9" data-value="Model x 0.0.9" class="editable editable-click">Model x 0.0.9</a></td> 
+                        <td style="text-align: center; "><a href="javascript:void(0)" data-name="name" data-pk="9" data-value="2017.3.9" class="editable editable-click">2017.3.9</a></td> 
+                        <td style="text-align: center; ">xxxxxxxxxxx.</td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="fixed-table-footer" style="display: none;">
+            <table>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="fixed-table-pagination" style="display: block;">
+            <div class="pull-left pagination-detail">
+                <span class="pagination-info">Showing 1 to 10 of 800 rows</span>
+                <span class="page-list"><span class="btn-group dropup"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem" class="active"><a href="#">10</a></li>
+                            <li role="menuitem"><a href="#">25</a></li>
+                            <li role="menuitem"><a href="#">50</a></li>
+                            <li role="menuitem"><a href="#">100</a></li>
+                            <li role="menuitem"><a href="#">All</a></li>
+                </ul></span> rows per page</span>
+            </div>
+            <div class="pull-right pagination">
+                <ul class="pagination">
+                    <li class="page-pre"><a href="#">‹</a></li>
+                    <li class="page-number active"><a href="#">1</a></li>
+                    <li class="page-number"><a href="#">2</a></li>
+                    <li class="page-number"><a href="#">3</a></li>
+                    <li class="page-number"><a href="#">4</a></li>
+                    <li class="page-number"><a href="#">5</a></li>
+                    <li class="page-last-separator disabled"><a href="#">...</a></li>
+                    <li class="page-last"><a href="#">80</a></li>
+                    <li class="page-next"><a href="#">›</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div> 
