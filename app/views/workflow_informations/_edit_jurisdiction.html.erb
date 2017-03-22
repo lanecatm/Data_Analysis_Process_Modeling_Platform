@@ -1,5 +1,5 @@
 
-<%= form_for(@workflow_privilege, :html => {:class => "form-horizontal", :role => "form"}) do |form|%>
+<%= form_for(@workflow_information, :html => {:class => "form-horizontal", :role => "form"}) do |form|%>
 
     <!--
     <div class="form-group">
@@ -8,6 +8,7 @@
         </div>
     </div>
     -->
+    <%= form.fields_for :workflow_privilege do |f| %> 
         <div class="form-group">
             <label class="col-md-12">Execution User Group</label>
             <div class="col-md-7">
@@ -38,13 +39,14 @@
                 %>
             </div>
         </div>
+    <% end %>
     <hr/>
     <div class="form-group">
         <!-- Button trigger modal -->
         <div class="col-md-2">
             <%= form.submit :"Last", :class => "btn btn-primary btn-block" %>
         </div>
-        <div class="col-md-offset-6 col-md-2">
+        <div class="col-md-offset-5 col-md-3">
             <%= form.submit :"Save Privilege", :class => "btn btn-primary btn-block" %>
         </div>
         <div class="col-md-2">

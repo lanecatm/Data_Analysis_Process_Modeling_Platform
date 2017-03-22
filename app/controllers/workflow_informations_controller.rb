@@ -25,22 +25,44 @@ class WorkflowInformationsController < ApplicationController
         @workflow_information = WorkflowInformation.find(params[:id])
         @categories = WorkflowCategory.all.collect{|t| [t.name, t.id]}
         @departments = DepartmentInformation.all.all.collect{|t| [t.name, t.id]}
-
+        @active_page = params[:active_page]
     end
 
     def update
         @workflow_information = WorkflowInformation.find(params[:id])
-        if @workflow_information.update(all_params)
-            redirect_to edit_workflow_information_path(@workflow_information.id)
+        case params[:commit]
+        when "Save Information"
+            @active_page = "info"
+            if @workflow_information.update(all_params)
+                redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
+            else
+                render 'edit'
+            end
+        when "Save Privilege"
+            @active_page = "jurisdiction"
+            @workflow_privilege = @workflow_information.workflow_privilege
+            if @workflow_privilege.update(workflow_privilege_params[:workflow_privilege])
+                @departments = DepartmentInformation.all.all.collect{|t| [t.name, t.id]}
+                redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
+            else
+                render 'edit'
+            end
+        when "Save Version"
+            @active_page = "version"
+            if @workflow_information.update(version_params)
+                redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
+            else
+                render 'edit'
+            end
+        when "Publish"
+            @workflow_information.status = WORKFLOW_INFO_PUBLISH
+            @workflow_information.save
+            redirect_to workflow_information_path(@workflow_information.id)
+
         else
-            render 'edit'
+            redirect_to workflow_information_path(@workflow_information.id)
         end
-        #@workflow_privilege = @workflow_information.workflow_privilege
-        #if @workflow_privilege.update(workflow_privilege_params[:workflow_privilege])
-        #    redirect_to edit_workflow_information_path(@workflow_information.id)
-        #else
-        #    render 'edit'
-        #end
+
     end
 
     def show
@@ -60,4 +82,9 @@ class WorkflowInformationsController < ApplicationController
     def workflow_privilege_params
         params.require(:workflow_information).permit(:workflow_information_id, workflow_privilege: [:edit_department_id, :execute_department_id, :delete_department_id])
     end
+
+    def version_params
+        params.require(:workflow_information).permit(:name, :introduction, :detial_description, :version_name, :category, :tag)
+    end
+
 end

@@ -12,16 +12,26 @@
                     <h3>&nbsp;</h3>
                     <!-- Nav tabs -->
                     <ul class="nav nav-stacked nav-pills" data-spy = "affix" >
-                        <li role="presentation" class="active"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">Basic Information</a></li>
-                        <!--
-                        <li role="presentation"><a href="#format" aria-controls="format" role="tab" data-toggle="tab">Data format</a></li>
-                        -->
-                        <li role="presentation"><a href="#diagram" aria-controls="diagram" role="tab" data-toggle="tab">Flow diagram</a></li>
-                        <!--
-                        <li role="presentation"><a href="#input" aria-controls="input" role="tab" data-toggle="tab">Algorithm input</a></li>
-                        -->
-                        <li role="presentation"><a href="#jurisdiction" aria-controls="input" role="tab" data-toggle="tab">Jurisdiction</a></li>
-                        <li role="presentation"><a href="#version" aria-controls="version" role="tab" data-toggle="tab">Version</a></li>
+                        <li role="presentation" 
+                        class="<%= 'active' if @active_page == 'info' %>"
+                        >
+                        <a href="#information" aria-controls="information" role="tab" data-toggle="tab">Basic Information</a>
+                        </li>
+                        <li role="presentation" 
+                        class="<%= 'active' if @active_page == 'diagram' %>"
+                        >
+                        <a href="#diagram" aria-controls="diagram" role="tab" data-toggle="tab">Flow diagram</a>
+                        </li>
+                        <li role="presentation"
+                        class="<%= 'active' if @active_page == 'jurisdiction' %>"
+                        >
+                        <a href="#jurisdiction" aria-controls="input" role="tab" data-toggle="tab">Jurisdiction</a>
+                        </li>
+                        <li role="presentation"
+                        class="<%= 'active' if @active_page == 'version' %>"
+                        >
+                        <a href="#version" aria-controls="version" role="tab" data-toggle="tab">Version</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -45,28 +55,36 @@
                 <!-- Nav tabs -->
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="information">
+                    <div role="tabpanel" class="tab-pane 
+                        <%= 'active' if @active_page == 'info' %>
+                        " id="information">
                         <div class="col-md-8">
                             <div class = "row">
                                 <%= render '/workflow_informations/edit_info' %>
                             </div>
                         </div>
                     </div><!-- tab -->
-                    <div role="tabpanel" class="tab-pane" id="diagram">
+                    <div role="tabpanel" class="tab-pane
+                        <%= 'active' if @active_page == 'diagram' %>
+                        " id="diagram">
                         <div class="col-md-8">
                             <div class = "row">
                                 <%= render '/workflow_informations/edit_diagram' %>
                             </div>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="version">
+                    <div role="tabpanel" class="tab-pane
+                        <%= 'active' if @active_page == 'version' %>
+                        " id="version">
                         <div class="col-md-8">
                             <div class = "row">
                                 <%= render '/workflow_informations/edit_version' %>
                             </div>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="jurisdiction">
+                    <div role="tabpanel" class="tab-pane
+                        <%= 'active' if @active_page == 'jurisdiction' %>
+                        " id="jurisdiction">
                         <div class="col-md-8">
                             <div class = "row">
                                 <%= render '/workflow_informations/edit_jurisdiction' %>

@@ -16,9 +16,9 @@
 <script type="text/javascript">
     $(function(){
             $("#tag").tabControl({maxTabCount:10,tabW:80,tabMaxLen:12},"");
-            $("#getTab").click(function(){
+            $(".getTab").click(function(){
                 var sucaijiayuan = $("#tag").getTabVals();
-                alert(sucaijiayuan.join("，"));
+                $("#tag_content input").val(sucaijiayuan.join(","));
                 });
             });
 </script>
@@ -59,6 +59,11 @@
         <div class="col-md-12">
             <div class="form-inline">
                 <div id="tag"></div>
+                <div id="tag_content">
+                    <%= f.fields_for :workflow_tag do |ftag| %> 
+                        <%= ftag.text_field :name, :class => "form-control"%>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>
@@ -75,8 +80,8 @@
     <hr/>
     <div class="form-group">
         <!-- Button trigger modal -->
-        <div class="col-md-offset-8 col-md-2">
-            <%= f.submit :"Save", :class => "btn btn-primary btn-block" %>
+        <div class="col-md-offset-7 col-md-3">
+            <%= f.submit :"Save Information", :class => "btn btn-primary btn-block getTab" %>
         </div>
         <div class="col-md-2">
             <%= f.submit :"Next", :class => "btn btn-primary btn-block" %>

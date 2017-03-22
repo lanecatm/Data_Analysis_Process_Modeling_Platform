@@ -140,7 +140,6 @@ $.fn.extend({
 		obj.children("span[name=\"tab\"][id^=\"radius\"]").find("b").text(function(index, text) {
             var checkReg = /[^A-Za-z0-9_\u4E00-\u9FA5]+/gi;
 			values.push(text.replace(checkReg, ""));
-			values.push(text);
 		});
 		return values;
 	}
