@@ -1,7 +1,7 @@
 
 <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
 <ul class="list-group">
-    <%= @process_information.comments.each do |comment| %>
+    <%= @workflow_information.workflow_comments.each do |comment| %>
         <li class="list-group-item">
         <div class="media">
             <div class="media-left">
@@ -36,7 +36,7 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">New comment</h4>
-            <%= form_for([@process_information, @process_information.comments.build]) do |f| %>
+            <%= form_for([@workflow_information, @workflow_information.workflow_comments.build]) do |f| %>
 
                 <%= f.text_field :score, :class => "rating", :value => "5", :type => "number", :min=>"0", :max=>"5", :step=>"1", :"data-size" => "xs" %>
                 <%= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120 %>

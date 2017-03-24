@@ -10,38 +10,63 @@
     </tr>
     <tr>
         <th>Category</th>
-        <td><%= @workflow_information.category.name %></td>
+        <td>
+            <% if @workflow_information.category != nil %>
+                <%= @workflow_information.category.name %>
+            <% end %>
+        </td>
+
     </tr>
 
     <tr>
         <th>Tag</th>
         <td>
-            <span class="label label-default">Tag 1</span>
-            <span class="label label-default">Tag 2</span>
-            <span class="label label-default">Tag 3</span>
+        <% @workflow_information.workflow_tags.each do |tag| %>
+            <span class="label label-default"><%= raw(tag.name) %></span>
+        <% end %>
         </td>
     </tr>
 
     <tr>
         <th rowspan="5">Jurisdiction</th>
         <th>Author</th>
-        <td><%= @workflow_information.author %></td>
+        <td>
+            <% if @workflow_information.author != nil %>
+                <%= @workflow_information.author.user_name %>
+            <% end %>
+        </td>
     </tr>
     <tr>
         <th>Last editor</th>
-        <td><%= @workflow_information.author %></td>
+        <td>
+            <% if @workflow_information.last_editor != nil %>
+            <%= @workflow_information.last_editor.user_name %>
+            <% end %>
+        </td>
     </tr>
     <tr>
         <th>Edit jurisdiction</th>
-        <td><%= @workflow_information.workflow_privilege.edit_department.name %></td>
+        <td>
+            <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.edit_department != nil %>
+                <%= @workflow_information.workflow_privilege.edit_department.name %>
+            <% end %>
+        </td>
     </tr>
     <tr>
         <th>Delete jurisdiction</th>
-        <td><%= @workflow_information.workflow_privilege.delete_department.name %></td>
+        <td>
+            <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.delete_department != nil %>
+                <%= @workflow_information.workflow_privilege.delete_department.name %>
+            <% end %>
+        </td>
     </tr>
     <tr>
         <th>Execute jurisdiction</th>
-        <td><%= @workflow_information.workflow_privilege.execute_department.name %></td>
+        <td>
+            <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.execute_department != nil %>
+                <%= @workflow_information.workflow_privilege.execute_department.name %>
+            <% end %>
+        </td>
     </tr>
 
     <tr>
@@ -51,12 +76,12 @@
     </tr>
     <tr>
         <th>Create time</th>
-        <td><%= @workflow_information.createtime %></td>
+        <td><%= @workflow_information.created_at %></td>
     </tr>
 
     <tr>
         <th>Update time</th>
-        <td><%= @workflow_information.createtime %></td>
+        <td><%= @workflow_information.updated_at %></td>
     </tr>
     <tr>
         <th>Last version</th>

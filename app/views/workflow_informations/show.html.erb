@@ -29,13 +29,49 @@
         <div class="col-md-9">
 
             <div class = "row">
-                <h3 >
-                    <%= @workflow_information.name %>
-                </h3>
-                <h4>
-                    <small><%= @workflow_information.introduction %></small> 
-                </h4>
-                <hr/>
+                <div class="col-md-8">
+                    <div class = "row">
+                        <h3 >
+                            <%= @workflow_information.name %>
+                            <small><%= @workflow_information.version_name %></small>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <div class = "row">
+                        <br/>
+                        <%= link_to 'Training', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class = "row">
+                        <br/>
+                        <%= link_to 'Execute', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class = "row">
+                        <br/>
+                        <%= link_to 'Edit', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class = "row">
+                        <br/>
+                        <%= link_to 'Delete', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class = "row">
+                        <h4>
+                            <small><%= @workflow_information.introduction %></small> 
+                        </h4>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+            <div class = "row">
                 <!-- Nav tabs -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="preview">
@@ -54,8 +90,7 @@
                         -->
                     </div>
                     <div role="tabpanel" class="tab-pane" id="comment">
-                        <!--
-                        -->
+                        <%= render '/workflow_informations/show_comment' %>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="history">
                         <%= render '/workflow_informations/show_history' %>

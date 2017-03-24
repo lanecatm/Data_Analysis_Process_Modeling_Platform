@@ -14,7 +14,7 @@
             <div class="col-md-7">
                 <%=f.select :execute_department_id, @departments, 
                     {
-                    :selected => @workflow_information.workflow_privilege.execute_department.id}, 
+                    :selected => @execute_department_choice}, 
                     { class: "form-control" } 
                 %> 
             </div>
@@ -24,7 +24,7 @@
             <div class="col-md-7">
                 <%=f.select :edit_department_id, @departments, 
                     {
-                    :selected => @workflow_information.workflow_privilege.edit_department.id}, 
+                    :selected => @edit_department_choice},
                     { class: "form-control" } 
                 %> 
             </div>
@@ -34,7 +34,7 @@
             <div class="col-md-7">
                 <%=f.select :delete_department_id, @departments,
                     {
-                    :selected => @workflow_information.workflow_privilege.delete_department.id}, 
+                    :selected => @delete_department_choice},
                     { class: "form-control" } 
                 %>
             </div>
