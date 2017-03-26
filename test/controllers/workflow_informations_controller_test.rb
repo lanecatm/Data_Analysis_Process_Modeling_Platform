@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NullModelTest < ActiveSupport::TestCase
+class WorkflowInformationsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

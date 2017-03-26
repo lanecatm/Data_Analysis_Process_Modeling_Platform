@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class OutputFormatTest < ActiveSupport::TestCase
+class ProcessControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

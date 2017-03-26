@@ -10,9 +10,23 @@ Rails.application.routes.draw do
       resources :comments
   end
 
+  resources :workflow_informations do
+      resources :workflow_privileges
+      resources :workflow_comments
+  end
+
   post 'process_informations/search/', to: 'process_informations#search'
+ 
+  post 'search/', to: 'search#search'
+  get 'search/', to: 'search#show'
 
   get 'history/', to: 'process_informations#history'
+
+
+  get 'process/train/', to: 'process#show_train'
+  post 'process/train/', to: 'process#train'
+  get 'process/execute/', to: 'process#show_execute'
+  post 'process/execute/', to: 'process#execute'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

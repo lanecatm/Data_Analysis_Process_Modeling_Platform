@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320075713) do
+ActiveRecord::Schema.define(version: 20170326050034) do
 
   create_table "department_informations", force: :cascade do |t|
     t.text     "name"
@@ -57,10 +57,14 @@ ActiveRecord::Schema.define(version: 20170320075713) do
     t.integer  "case_type"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "process_type"
+    t.integer  "process_id"
   end
 
   add_index "process_informations", ["creater_id"], name: "index_process_informations_on_creater_id"
   add_index "process_informations", ["parent_case_id"], name: "index_process_informations_on_parent_case_id"
+  add_index "process_informations", ["process_id"], name: "index_process_informations_on_process_id"
+  add_index "process_informations", ["process_type"], name: "index_process_informations_on_process_type_and_process_id"
   add_index "process_informations", ["user_id"], name: "index_process_informations_on_user_id"
   add_index "process_informations", ["workflow_information_id"], name: "index_process_informations_on_workflow_information_id"
 
@@ -102,6 +106,16 @@ ActiveRecord::Schema.define(version: 20170320075713) do
   add_index "workflow_comments", ["comment_parent_id"], name: "index_workflow_comments_on_comment_parent_id"
   add_index "workflow_comments", ["process_id"], name: "index_workflow_comments_on_process_id"
   add_index "workflow_comments", ["workflow_information_id"], name: "index_workflow_comments_on_workflow_information_id"
+
+  create_table "workflow_information_and_tags", force: :cascade do |t|
+    t.integer  "workflow_information_id"
+    t.integer  "workflow_tag_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "workflow_information_and_tags", ["workflow_information_id"], name: "index_workflow_information_and_tags_on_workflow_information_id"
+  add_index "workflow_information_and_tags", ["workflow_tag_id"], name: "index_workflow_information_and_tags_on_workflow_tag_id"
 
   create_table "workflow_informations", force: :cascade do |t|
     t.string   "name"

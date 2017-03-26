@@ -1,5 +1,5 @@
 class PersonInformation < ActiveRecord::Base
-    has_many  manage_departments, class_name: "DepartmentInformation", foreign_key: "manager"
+    has_many :manage_departments, class_name: "DepartmentInformation", foreign_key: "manager"
     has_many :vice_manage_departments, class_name: "DepartmentInformation", foreign_key: "vice_manager"
     
     has_many :create_workflows, class_name: "WorkflowInformation", foreign_key: "author"

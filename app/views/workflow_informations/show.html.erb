@@ -9,20 +9,19 @@
         <div class="col-md-2">
             <div class = "row">
                 <div class="col-md-12">&nbsp;</div>
-                <div class="col-md-2"> </div>
-                <h3>&nbsp;</h3>
-                <h3>&nbsp;</h3>
+                <div class="col-md-12">
+                    <h3>&nbsp;</h3>
+                    <h3>&nbsp;</h3>
 
-                <ul class="nav nav-stacked nav-pills" data-spy="affix" role="tablist">
-                    <li role="presentation" class="active"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">Diagram preview</a></li>
-                    <li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">Basic Information</a></li>
-                    <li role="presentation"><a href="#version" aria-controls="version" role="tab" data-toggle="tab">All version</a></li>
-                    <li role="presentation"><a href="#usecase" aria-controls="usecase" role="tab" data-toggle="tab">Use case</a></li>
-                    <li role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab">Execution history</a></li>
-                    <li role="presentation"><a href="#training" aria-controls="training" role="tab" data-toggle="tab">Model training</a></li>
-                    <li role="presentation"><a href="#running" aria-controls="running" role="tab" data-toggle="tab">Process excution</a></li>
-                    <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
-                </ul>
+                    <ul class="nav nav-stacked nav-pills" data-spy="affix" role="tablist">
+                        <li role="presentation" class="active"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">Diagram preview</a></li>
+                        <li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">Basic Information</a></li>
+                        <li role="presentation"><a href="#version" aria-controls="version" role="tab" data-toggle="tab">All version</a></li>
+                        <li role="presentation"><a href="#usecase" aria-controls="usecase" role="tab" data-toggle="tab">Use case</a></li>
+                        <li role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab">Execution history</a></li>
+                        <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -41,25 +40,25 @@
                 <div class="col-md-1">
                     <div class = "row">
                         <br/>
-                        <%= link_to 'Training', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                        <%= link_to 'Training', workflow_information_path(@workflow_information), class:"btn btn-primary btn-block btn-sm", role:"button" %>
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class = "row">
                         <br/>
-                        <%= link_to 'Execute', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                        <%= link_to 'Execute', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-info btn-block btn-sm", role:"button" %>
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class = "row">
                         <br/>
-                        <%= link_to 'Edit', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                        <%= link_to 'Edit', edit_workflow_information_path(@workflow_information.id), class:'btn btn-success btn-block btn-sm', role:"button" %>
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class = "row">
                         <br/>
-                        <%= link_to 'Delete', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block btn-sm", role:"button" %>
+                        <%= link_to 'Delete', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-block btn-sm", role:"button" %>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -78,11 +77,6 @@
                         <%= render '/workflow_informations/show_diagram' %>
                     </div>
 
-                    <div role="tabpanel" class="tab-pane" id="training">
-                        <%= render '/workflow_informations/show_training' %>
-                    </div>
-
-
                     <div role="tabpanel" class="tab-pane" id="information">
                         <%= render '/workflow_informations/show_info' %>
                         <!--
@@ -94,9 +88,6 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="history">
                         <%= render '/workflow_informations/show_history' %>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="running">
-                        <%= render '/workflow_informations/show_running' %>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="version">
                         <!--

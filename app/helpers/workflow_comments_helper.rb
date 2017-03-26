@@ -1,0 +1,2 @@
+module WorkflowCommentsHelper
+end

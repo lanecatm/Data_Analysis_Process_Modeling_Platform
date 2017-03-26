@@ -58,7 +58,7 @@ $.fn.extend({
 					}
 					if (value != "") {
 						if (value.length > opts.tabMaxLen) {
-							showMes($(this), "请输入1到" + opts.tabMaxLen + "个字符长度的标签");
+							showMes($(this), "Please insert character from 1 to " + opts.tabMaxLen + ".");
 							return;
 						}
 						var _match = value.match(checkReg);
@@ -75,12 +75,12 @@ $.fn.extend({
 							hideErr();
 						}
 						 else {
-							showMes(inputObj, "內容不能包含非法字符（{0}）！".replace("{0}", _match.join(" ")));
+							showMes(inputObj, "Tag can not include ({0})！".replace("{0}", _match.join(" ")));
 						}
 					}
 					 else {
 						if (event.type != "blur")
-						 showMes(inputObj, "请输入标签！");
+						 showMes(inputObj, "Please insert tag.");
 					}
 				}
 			}).bind("focus",
@@ -94,7 +94,7 @@ $.fn.extend({
 			var _span = "<span name='tab' id='radius'><b>" + value + "</b><a id='deltab'>×</a></span>";
 			inputObj.after(_span).hide();
 			inputObj.next("span").find("a").click(function() {
-				if (confirm("确定删除该标签？")) {
+				if (confirm("Delete this tag?")) {
 					inputObj.next("span").remove();
 					inputObj.remove();
 					if ($("span[name='tab']", obj).length == opts.maxTabCount - 1)

@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="col-md-offset-3 col-md-7">
+        <%= form_for :search_request, :html => {:class => "form-inline", :role => "form"}, url:search_path do |f|%>
+            <%= f.select :search_for, {"Model" => 'model', "Use case" => 'use_case'},{:selected => @active_choice}, {class: "form-control", style: "width:14%"} %>
+            <!--
+            <select class="form-control" style="width:14%">
+                <option>Model</option>
+                <option>Use case</option>
+            </select>
+            -->
+            <div class="input-group" style="width:85%" >
+                <%= f.text_field :search_content, :class => "form-control", :placeholder => "Search for ..." %>
+                <div class="input-group-btn">
+                    <%= f.submit :"Search", :class => "btn btn-primary" %>
+                </div><!-- /btn-group -->
+            </div><!-- /input-group -->
+        <% end %>
+
+    </div><!-- /col-md-12 -->
+</div><!-- /container -->
+
