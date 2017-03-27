@@ -37,15 +37,12 @@ class WorkflowInformationsController < ApplicationController
             @new_workflow_information.last_editor = PersonInformation.find(1)
             @new_workflow_information.save
 
-            if @workflow_privilege_hash != nil
-                workflow_privilege_hash = @workflow_information.workflow_privilege.attributes
-            else
-                workflow_privilege_hash = {:edit_department_id => 1, :execute_department_id => 1, :delete_department_id => 1}
-            end
-            workflow_privilege_hash.delete("id")
-            @workflow_privilege = WorkflowPrivilege.create(workflow_privilege_hash)
-            @workflow_privilege.workflow_information = @new_workflow_information
-            @workflow_privilege.save
+            @new_workflow_privilege = WorkflowPrivilege.create
+            @new_workflow_privilege.edit_department = @workflow_information.workflow_privilege.edit_department
+            @new_workflow_privilege.execute_department = @workflow_information.workflow_privilege.execute_department
+            @new_workflow_privilege.delete_department = @workflow_information.workflow_privilege.delete_department
+            @new_workflow_privilege.workflow_information = @new_workflow_information
+            @new_workflow_privilege.save
             redirect_to edit_workflow_information_path(@new_workflow_information.id)
         end
         @categories = WorkflowCategory.all.collect{|t| [t.name, t.id]}
@@ -54,10 +51,10 @@ class WorkflowInformationsController < ApplicationController
         @workflow_tag_str = ""
         @workflow_information.workflow_tags.each do |tag|
             @workflow_tag_str = @workflow_tag_str + tag.name + ","
-            @execute_department_choice = @workflow_information.workflow_privilege == nil ? 1 : @workflow_information.workflow_privilege.execute_department_id
-            @edit_department_choice = @workflow_information.workflow_privilege == nil ? 1 : @workflow_information.workflow_privilege.edit_department_id
-            @delete_department_choice = @workflow_information.workflow_privilege == nil ? 1 : @workflow_information.workflow_privilege.delete_department_id
         end
+        @execute_department_choice = @workflow_information.workflow_privilege == nil ? 1 : @workflow_information.workflow_privilege.execute_department_id
+        @edit_department_choice = @workflow_information.workflow_privilege == nil ? 1 : @workflow_information.workflow_privilege.edit_department_id
+        @delete_department_choice = @workflow_information.workflow_privilege == nil ? 1 : @workflow_information.workflow_privilege.delete_department_id
     end
 
     def update
@@ -85,8 +82,6 @@ class WorkflowInformationsController < ApplicationController
                 workflow_information_and_tag.workflow_tag = workflow_tag
                 workflow_information_and_tag.save
             end
-
-
             if @workflow_information.update(all_params)
                 redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
             else
@@ -121,10 +116,6 @@ class WorkflowInformationsController < ApplicationController
                 if @workflow_information.update(version_params)
                     @workflow_information.status = WORKFLOW_INFO_PUBLISH
                     @workflow_information.save
-                    # TODO 把这段代码扔到点击edit按钮的时候
-                    #workflow_information_hash = @workflow_information.attributes
-                    #workflow_information_hash.delete("id")
-                    #@new_workflow_information = WorkflowInformation.create(workflow_information_hash)
                     # TODO 关联父节点
 
                     redirect_to workflow_information_path(@workflow_information.id)
@@ -141,8 +132,11 @@ class WorkflowInformationsController < ApplicationController
 
     def show
         @workflow_information = WorkflowInformation.find(params[:id])
+        @version_workflow_informations = WorkflowInformation.where(:name => @workflow_information.name)
+        @process_informations = ProcessInformation.where(:workflow_information_id => @workflow_information.id)
     end
 
+   
     def destroy
         @workflow_information = WorkflowInformation.find(params[:id])
         @workflow_information.destroy

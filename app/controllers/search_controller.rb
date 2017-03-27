@@ -6,12 +6,17 @@ class SearchController < ApplicationController
 
     def show
         @active_page = "all"
-        @none_workflow_informations = []
         @all_workflow_informations = WorkflowInformation.all
+        @tag_workflow_informations = WorkflowInformation.all
+        @title_workflow_informations = WorkflowInformation.all
+        @other_workflow_informations = WorkflowInformation.all
         case params[:search_for]
         when "model"
             if params[:search_content] == nil or params[:search_content] == ""
                 @all_workflow_informations = WorkflowInformation.all
+                @tag_workflow_informations = WorkflowInformation.all
+                @title_workflow_informations = WorkflowInformation.all
+                @other_workflow_informations = WorkflowInformation.all
             else
                 search_content_str = "%" + params[:search_content] + "%"
                 @tag_ids = WorkflowTag.select("id").where("name like ?", search_content_str)

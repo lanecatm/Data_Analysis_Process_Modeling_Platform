@@ -6,27 +6,24 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-  resources :process_informations do
-      resources :comments
-  end
 
   resources :workflow_informations do
       resources :workflow_privileges
       resources :workflow_comments
   end
-
-  post 'process_informations/search/', to: 'process_informations#search'
- 
   post 'search/', to: 'search#search'
   get 'search/', to: 'search#show'
-
-  get 'history/', to: 'process_informations#history'
-
 
   get 'process/train/', to: 'process#show_train'
   post 'process/train/', to: 'process#train'
   get 'process/execute/', to: 'process#show_execute'
   post 'process/execute/', to: 'process#execute'
+  get 'process/refresh/', to: 'process#refresh_info'
+
+  
+  get 'history/model/', to: 'history#show_model'
+  get 'history/use_case/', to: 'history#show_use_case'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

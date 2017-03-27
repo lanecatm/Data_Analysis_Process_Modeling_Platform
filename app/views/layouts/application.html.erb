@@ -46,11 +46,11 @@
                     <%= link_to 'Create', new_workflow_information_path %>
                     </li>
                     <li class="dropdown">
-                    <a href="./View.htm" class="dropdown-toggle" data-toggle="dropdown">My History <span class="caret"></span></a>
+                    <a href="./View.htm" class="dropdown-toggle" data-toggle="dropdown">History <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><%= link_to 'My Model', history_path %></li>
-                        <li><%= link_to 'My Use case', history_path %></li>
-                        <li><%= link_to 'Running record', history_path %></li>
+                        <li><%= link_to 'Model', history_model_path %></li>
+                        <li><%= link_to 'Use case', history_use_case_path %></li>
+                        <li><%= link_to 'Running record', history_model_path %></li>
                     </ul>
                     </li>
                 </ul>

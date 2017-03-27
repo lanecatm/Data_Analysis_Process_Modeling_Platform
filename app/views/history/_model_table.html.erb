@@ -1,0 +1,42 @@
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>ID </th>
+        <th>Model name</th>
+        <th>Version</th>
+        <th>Update time</th>
+        <th>Status</th>
+    </tr>
+    <% @workflow_informations.each do |workflow_information| %>
+        <tr>
+            <td>
+                <%= workflow_information.id %>
+            </td>
+            <td>
+                <%= link_to workflow_information.name, workflow_information_path(workflow_information) %>
+            </td>
+            <!--
+            <p>
+            <%= workflow_information.introduction %>
+            </p>
+            -->
+            <td>
+                <%= workflow_information.version_name %>
+            </td>
+            <td>
+                <%= workflow_information.updated_at %>
+            </td>
+            <td>
+                <% if workflow_information.status == WorkflowInformation::WORKFLOW_INFO_INIT %>
+                    <%= "Init" %>
+                <% end %>
+                <% if workflow_information.status == WorkflowInformation::WORKFLOW_INFO_EDITING %>
+                    <%= "Editing" %>
+                <% end %>
+                <% if workflow_information.status == WorkflowInformation::WORKFLOW_INFO_PUBLISH %>
+                    <%= "Published" %>
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>
