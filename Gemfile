@@ -46,3 +46,4 @@ group :development, :test do
 end
 
 gem 'tinymce-rails'
+gem 'bootstrap-sass', '~> 3.3.6'

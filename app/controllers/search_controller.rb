@@ -29,7 +29,8 @@ class SearchController < ApplicationController
 
             
         when "use_case"
-            @all_workflow_informations = []
+            search_content_str = "%" + params[:search_content] + "%"
+            @all_process_informations = ProcessInformation.where("name like ?", search_content_str)
             @title_workflow_informations = []
             @other_workflow_informations = []
         end

@@ -11,7 +11,7 @@ module SimpleStomp
     # expires in millisecond
     expires = options.fetch :expires, 3000
 
-    limit = options.fetch :time_limit, 1
+    limit = options.fetch :time_limit, 12
     dest_reply = options.fetch :dest_reply, "INFO"
     max_retries = options.fetch(:max_retries, 2)
     tries = 0
@@ -103,7 +103,7 @@ module SimpleStomp
 
       end
       def receive(options = {})
-          limit = options.fetch :time_limit, 15
+          limit = options.fetch :time_limit, 1
           dest_reply = options.fetch :dest_reply, "INFO"
           thr = Thread.new do
               SimpleStomp::receive(options).body

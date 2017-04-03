@@ -7,16 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="http://v3.bootcss.com/favicon.ico">
 
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
         <!-- Latest compiled and minified Locales -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
         <title>Data Analysis Process Modeling Platform</title>
 
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -27,18 +23,17 @@
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
+            <!--
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <%= link_to 'ISDSP', root_path, :class => "navbar-brand" %>
             </div>
+            -->
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
+                    <li>
+                    <%= link_to image_tag("/assets/LOGO1.png", :style => "width: 70px; height: 25px;"), root_path, :class => "navbar-brand" %>
+                    </li>
                     <li>
                     <%= link_to 'Search', root_path %>
                     </li>
@@ -55,9 +50,6 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                    <span class="glyphicon glyphicon-user" aria-hidden="false"></span>
-                    </li>
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -65,13 +57,19 @@
                         <li><a>Sign out</a></li>
                     </ul>
                     </li>
-                    <ul>
-                    </div><!--/.navbar-collapse -->
-                </div>
-                </nav>
+                </ul>
+            </div><!--/.navbar-collapse -->
+        </div>
+        </nav>
 
-                <%= yield %>
+        <%= yield %>
 
-            </body>
-        </html>
+        <div class="container">
+            <footer>
+            <p>© SJTU 2017</p>
+            </footer>
+        </div> <!-- /container -->
+
+    </body>
+</html>
 
