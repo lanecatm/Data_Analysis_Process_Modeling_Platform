@@ -26,12 +26,33 @@ class ProcessController < ApplicationController
     end
 
     def show_execute
-        @workflow_information = WorkflowInformation.last
-        @refresh_info = receive dest_reply: "INFO"
+        @workflow_information = WorkflowInformation.find(params[:workflow_id])
+        @active_page = "input"
+        #@refresh_info = receive dest_reply: "INFO"
     end
 
     def refresh_info
         redirect_to process_execute_path
     end
 
+    def upload_file(file) 
+        if !file.original_filename.empty? 
+            #生成一个随机的文件名 
+            @filename = get_file_name(file.original_filename) 
+            #向dir目录写入文件 
+            File.open("#{RAILS_ROOT}/public/emag/upload/#{@filename}", "wb") do |f| 
+                f.write(file.read) 
+            end 
+            #返回文件名称，保存到数据库中 
+            return @filename 
+        end 
+    end 
+
+    def get_file_name(filename) 
+        if !filename.nil? 
+            require 'uuidtools' 
+            filename.sub(/.*./,UUID.random_create.to_s+'.') 
+        end 
+    end 
 end
+

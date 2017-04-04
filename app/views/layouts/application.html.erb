@@ -13,11 +13,19 @@
         <!-- Latest compiled and minified JavaScript -->
 
         <!-- Latest compiled and minified Locales -->
-        <title>Data Analysis Process Modeling Platform</title>
+        <title>ISDSP</title>
 
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <!--
+        <link href="/stylesheets/chl.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/pace-theme-minimal.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/theme-peter-river.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/star-rating.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/bs-is-fun.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        -->
         <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
         <%= csrf_meta_tags %>
+        <link rel="Shortcut Icon" href="assets/LOGO_2_s.png">
     </head>
 
     <body>
@@ -32,26 +40,26 @@
                 <ul class="nav navbar-nav">
 
                     <li>
-                    <%= link_to image_tag("/assets/LOGO1.png", :style => "width: 70px; height: 25px;"), root_path, :class => "navbar-brand" %>
+                    <%= link_to image_tag("/assets/LOGO_2_w.png", :style => "width: 70px; height: 25px;"), root_path, :class => "navbar-brand" %>
                     </li>
                     <li>
-                    <%= link_to 'Search', root_path %>
+                    <%= link_to 'Search', search_path(:search_content => "", :search_for => "model") %>
                     </li>
                     <li>
                     <%= link_to 'Create', new_workflow_information_path %>
                     </li>
                     <li class="dropdown">
-                    <a href="./View.htm" class="dropdown-toggle" data-toggle="dropdown">History <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">History <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><%= link_to 'Model', history_model_path %></li>
-                        <li><%= link_to 'Use case', history_use_case_path %></li>
+                        <li><%= link_to 'Running case', history_use_case_path %></li>
                         <li><%= link_to 'Running record', history_model_path %></li>
                     </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a>Settings</a></li>
                         <li><a>Sign out</a></li>
@@ -62,12 +70,13 @@
         </div>
         </nav>
 
+        <br/>
         <%= yield %>
 
+
         <div class="container">
-            <footer>
+            <hr/>
             <p>© SJTU 2017</p>
-            </footer>
         </div> <!-- /container -->
 
     </body>

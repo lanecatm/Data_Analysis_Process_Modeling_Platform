@@ -16,12 +16,40 @@
                     <div class="box-body">
                         <div class="tab-custom">
                             <ul class="nav nav-tabs nav-bordered" data-spy="affix" role="tablist">
-                                <li role="presentation" class="active"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">Diagram preview</a></li>
-                                <li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">Basic Information</a></li>
-                                <li role="presentation"><a href="#version" aria-controls="version" role="tab" data-toggle="tab">All version</a></li>
-                                <li role="presentation"><a href="#usecase" aria-controls="usecase" role="tab" data-toggle="tab">Use case</a></li>
-                                <li role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab">Execution history</a></li>
-                                <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
+                                <li role="presentation" class="
+                                    <%= 'active' if (@active_page == nil or @active_page == "preview") %>
+                                ">
+                                <a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Diagram preview
+                                </a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#information" aria-controls="information" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Basic Information
+                                </a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#version" aria-controls="version" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> All versions
+                                </a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#usecase" aria-controls="usecase" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Running cases
+                                </a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#history" aria-controls="history" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span> Execution history
+                                </a>
+                                </li>
+                                <li role="presentation", class="
+                                    <%= 'active' if @active_page == "comment" %>
+                                ">
+                                <a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comments
+                                </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -31,7 +59,7 @@
 
         <div class="col-md-9">
             <div class = "row">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class = "row">
                         <h3 >
                             <%= @workflow_information.name %>
@@ -40,28 +68,23 @@
                     </div>
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-5">
+                    <br/>
                     <div class = "row">
-                        <br/>
-                        <%= link_to 'Training', workflow_information_path(@workflow_information), class:"btn btn-primary btn-block btn-sm", role:"button" %>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div class = "row">
-                        <br/>
-                        <%= link_to 'Execute', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-info btn-block btn-sm", role:"button" %>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div class = "row">
-                        <br/>
-                        <%= link_to 'Edit', edit_workflow_information_path(@workflow_information.id), class:'btn btn-success btn-block btn-sm', role:"button" %>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div class = "row">
-                        <br/>
-                        <%= link_to 'Delete', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-block btn-sm", role:"button" %>
+                        <div class="btn-group btn-group-justified" role="group">
+                        <%= link_to workflow_information_path(@workflow_information), class:"btn btn-primary btn-block btn-sm", role:"button" do %>
+                            <span class="glyphicon glyphicon-scale" aria-hidden="true"></span> Train
+                        <% end %>
+                        <%= link_to process_execute_path(:workflow_id => @workflow_information.id), class:"btn btn-info btn-block btn-sm", role:"button" do %>
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Execute
+                        <% end %>
+                        <%= link_to edit_workflow_information_path(@workflow_information.id), class:'btn btn-success btn-block btn-sm', role:"button" do %>
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                        <% end %>
+                        <%= link_to workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-block btn-sm", role:"button" do %>
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                        <% end %>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -76,7 +99,9 @@
             <div class = "row">
                 <!-- Nav tabs -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="preview">
+                    <div role="tabpanel" class="tab-pane 
+                        <%= 'active' if (@active_page == nil or @active_page == "preview") %>
+                        " id="preview">
                         <%= render '/workflow_informations/show_diagram' %>
                     </div>
 
@@ -86,7 +111,9 @@
                         <%= link_to '删除', workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-block", role:"button" %>
                         -->
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="comment">
+                    <div role="tabpanel" class="tab-pane
+                        <%= 'active' if @active_page == "comment" %>
+                        " id="comment">
                         <%= render '/workflow_informations/show_comment' %>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="history">
@@ -99,32 +126,9 @@
                         <%= render '/workflow_informations/show_usecase' %>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-    <div class = "row">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <hr>
-        <footer>
-        <p>© SJTU 2017</p>
-        </footer>
-    </div>
-</div> <!-- /container -->
-<div class="container">
 </div> <!-- /container -->
 
 

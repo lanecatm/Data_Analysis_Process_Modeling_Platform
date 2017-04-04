@@ -17,7 +17,7 @@ $.fn.extend({
 		var defOpt = {
 			initTabCount: 1,
 			maxTabCount: 10,
-			tabMaxLen: 10,
+			tabMaxLen: 100,
 			tabW: 150,
 			tabH: 15,
 			tipTOffset: 5,

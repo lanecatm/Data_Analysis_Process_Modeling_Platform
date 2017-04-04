@@ -17,3 +17,4 @@
 //= require tinymce
 //= require jquery
 //= require bootstrap-sprockets
+//= require bootstrap-table

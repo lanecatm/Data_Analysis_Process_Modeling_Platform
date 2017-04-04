@@ -1,0 +1,29 @@
+
+<div class="jumbotron">
+    <br/>
+<img src="/assets/LOGO_2_b.png" class="center-block" alt="image" style="width: 350px; height: 125px;">
+<br/>
+<%= render '/search/search_bar' %>
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-6">
+            <img data-src="holder.js/200x200" class="img-thumbnail center-block" alt="image" data-holder-rendered="true" style="width: 200px; height: 200px;">
+            <br/>
+            <h2 class="text-center">How to use the platform?</h2>
+            <p  class="text-center"><a class="btn btn-default" href="./Example1.htm" role="button">Learn More »</a></p>
+        </div>
+        <div class="col-md-6">
+            <img data-src="holder.js/200x200" class="img-thumbnail center-block" alt="image" data-holder-rendered="true" style="width: 200px; height: 200px;">
+            <br/>
+            <h2 class="text-center">Sample model and use case</h2>
+            <p  class="text-center"><a class="btn btn-default" href="./Example1.htm" role="button">Learn More »</a></p>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+
+
+
+

@@ -70,23 +70,25 @@
     </tr>
 
     <tr>
-        <th rowspan="5">Version</th>
+        <th rowspan="4">Version</th>
         <th>Version</th>
         <td><%= @workflow_information.version_name %></td>
     </tr>
     <tr>
         <th>Create time</th>
-        <td><%= @workflow_information.created_at %></td>
+        <td><%= @workflow_information.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
     </tr>
 
     <tr>
         <th>Update time</th>
-        <td><%= @workflow_information.updated_at %></td>
+        <td><%= @workflow_information.updated_at.strftime("%Y-%m-%d %H:%M:%S")  %></td>
     </tr>
+    <!--
     <tr>
         <th>Last version</th>
         <td> </td>
     </tr>
+    -->
     <tr>
         <th>Functional description</th>
         <td><%= @workflow_information.detial_description %></td>

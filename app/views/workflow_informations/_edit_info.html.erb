@@ -15,7 +15,7 @@
 </style>
 <script type="text/javascript">
     $(function(){
-            $("#tag").tabControl({maxTabCount:10,tabW:80,tabMaxLen:12},'<%= @workflow_tag_str %>');
+            $("#tag").tabControl({maxTabCount:10,tabW:80,tabMaxLen:100},'<%= @workflow_tag_str %>');
             $(".getTab").click(function(){
                 var sucaijiayuan = $("#tag").getTabVals();
                 $("#tag_content input").val(sucaijiayuan.join(","));
@@ -46,7 +46,7 @@
 
     <div class="form-group">
         <label class="col-md-12">Category</label>
-        <div class="col-md-7">
+        <div class="col-md-6">
             <%=f.select :category_id, @categories, 
                 {
                 :selected => @workflow_information.category_id},

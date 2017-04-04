@@ -47,3 +47,4 @@ end
 
 gem 'tinymce-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem "bootstrap-table-rails"

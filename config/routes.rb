@@ -17,8 +17,8 @@ Rails.application.routes.draw do
 
   get 'process/train/', to: 'process#show_train'
   post 'process/train/', to: 'process#train'
-  get 'process/execute/', to: 'process#show_execute'
   post 'process/execute/', to: 'process#execute'
+  get 'process/execute/', to: 'process#show_execute'
   get 'process/refresh/', to: 'process#refresh_info'
 
   

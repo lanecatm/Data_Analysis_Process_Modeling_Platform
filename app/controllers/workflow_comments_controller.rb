@@ -2,7 +2,7 @@ class WorkflowCommentsController < ApplicationController
     def create
         @workflow_information = WorkflowInformation.find(params[:workflow_information_id])
         @comment = @workflow_information.workflow_comments.create(comment_params)
-        redirect_to workflow_information_path(@workflow_information)
+        redirect_to workflow_information_path(@workflow_information, :active_page => "comment")
     end
     private
     def comment_params

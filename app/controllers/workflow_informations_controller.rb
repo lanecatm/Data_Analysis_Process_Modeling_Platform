@@ -43,8 +43,20 @@ class WorkflowInformationsController < ApplicationController
             @new_workflow_privilege.delete_department = @workflow_information.workflow_privilege.delete_department
             @new_workflow_privilege.workflow_information = @new_workflow_information
             @new_workflow_privilege.save
+            
+            @workflow_information.workflow_information_and_tags.each do |tag|
+                workflow_information_and_tag = WorkflowInformationAndTag.create
+                workflow_information_and_tag.workflow_information = @new_workflow_information
+                workflow_information_and_tag.workflow_tag = tag.workflow_tag
+                workflow_information_and_tag.save
+            end
+
+
+            # TODO last version
+
             redirect_to edit_workflow_information_path(@new_workflow_information.id)
         end
+
         @categories = WorkflowCategory.all.collect{|t| [t.name, t.id]}
         @departments = DepartmentInformation.all.all.collect{|t| [t.name, t.id]}
         @active_page = params[:active_page] == nil ? "info" : params[:active_page]
@@ -61,7 +73,7 @@ class WorkflowInformationsController < ApplicationController
         @workflow_information = WorkflowInformation.find(params[:id])
         case params[:commit]
         when "Save Information"
-            @active_page = "info"
+            @active_page = "diagram"
 
             # delete origin tags
             origin_tags = @workflow_information.workflow_tags.all
@@ -87,8 +99,12 @@ class WorkflowInformationsController < ApplicationController
             else
                 render 'edit'
             end
-        when "Save Privilege"
+        when "Save Diagram"
             @active_page = "jurisdiction"
+            redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
+
+        when "Save Privilege"
+            @active_page = "version"
             @workflow_privilege = @workflow_information.workflow_privilege
             if @workflow_privilege.update(workflow_privilege_params[:workflow_privilege])
                 @departments = DepartmentInformation.all.all.collect{|t| [t.name, t.id]}
@@ -131,6 +147,7 @@ class WorkflowInformationsController < ApplicationController
     end
 
     def show
+        @active_page = params[:active_page] == nil ? "preview" : params[:active_page]
         @workflow_information = WorkflowInformation.find(params[:id])
         @version_workflow_informations = WorkflowInformation.where(:name => @workflow_information.name)
         @process_informations = ProcessInformation.where(:workflow_information_id => @workflow_information.id)

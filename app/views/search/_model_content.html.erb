@@ -16,49 +16,58 @@
                     <li><a>Lowest score</a></li>
                     <li><a>Most user</a></li>
                     <li><a>Fewest user</a></li>
-                    <li><a>Recently update</a></li>
-                    <li><a>Least recently update</a></li>
-                </ul>
+                        <li><a>Recently update</a></li>
+                        <li><a>Least recently update</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <hr/>
-    </li>
-    <% @workflow_informations.each do |workflow_information| %>
-        <li>
-        <h3>
-            <%= link_to workflow_information.name, workflow_information_path(workflow_information) %>
-        </h3>
-        <p>
-        <%= workflow_information.introduction %>
-        </p>
-        <div>
+        <hr/>
+        </li>
+        <% @workflow_informations.each do |workflow_information| %>
+            <li>
+            <h3>
+                <%= link_to workflow_information.name, workflow_information_path(workflow_information) %>
+            </h3>
             <p>
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <% if workflow_information.author != nil %>
-                <%= workflow_information.author.user_name %>
-            <% end %>
-            &nbsp;
-            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-            <% if workflow_information.category != nil %>
-                <%= workflow_information.category.name %>
-            <% end %>
+            <%= workflow_information.introduction %>
+            </p>
+            <div>
+                <p>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <% if workflow_information.author != nil %>
+                    <%= workflow_information.author.user_name %>
+                <% end %>
+                &nbsp;
+                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                <% if workflow_information.category != nil %>
+                    <%= workflow_information.category.name %>
+                <% end %>
                 &nbsp;
                 <!--
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 4
                 &nbsp;
                 -->
-                Version &nbsp;
-            <%= workflow_information.version_name %>
-            </p>
-        </div>
-        <div>
-            <% workflow_information.workflow_tags.each do |tag| %>
-                <span class="label label-default"><%= raw(tag.name) %></span>
-            <% end %>
-        </div>
-        </li>
-        <hr/>
-    <% end %>
-</ul>
+                <% workflow_information_same_name = @workflow_informations_without_group.where(:name => workflow_information.name)%>
+                <% if workflow_information_same_name.size > 1%>
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    <%= workflow_information_same_name.first.version_name %>
+                    ...
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    <%= workflow_information_same_name.last.version_name %>
+                <% else %>
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    <%= workflow_information_same_name.first.version_name %>
+                <% end %>
+                </p>
+            </div>
+            <div>
+                <% workflow_information.workflow_tags.each do |tag| %>
+                    <span class="label label-default"><%= raw(tag.name) %></span>
+                <% end %>
+            </div>
+            </li>
+            <hr/>
+        <% end %>
+    </ul>

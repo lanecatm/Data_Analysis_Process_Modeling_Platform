@@ -3,30 +3,25 @@
 
 
 
-<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
 
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class = "row">
-            <div class="col-md-offset-1 col-md-10">
+<div class="container">
+    <!-- Example row of columns -->
+    <div class = "row">
+        <div class="col-md-offset-1 col-md-10">
+            <div class = "row">
+                <br/>
                 <br/>
                 <h3> We have found <%= @workflow_informations.length %> model. </h3>
                 <br/>
             </div>
         </div>
-        <div class = "row">
-            <div class="col-md-offset-1 col-md-10">
-                <%= render '/history/model_table' %>
-            </div>
+    </div>
+    <div class = "row">
+        <div class="col-md-offset-1 col-md-10">
+            <%= render '/history/model_table' %>
         </div>
-        <hr/>
-
-        <div class = "row">
-            <footer>
-            <p>© SJTU 2017</p>
-            </footer>
-        </div>
-    </div> <!-- /container -->
+    </div>
+</div> <!-- /container -->
 
 
 

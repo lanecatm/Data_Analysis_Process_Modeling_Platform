@@ -1,5 +1,4 @@
 
-<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
 <ul class="list-group">
     <% @workflow_information.workflow_comments.each do |comment| %>
         <li class="list-group-item">
@@ -24,9 +23,6 @@
         </li>
 
     <% end %>
-    <!--
-    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
-    -->
     <li class="list-group-item">
     <div class="media">
         <div class="media-left">
@@ -39,7 +35,7 @@
             <%= form_for([@workflow_information, @workflow_information.workflow_comments.build]) do |f| %>
 
                 <%= f.text_field :score, :class => "rating", :value => "5", :type => "number", :min=>"0", :max=>"5", :step=>"1", :"data-size" => "xs" %>
-                <%= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120 %>
+                <%= f.text_area :body, :class => "tinymce", :rows => 5, :cols => 120 %>
                 <%= tinymce %>
                 <%= f.submit:"create comment", :class =>"btn btn-default" %>
             <% end %>
