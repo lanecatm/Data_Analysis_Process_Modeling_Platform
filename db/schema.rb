@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326050034) do
+ActiveRecord::Schema.define(version: 20170405053607) do
 
   create_table "department_informations", force: :cascade do |t|
     t.text     "name"
@@ -82,6 +82,25 @@ ActiveRecord::Schema.define(version: 20170326050034) do
   add_index "shared_process_privileges", ["edit_department_id"], name: "index_shared_process_privileges_on_edit_department_id"
   add_index "shared_process_privileges", ["execute_department_id"], name: "index_shared_process_privileges_on_execute_department_id"
   add_index "shared_process_privileges", ["process_id"], name: "index_shared_process_privileges_on_process_id"
+
+  create_table "test_algorithms", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "param1"
+    t.string   "param2"
+    t.string   "param3"
+    t.integer  "process_information_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "test_algorithms", ["process_information_id"], name: "index_test_algorithms_on_process_information_id"
+
+  create_table "uplaod_files", force: :cascade do |t|
+    t.text     "name"
+    t.text     "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "workflow_categories", force: :cascade do |t|
     t.string   "name"

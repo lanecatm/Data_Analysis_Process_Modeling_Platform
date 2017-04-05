@@ -19,9 +19,9 @@ module SimpleStomp
         tries += 1 # NOTE: first line
         clt = SimpleStomp::Client.new
         clt.subscribe dest_reply
-        msg = clt.receive
-        clt.ack msg
-        raise 'nil message received' if msg.nil?
+        @msg = clt.receive
+        clt.ack @msg
+        raise 'nil message received' if @msg.nil?
     rescue StandardError => e
         if tries < max_retries
             Rails.logger.error "stomp: #{e.message}\ntype: #{e.class}\ntime: #{Time.now}\nat: #{$@}"
@@ -33,7 +33,7 @@ module SimpleStomp
     ensure
         clt.try :close
     end
-    msg
+    @msg
   end
 
 
@@ -102,15 +102,15 @@ module SimpleStomp
           end
 
       end
+
       def receive(options = {})
           limit = options.fetch :time_limit, 1
           dest_reply = options.fetch :dest_reply, "INFO"
           thr = Thread.new do
               SimpleStomp::receive(options).body
           end
-
           if thr.join(limit)
-              JSON.parse thr.value
+              JSON.parse(thr.value)
           else
               thr.kill
               { 'status' => 'not_respond', 'error' => I18n.t('workflow.errors.not_respond')}
@@ -147,6 +147,7 @@ module SimpleStomp
       end
 
       def subscribe(destination, headers = {})
+          headers[:ack] ="client"
           headers.symbolize_keys!
 
           # if lack id

@@ -27,7 +27,7 @@
         <% @workflow_informations.each do |workflow_information| %>
             <li>
             <h3>
-                <%= link_to workflow_information.name, workflow_information_path(workflow_information) %>
+                <%= link_to workflow_information.name, workflow_information_path(workflow_information), 'data-no-turbolink' => true %>
             </h3>
             <p>
             <%= workflow_information.introduction %>

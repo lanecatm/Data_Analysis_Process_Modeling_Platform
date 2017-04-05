@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  param1: 1
+  param2: MyString
+  param3: MyString
+  process_information_id: 
+
+two:
+  name: MyString
+  param1: 1
+  param2: MyString
+  param3: MyString
+  process_information_id: 

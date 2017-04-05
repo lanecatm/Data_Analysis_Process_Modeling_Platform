@@ -1,4 +1,7 @@
 
+<% content_for(:body_attributes) do %>
+    data-no-turbolink="true"
+<% end %>
 <br/>
 <br/>
 <!-- 表单 -->
@@ -6,13 +9,13 @@
     <div class = "row">
         <div class="col-md-offset-2 col-md-8">
             <div class="row">
-            <h3>
-                <%= @workflow_information.name %>
-            </h3>
-            <h4>
-                <small><%= @workflow_information.introduction %></small> 
-            </h4>
-            <hr/>
+                <h3>
+                    <%= @workflow_information.name %>
+                </h3>
+                <h4>
+                    <small><%= @workflow_information.introduction %></small> 
+                </h4>
+                <hr/>
             </div>
         </div>
     </div>

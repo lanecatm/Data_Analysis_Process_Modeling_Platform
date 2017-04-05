@@ -15,7 +15,7 @@
         <!-- Latest compiled and minified Locales -->
         <title>ISDSP</title>
 
-        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
         <!--
         <link href="/stylesheets/chl.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
         <link href="/stylesheets/pace-theme-minimal.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
@@ -23,12 +23,12 @@
         <link href="/stylesheets/star-rating.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
         <link href="/stylesheets/bs-is-fun.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
         -->
-        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
         <%= csrf_meta_tags %>
         <link rel="Shortcut Icon" href="assets/LOGO_2_s.png">
     </head>
 
-    <body>
+    <body data-no-turbolink="true" >
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!--

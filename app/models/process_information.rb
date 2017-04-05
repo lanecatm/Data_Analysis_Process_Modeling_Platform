@@ -5,4 +5,5 @@ class ProcessInformation < ActiveRecord::Base
   belongs_to :parent_case, class_name: "ProcessInformation"
   has_many :workflow_comments, foreign_key: "process"
   has_many :sub_cases, class_name: "ProcessInformation", foreign_key: "parent_case"
+  has_one :test_algorithm
 end
