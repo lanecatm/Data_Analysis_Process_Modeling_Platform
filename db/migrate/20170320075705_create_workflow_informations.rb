@@ -5,10 +5,10 @@ class CreateWorkflowInformations < ActiveRecord::Migration
       t.text :introduction
       t.text :detial_description
       t.text :version_name
-      t.references :category, index: true
-      t.references :tag, index: true
-      t.references :author, index: true
-      t.references :last_editor, index: true
+      t.references :category, index: true, foreign_key: true
+      t.references :tag, index: true, foreign_key: true
+      t.references :author, index: true, foreign_key: true
+      t.references :last_editor, index: true, foreign_key: true
       t.integer :status
       t.datetime :createtime
       t.datetime :valid_from
@@ -21,9 +21,5 @@ class CreateWorkflowInformations < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :workflow_informations, :categories
-    add_foreign_key :workflow_informations, :tags
-    add_foreign_key :workflow_informations, :authors
-    add_foreign_key :workflow_informations, :last_editors
   end
 end

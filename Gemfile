@@ -48,3 +48,11 @@ end
 gem 'tinymce-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "bootstrap-table-rails"
+# database
+gem 'mysql2'
+gem 'enumerize'
+gem "flag_shih_tzu"
+gem 'paperclip'
+gem 'simple_form'
+gem 'ransack'
+gem 'faker'

@@ -14,173 +14,173 @@
 ActiveRecord::Schema.define(version: 20170405053607) do
 
   create_table "department_informations", force: :cascade do |t|
-    t.text     "name"
-    t.integer  "parent_department_id"
-    t.text     "description"
-    t.integer  "layer"
-    t.integer  "manager_id"
-    t.integer  "vice_manager_id"
-    t.text     "duty"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.text     "name",                 limit: 65535
+    t.integer  "parent_department_id", limit: 4
+    t.text     "description",          limit: 65535
+    t.integer  "layer",                limit: 4
+    t.integer  "manager_id",           limit: 4
+    t.integer  "vice_manager_id",      limit: 4
+    t.text     "duty",                 limit: 65535
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
-  add_index "department_informations", ["manager_id"], name: "index_department_informations_on_manager_id"
-  add_index "department_informations", ["parent_department_id"], name: "index_department_informations_on_parent_department_id"
-  add_index "department_informations", ["vice_manager_id"], name: "index_department_informations_on_vice_manager_id"
+  add_index "department_informations", ["manager_id"], name: "index_department_informations_on_manager_id", using: :btree
+  add_index "department_informations", ["parent_department_id"], name: "index_department_informations_on_parent_department_id", using: :btree
+  add_index "department_informations", ["vice_manager_id"], name: "index_department_informations_on_vice_manager_id", using: :btree
 
   create_table "person_informations", force: :cascade do |t|
-    t.string   "person_name"
-    t.string   "user_name"
-    t.string   "gender"
+    t.string   "person_name",    limit: 255
+    t.string   "user_name",      limit: 255
+    t.string   "gender",         limit: 255
     t.datetime "birthday"
-    t.text     "description"
-    t.string   "phone_number"
-    t.string   "email"
-    t.string   "technical_post"
-    t.integer  "state"
-    t.string   "password"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.text     "description",    limit: 65535
+    t.string   "phone_number",   limit: 255
+    t.string   "email",          limit: 255
+    t.string   "technical_post", limit: 255
+    t.integer  "state",          limit: 4
+    t.string   "password",       limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "process_informations", force: :cascade do |t|
-    t.integer  "workflow_information_id"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "creater_id"
-    t.integer  "user_id"
-    t.boolean  "is_shared"
-    t.integer  "parent_case_id"
-    t.boolean  "persistent"
-    t.text     "state"
-    t.integer  "case_type"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "process_type"
-    t.integer  "process_id"
+    t.integer  "workflow_information_id", limit: 4
+    t.string   "name",                    limit: 255
+    t.text     "description",             limit: 65535
+    t.integer  "creater_id",              limit: 4
+    t.integer  "user_id",                 limit: 4
+    t.boolean  "is_shared",               limit: 1
+    t.integer  "parent_case_id",          limit: 4
+    t.boolean  "persistent",              limit: 1
+    t.text     "state",                   limit: 65535
+    t.integer  "case_type",               limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "process_type",            limit: 255
+    t.integer  "process_id",              limit: 4
   end
 
-  add_index "process_informations", ["creater_id"], name: "index_process_informations_on_creater_id"
-  add_index "process_informations", ["parent_case_id"], name: "index_process_informations_on_parent_case_id"
-  add_index "process_informations", ["process_id"], name: "index_process_informations_on_process_id"
-  add_index "process_informations", ["process_type"], name: "index_process_informations_on_process_type_and_process_id"
-  add_index "process_informations", ["user_id"], name: "index_process_informations_on_user_id"
-  add_index "process_informations", ["workflow_information_id"], name: "index_process_informations_on_workflow_information_id"
+  add_index "process_informations", ["creater_id"], name: "index_process_informations_on_creater_id", using: :btree
+  add_index "process_informations", ["parent_case_id"], name: "index_process_informations_on_parent_case_id", using: :btree
+  add_index "process_informations", ["process_id"], name: "index_process_informations_on_process_id", using: :btree
+  add_index "process_informations", ["process_type"], name: "index_process_informations_on_process_type_and_process_id", using: :btree
+  add_index "process_informations", ["user_id"], name: "index_process_informations_on_user_id", using: :btree
+  add_index "process_informations", ["workflow_information_id"], name: "index_process_informations_on_workflow_information_id", using: :btree
 
   create_table "shared_process_privileges", force: :cascade do |t|
-    t.integer  "process_id"
-    t.integer  "edit_department_id"
-    t.integer  "execute_department_id"
-    t.integer  "delete_department_id"
-    t.boolean  "isSharedSampleInput"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "process_id",            limit: 4
+    t.integer  "edit_department_id",    limit: 4
+    t.integer  "execute_department_id", limit: 4
+    t.integer  "delete_department_id",  limit: 4
+    t.boolean  "isSharedSampleInput",   limit: 1
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
-  add_index "shared_process_privileges", ["delete_department_id"], name: "index_shared_process_privileges_on_delete_department_id"
-  add_index "shared_process_privileges", ["edit_department_id"], name: "index_shared_process_privileges_on_edit_department_id"
-  add_index "shared_process_privileges", ["execute_department_id"], name: "index_shared_process_privileges_on_execute_department_id"
-  add_index "shared_process_privileges", ["process_id"], name: "index_shared_process_privileges_on_process_id"
+  add_index "shared_process_privileges", ["delete_department_id"], name: "index_shared_process_privileges_on_delete_department_id", using: :btree
+  add_index "shared_process_privileges", ["edit_department_id"], name: "index_shared_process_privileges_on_edit_department_id", using: :btree
+  add_index "shared_process_privileges", ["execute_department_id"], name: "index_shared_process_privileges_on_execute_department_id", using: :btree
+  add_index "shared_process_privileges", ["process_id"], name: "index_shared_process_privileges_on_process_id", using: :btree
 
   create_table "test_algorithms", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "param1"
-    t.string   "param2"
-    t.string   "param3"
-    t.integer  "process_information_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",                   limit: 255
+    t.integer  "param1",                 limit: 4
+    t.string   "param2",                 limit: 255
+    t.string   "param3",                 limit: 255
+    t.integer  "process_information_id", limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
-  add_index "test_algorithms", ["process_information_id"], name: "index_test_algorithms_on_process_information_id"
+  add_index "test_algorithms", ["process_information_id"], name: "index_test_algorithms_on_process_information_id", using: :btree
 
   create_table "uplaod_files", force: :cascade do |t|
-    t.text     "name"
-    t.text     "path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "name",       limit: 65535
+    t.text     "path",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "workflow_categories", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "workflow_comments", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "score"
-    t.integer  "author_id"
-    t.integer  "comment_parent_id"
-    t.integer  "workflow_information_id"
-    t.integer  "process_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "title",                   limit: 255
+    t.text     "body",                    limit: 65535
+    t.integer  "score",                   limit: 4
+    t.integer  "author_id",               limit: 4
+    t.integer  "comment_parent_id",       limit: 4
+    t.integer  "workflow_information_id", limit: 4
+    t.integer  "process_id",              limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
-  add_index "workflow_comments", ["author_id"], name: "index_workflow_comments_on_author_id"
-  add_index "workflow_comments", ["comment_parent_id"], name: "index_workflow_comments_on_comment_parent_id"
-  add_index "workflow_comments", ["process_id"], name: "index_workflow_comments_on_process_id"
-  add_index "workflow_comments", ["workflow_information_id"], name: "index_workflow_comments_on_workflow_information_id"
+  add_index "workflow_comments", ["author_id"], name: "index_workflow_comments_on_author_id", using: :btree
+  add_index "workflow_comments", ["comment_parent_id"], name: "index_workflow_comments_on_comment_parent_id", using: :btree
+  add_index "workflow_comments", ["process_id"], name: "index_workflow_comments_on_process_id", using: :btree
+  add_index "workflow_comments", ["workflow_information_id"], name: "index_workflow_comments_on_workflow_information_id", using: :btree
 
   create_table "workflow_information_and_tags", force: :cascade do |t|
-    t.integer  "workflow_information_id"
-    t.integer  "workflow_tag_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "workflow_information_id", limit: 4
+    t.integer  "workflow_tag_id",         limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
-  add_index "workflow_information_and_tags", ["workflow_information_id"], name: "index_workflow_information_and_tags_on_workflow_information_id"
-  add_index "workflow_information_and_tags", ["workflow_tag_id"], name: "index_workflow_information_and_tags_on_workflow_tag_id"
+  add_index "workflow_information_and_tags", ["workflow_information_id"], name: "index_workflow_information_and_tags_on_workflow_information_id", using: :btree
+  add_index "workflow_information_and_tags", ["workflow_tag_id"], name: "index_workflow_information_and_tags_on_workflow_tag_id", using: :btree
 
   create_table "workflow_informations", force: :cascade do |t|
-    t.string   "name"
-    t.text     "introduction"
-    t.text     "detial_description"
-    t.text     "version_name"
-    t.integer  "category_id"
-    t.integer  "tag_id"
-    t.integer  "author_id"
-    t.integer  "last_editor_id"
-    t.integer  "status"
+    t.string   "name",                   limit: 255
+    t.text     "introduction",           limit: 65535
+    t.text     "detial_description",     limit: 65535
+    t.text     "version_name",           limit: 65535
+    t.integer  "category_id",            limit: 4
+    t.integer  "tag_id",                 limit: 4
+    t.integer  "author_id",              limit: 4
+    t.integer  "last_editor_id",         limit: 4
+    t.integer  "status",                 limit: 4
     t.datetime "createtime"
     t.datetime "valid_from"
     t.datetime "valid_to"
-    t.boolean  "persistent"
-    t.integer  "priority"
-    t.integer  "most_possible_duration"
-    t.integer  "minimal_duration"
-    t.integer  "maximal_duration"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.boolean  "persistent",             limit: 1
+    t.integer  "priority",               limit: 4
+    t.integer  "most_possible_duration", limit: 4
+    t.integer  "minimal_duration",       limit: 4
+    t.integer  "maximal_duration",       limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
-  add_index "workflow_informations", ["author_id"], name: "index_workflow_informations_on_author_id"
-  add_index "workflow_informations", ["category_id"], name: "index_workflow_informations_on_category_id"
-  add_index "workflow_informations", ["last_editor_id"], name: "index_workflow_informations_on_last_editor_id"
-  add_index "workflow_informations", ["tag_id"], name: "index_workflow_informations_on_tag_id"
+  add_index "workflow_informations", ["author_id"], name: "index_workflow_informations_on_author_id", using: :btree
+  add_index "workflow_informations", ["category_id"], name: "index_workflow_informations_on_category_id", using: :btree
+  add_index "workflow_informations", ["last_editor_id"], name: "index_workflow_informations_on_last_editor_id", using: :btree
+  add_index "workflow_informations", ["tag_id"], name: "index_workflow_informations_on_tag_id", using: :btree
 
   create_table "workflow_privileges", force: :cascade do |t|
-    t.integer  "workflow_information_id"
-    t.integer  "edit_department_id"
-    t.integer  "execute_department_id"
-    t.integer  "delete_department_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "workflow_information_id", limit: 4
+    t.integer  "edit_department_id",      limit: 4
+    t.integer  "execute_department_id",   limit: 4
+    t.integer  "delete_department_id",    limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
-  add_index "workflow_privileges", ["delete_department_id"], name: "index_workflow_privileges_on_delete_department_id"
-  add_index "workflow_privileges", ["edit_department_id"], name: "index_workflow_privileges_on_edit_department_id"
-  add_index "workflow_privileges", ["execute_department_id"], name: "index_workflow_privileges_on_execute_department_id"
-  add_index "workflow_privileges", ["workflow_information_id"], name: "index_workflow_privileges_on_workflow_information_id"
+  add_index "workflow_privileges", ["delete_department_id"], name: "index_workflow_privileges_on_delete_department_id", using: :btree
+  add_index "workflow_privileges", ["edit_department_id"], name: "index_workflow_privileges_on_edit_department_id", using: :btree
+  add_index "workflow_privileges", ["execute_department_id"], name: "index_workflow_privileges_on_execute_department_id", using: :btree
+  add_index "workflow_privileges", ["workflow_information_id"], name: "index_workflow_privileges_on_workflow_information_id", using: :btree
 
   create_table "workflow_tags", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
