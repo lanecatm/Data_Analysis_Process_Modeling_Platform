@@ -11,10 +11,10 @@
                 <%= workflow_information.id %>
             </td>
             <td>
-                <%= workflow_information.detial_description %>
+                <%= link_to workflow_information.version_name, workflow_information_path(workflow_information)%>
             </td>
             <td>
-                <%= workflow_information.version_name %>
+                <%= workflow_information.detial_description %>
             </td>
             <td>
                 <%= workflow_information.updated_at.strftime("%Y-%m-%d %H:%M:%S")  %>

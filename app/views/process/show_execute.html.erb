@@ -59,7 +59,6 @@
                     <div class="row">
 
                         <div class="tab-content">
-
                             <div role="tabpanel" class="tab-pane 
                                 <%= 'active' if @active_page == 'input' %>
                                 " id="input">
@@ -173,6 +172,41 @@
                                         <div class="col-md-12">
                                             <%= f.text_area :description, :class => "form-control", :row => "5" %>
                                         </div>
+                                    </div>
+                                    <!-- 选择是否带上文件 -->
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label> Share running case with the input file?</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                                <label>
+                                                    <%= radio_button_tag(:save_input, "yes", true) %>
+                                                    <%= label_tag(:save_input, "Yes") %>
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                                <label>
+                                                    <%= radio_button_tag(:save_input, "no", false) %>
+                                                    <%= label_tag(:save_input, "No") %>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 选择执行的用户组 -->
+                                    <div class="form-group">
+                                        <label class="col-md-12">Shared User Group</label>
+                                        <div class="col-md-12">
+                                            <%=f.select :share_department_id, @departments, 
+                                                {
+                                                :selected => @share_department_choice}, 
+                                                { class: "form-control" } 
+                                            %> 
+                                        </div>
+
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-4">

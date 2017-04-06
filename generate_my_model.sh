@@ -43,5 +43,6 @@
 #rails generate model WorkflowInformationAndTag workflow_information:references workflow_tag:references
 
 
-#rails generate model UplaodFile name:text path:text
-rails generate model TestAlgorithm name:string param1:integer param2:string param3:string process_information:references 
+#rails d model UplaodFile
+#rails generate model UploadFile name:text path:text process_information:references
+#rails generate model TestAlgorithm name:string param1:integer param2:string param3:string process_information:references 

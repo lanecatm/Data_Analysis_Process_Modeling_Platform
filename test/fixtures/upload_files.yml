@@ -3,7 +3,9 @@
 one:
   name: MyText
   path: MyText
+  process_information_id: 
 
 two:
   name: MyText
   path: MyText
+  process_information_id: 

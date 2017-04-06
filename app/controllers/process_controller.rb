@@ -7,11 +7,21 @@ class ProcessController < ApplicationController
     end
 
     def create
+        # 如果点击分享,创建一个process_information
         @process_information = ProcessInformation.create(create_params)
+        # 临时的保存参数的地方
         @test_algorithm = TestAlgorithm.create(:param1 => @param1)
         @test_algorithm.process_information = @process_information
         @test_algorithm.save
-        redirect_to process_execute_path(:workflow_id => create_params[:workflow_information_id], :active_page => "share")
+        # 保存权限
+        is_shared_sample_input = params[:save_input] == "no" ? false : true
+        @shared_process_privilege = SharedProcessPrivilege.create(:execute_department_id =>share_department_params[:share_department_id] , :is_shared_sample_input => is_shared_sample_input, :process_id=>@process_information.id)
+
+        # 保存是否分享文件
+        @process_information.upload_file = @upload_file
+        @process_information.save
+
+        redirect_to history_use_case_path
     end
 
 
@@ -35,6 +45,9 @@ class ProcessController < ApplicationController
 
     def show_execute
         @workflow_information = WorkflowInformation.find(params[:workflow_id])
+        @departments = DepartmentInformation.all.all.collect{|t| [t.name, t.id]}
+        @share_department_choice = DepartmentInformation.first.id
+
         if params[:active_page] == "running"
             @refresh_info = receive dest_reply: "INFO"
         end
@@ -44,6 +57,9 @@ class ProcessController < ApplicationController
     def upload
         uploaded_io = params[:upload][:file]
         filename = upload_file(uploaded_io)
+        # TODO 把文件存入数据库
+        @upload_file = UploadFile.create(:name => filename, :path => filename)
+
         redirect_to process_execute_path(:workflow_id => params[:upload][:workflow_id], :active_page => "param")
     end
 
@@ -69,6 +85,9 @@ class ProcessController < ApplicationController
     end 
     def create_params
         params.require(:process_information).permit(:name, :description, :workflow_information_id)
+    end
+    def share_department_params
+        params.require(:process_information).permit(:share_department_id)
     end
 end
 
