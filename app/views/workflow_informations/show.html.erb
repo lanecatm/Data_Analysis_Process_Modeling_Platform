@@ -72,13 +72,14 @@
                     <br/>
                     <div class = "row">
                         <div class="btn-group btn-group-justified" role="group">
-                        <%= link_to workflow_information_path(@workflow_information), class:"btn btn-primary btn-block btn-sm", role:"button" do %>
+                        <%= link_to workflow_information_path(@workflow_information), class: "btn btn-primary btn-block btn-sm", role:"button" do %>
                             <span class="glyphicon glyphicon-scale" aria-hidden="true"></span> Train
                         <% end %>
-                        <%= link_to process_execute_path(:workflow_id => @workflow_information.id), class:"btn btn-info btn-block btn-sm", role:"button" do %>
+                        <!-- link_to process_execute_path(:workflow_id => @workflow_information.id), class: "btn btn-info btn-block btn-sm", role:"button" do -->
+                        <%= link_to process_index_path(:workflow_information_id => @workflow_information.id), class: "btn btn-info btn-block btn-sm", method: :post, role:"button" do %>
                             <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Execute
                         <% end %>
-                        <%= link_to edit_workflow_information_path(@workflow_information.id), class:'btn btn-success btn-block btn-sm', role:"button" do %>
+                        <%= link_to edit_workflow_information_path(@workflow_information.id), class: 'btn btn-success btn-block btn-sm', role:"button" do %>
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
                         <% end %>
                         <%= link_to workflow_information_path(@workflow_information), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-block btn-sm", role:"button" do %>

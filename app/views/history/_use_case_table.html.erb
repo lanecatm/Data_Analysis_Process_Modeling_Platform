@@ -5,6 +5,10 @@
         <tr>
             <th>ID </th>
             <th>Running case name</th>
+            <th>Running case description</th>
+            <th> Is shared</th>
+            <th>Shared sample input</th>
+            <th>Shared department</th>
             <th>Update time</th>
         </tr>
         <% @process_informations.each do |process_information| %>
@@ -13,7 +17,26 @@
                     <%= process_information.id %>
                 </td>
                 <td>
-                    <%= link_to process_information.name, process_execute_path %>
+                    <%= link_to process_information.name, process_copy_path(:process_id => process_information.id), method: :post %>
+                </td>
+                <td>
+                    <%= process_information.description %>
+                </td>
+                <td>
+                    <%= process_information.is_shared %>
+                </td>
+                <td>
+                    <% if process_information.shared_process_privilege != nil %>
+                        <%= process_information.shared_process_privilege.is_shared_sample_input %>
+                        <% if process_information.shared_process_privilege.is_shared_sample_input and process_information.upload_file != nil %>
+                            <%= process_information.upload_file.name %>
+                        <% end %>
+                    <% end %>
+                </td>
+                <td>
+                    <% if process_information.shared_process_privilege != nil %>
+                        <%= process_information.shared_process_privilege.execute_department.name %>
+                    <% end %>
                 </td>
                 <td>
                     <%= process_information.updated_at.strftime("%Y-%m-%d %H:%M:%S")  %>

@@ -1,0 +1,103 @@
+<script type="text/javascript">
+    $(function () {
+            $(".radio").click(function () {
+                if ($("#share_use_case").is(":checked")) {
+                $("#share_use_case_form").css("display", "none");
+                $("#return_button").css("display", "block");
+                }
+                else {
+                $("#share_use_case_form").css("display", "block");
+                $("#return_button").css("display", "none");
+                }
+                });
+            });
+</script>
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="share_use_case" value="false" id="share_use_case" checked/> 
+                    I don't want to share this running case.
+                </label>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="share_use_case" value="true" /> 
+                    I want to share this running case.
+                </label>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="form-horizontal">
+<div id = "return_button">
+    <div class="form-group">
+        <div class="col-md-2">
+            <%= link_to 'Exit', workflow_information_path(@process_information.workflow_information_id) ,class:"btn btn-primary btn-block", role:"button" %>
+        </div>
+    </div>
+</div>
+</form>
+
+<div id = "share_use_case_form" style = "display:none">
+    <%= form_for :process_information, method: :patch, :html => {:class => "form-horizontal", :role => "form"}, url: process_path(@process_information.id) do |f|%>
+        <div class="form-group">
+            <label class="col-md-12">Running case name</label>
+            <div class="col-md-12">
+                <%= f.hidden_field :process_id, :value => params[:process_id] %>
+                <%= f.text_field :name, :class => "form-control", :value => @process_name %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-12">Running case description</label>
+            <div class="col-md-12">
+                <%= f.text_area :description, :class => "form-control", :row => "5" %>
+            </div>
+        </div>
+        <!-- 选择是否带上文件 -->
+        <div class="form-group">
+            <div class="col-md-12">
+                <label> Share running case with the input file?</label>
+            </div>
+            <div class="col-md-12">
+                <div class="radio">
+                    <label>
+                        <%= radio_button_tag(:save_input, "yes", true) %>
+                        <%= label_tag(:save_input, "Yes") %>
+                    </label>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="radio">
+                    <label>
+                        <%= radio_button_tag(:save_input, "no", false) %>
+                        <%= label_tag(:save_input, "No") %>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- 选择执行的用户组 -->
+        <div class="form-group">
+            <label class="col-md-12">Shared User Group</label>
+            <div class="col-md-12">
+                <%=f.select :share_department_id, @departments, 
+                    {
+                    :selected => @share_department_choice}, 
+                    { class: "form-control" } 
+                %> 
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <%= f.submit :"Save running case", :class => "btn btn-primary btn-block" %>
+            </div>
+        </div>
+    <% end %>
+</div>
