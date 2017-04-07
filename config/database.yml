@@ -7,8 +7,8 @@
 default: &default
     adapter: mysql2
     encoding: utf8
-    username: root
-    password: root
+    username: isdsp
+    password: 12345678
     host: localhost
     port: 3306
     timeout: 6000
