@@ -15,11 +15,15 @@ Rails.application.routes.draw do
   post 'search/', to: 'search#search'
   get 'search/', to: 'search#show'
 
-  post "process", to: 'process#create'
-  get 'process/train/', to: 'process#show_train'
+  resources :process do
+      get 'execute/', to: 'process#show_execute'
+      post 'execute/', to: 'process#execute'
+      post 'copy/', to: 'process#copy'
+  end
+  #post "process", to: 'process#create'
+  #get 'process/train/', to: 'process#show_train'
   post 'process/train/', to: 'process#train'
-  post 'process/execute/', to: 'process#execute'
-  get 'process/execute/', to: 'process#show_execute'
+  #get 'process/execute/:id/', to: 'process#show_execute'
 #  get 'process/refresh/', to: 'process#refresh_info'
   post 'process/upload/', to: 'process#upload'
 

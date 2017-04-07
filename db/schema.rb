@@ -284,13 +284,13 @@ ActiveRecord::Schema.define(version: 20170406090808) do
   end
 
   create_table "shared_process_privileges", force: :cascade do |t|
-    t.integer  "process_id",            limit: 4
-    t.integer  "edit_department_id",    limit: 4
-    t.integer  "execute_department_id", limit: 4
-    t.integer  "delete_department_id",  limit: 4
-    t.boolean  "isSharedSampleInput",   limit: 1
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.integer  "process_id",             limit: 4
+    t.integer  "edit_department_id",     limit: 4
+    t.integer  "execute_department_id",  limit: 4
+    t.integer  "delete_department_id",   limit: 4
+    t.boolean  "is_shared_sample_input", limit: 1
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "shared_process_privileges", ["delete_department_id"], name: "index_shared_process_privileges_on_delete_department_id", using: :btree
@@ -336,11 +336,24 @@ ActiveRecord::Schema.define(version: 20170406090808) do
   add_index "test_algorithms", ["process_information_id"], name: "index_test_algorithms_on_process_information_id", using: :btree
 
   create_table "uplaod_files", force: :cascade do |t|
-    t.text     "name",       limit: 65535
-    t.text     "path",       limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "name",                   limit: 65535
+    t.text     "path",                   limit: 65535
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "process_information_id", limit: 4
   end
+
+  add_index "uplaod_files", ["process_information_id"], name: "index_uplaod_files_on_process_information_id", using: :btree
+
+  create_table "upload_files", force: :cascade do |t|
+    t.text     "name",                   limit: 65535
+    t.text     "path",                   limit: 65535
+    t.integer  "process_information_id", limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "upload_files", ["process_information_id"], name: "index_upload_files_on_process_information_id", using: :btree
 
   create_table "workflow_categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -557,4 +570,5 @@ ActiveRecord::Schema.define(version: 20170406090808) do
     t.float   "ProbabilityCoefficient", limit: 24
   end
 
+  add_foreign_key "upload_files", "process_informations"
 end

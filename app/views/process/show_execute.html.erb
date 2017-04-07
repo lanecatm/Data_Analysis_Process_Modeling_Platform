@@ -41,11 +41,13 @@
                     >
                     <a href="#output" aria-controls="output" role="tab" data-toggle="tab">Output data</a>
                     </li>
-                    <li role="presentation"
-                    class="<%= 'active' if @active_page == 'share' %>"
-                    >
-                    <a href="#share" aria-controls="share" role="tab" data-toggle="tab">Share</a>
-                    </li>
+                    <% if @show_share %>
+                        <li role="presentation"
+                        class="<%= 'active' if @active_page == 'share' %>"
+                        >
+                        <a href="#share" aria-controls="share" role="tab" data-toggle="tab">Share</a>
+                        </li>
+                    <% end %>
                 </ul>
             </div>
             <div class="row">
@@ -59,128 +61,37 @@
                     <div class="row">
 
                         <div class="tab-content">
-
                             <div role="tabpanel" class="tab-pane 
                                 <%= 'active' if @active_page == 'input' %>
                                 " id="input">
-                                <%= form_for :upload, :html => {:class => "form-horizontal", :role => "form"}, url: process_upload_path do |f|%>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Input data from local file</label>
-                                        <div class="col-md-12">
-                                            <%= f.hidden_field :workflow_id, :value => params[:workflow_id] %>
-                                            <%= f.file_field :file%>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-3">
-                                            <%= f.submit :"Upload", :class => "btn btn-primary btn-block" %>
-                                        </div>
-                                    </div>
-                                <% end %>
+                                <%= render '/process/execute_upload' %>
                             </div><!-- tab -->
 
                             <div role="tabpanel" class="tab-pane 
                                 <%= 'active' if @active_page == 'param' %>
                                 " id="param">
-                                
-                                <%= form_for :running_param, method: :post, :html => {:class => "form-horizontal", :role => "form"}, url: process_execute_path do |f|%>
-                                    <!--
-                                    <div class="form-group">
-                                        <label class="col-md-12">Choose parameters</label>
-                                        <div class="col-md-6">
-                                            <select class="form-control">
-                                                <option> </option>
-                                                <option>Algorithm A result 1</option>
-                                                <option>Algorithm B result 2</option>
-                                            </select>
-                                        </div>
-                                        <br/>
-                                    </div>
-                                    -->
-                                    <!-- 临时指定workflow显示的参数 -->
-                                    <% if params[:workflow_id] == "123" %>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Number of clusters</label>
-                                            <div class="col-md-6">
-                                                <%= f.hidden_field :workflow_id, :value => params[:workflow_id] %>
-                                                <%= f.text_field :num, :class => "form-control" %>
-                                            </div>
-                                            <br/>
-                                        </div>
-                                    <% end %>
-
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <%= f.submit :"Run", :class => "btn btn-default btn-block" %>
-                                        </div>
-                                    </div>
-
-                                <% end %>
+                                <%= render '/process/execute_params' %>
                             </div>
 
                             <div role="tabpanel" class="tab-pane 
                                 <%= 'active' if @active_page == 'running' %>
                                 " id="running">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                    60%
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <label> Now running <%= @refresh_info %></label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <%= link_to 'Refresh', process_execute_path(:workflow_id => params[:workflow_id], :active_page => "running"), class:"btn btn-primary btn-block", role:"button" %>
-                                        </div>
-                                    </div>
-                                </form>
+                                <%= render '/process/execute_run' %>
                             </div><!-- tab -->
 
                             <div role="tabpanel" class="tab-pane 
                                 <%= 'active' if @active_page == 'output' %>
                                 " id="output">
-
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label class="col-md-12">Output filename</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Algorithm A output i">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-default btn-block">Download</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <%= render '/process/execute_download' %>
                             </div><!-- tab -->
 
-                            <div role="tabpanel" class="tab-pane 
-                                <%= 'active' if @active_page == 'share' %>
-                                " id="share">
-                                <%= form_for :process_information, method: :post, :html => {:class => "form-horizontal", :role => "form"}, url: process_path do |f|%>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Running case name</label>
-                                        <div class="col-md-12">
-                                            <%= f.hidden_field :workflow_information_id, :value => params[:workflow_id] %>
-                                            <%= f.text_field :name, :class => "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Running case description</label>
-                                        <div class="col-md-12">
-                                            <%= f.text_area :description, :class => "form-control", :row => "5" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <%= f.submit :"Save running case", :class => "btn btn-primary btn-block" %>
-                                        </div>
-                                    </div>
-                                <% end %>
-                            </div><!-- tab -->
+                            <% if @show_share %>
+                                <div role="tabpanel" class="tab-pane 
+                                    <%= 'active' if @active_page == 'share' %>
+                                    " id="share">
+                                    <%= render '/process/execute_share' %>
+                                </div><!-- tab -->
+                            <% end %>
                         </div>
                     </div>
                 </div>

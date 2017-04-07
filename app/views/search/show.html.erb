@@ -67,66 +67,68 @@
         <div class="col-md-3">
             <h3>&nbsp;</h3>
             <p>&nbsp;</h3>
-        <% if params[:search_for] == "model"%>
+            <% if params[:search_for] == "model"%>
             <ul class="list-group">
                 <li class="list-group-item">
                 <b>Catelogy</b>
                 </li>
 
-            <% @workflow_information_by_categories.each do |wf| %>
-                <li class="list-group-item">
-                <%= WorkflowCategory.find(wf[0][1]).name %>
-                <span class="badge"><%= wf[1] %></span>
-                </li>
-            <% end %>
+                <% if @workflow_information_by_categories != nil %>
+                    <% @workflow_information_by_categories.each do |wf_key, wf_value| %>
+                        <li class="list-group-item">
+                        <%= WorkflowCategory.find(wf_key).name %>
+                        <span class="badge"><%= wf_value %></span>
+                        </li>
+                    <% end %>
+                <% end %>
             </ul>
-        <% end %>
+            <% end %>
 
-    </div>
-    <div class="col-md-6">
-        <% if params[:search_for] == "model"%>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="all">
-                    <% @workflow_informations = @all_workflow_informations %>
-                    <% @workflow_informations_without_group = @all_workflow_informations_without_group %>
-                    <%= render '/search/model_content' %>
+        </div>
+        <div class="col-md-6">
+            <% if params[:search_for] == "model"%>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="all">
+                        <% @workflow_informations = @all_workflow_informations %>
+                        <% @workflow_informations_without_group = @all_workflow_informations_without_group %>
+                        <%= render '/search/model_content' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="title">
+                        <% @workflow_informations = @title_workflow_informations %>
+                        <% @workflow_informations_without_group = @title_workflow_informations_without_group %>
+                        <%= render '/search/model_content' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="tag">
+                        <% @workflow_informations = @tag_workflow_informations %>
+                        <% @workflow_informations_without_group = @tag_workflow_informations_without_group %>
+                        <%= render '/search/model_content' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="other">
+                        <% @workflow_informations = @other_workflow_informations %>
+                        <% @workflow_informations_without_group = @other_workflow_informations_without_group %>
+                        <%= render '/search/model_content' %>
+                    </div>
                 </div>
-                <div role="tabpanel" class="tab-pane " id="title">
-                    <% @workflow_informations = @title_workflow_informations %>
-                    <% @workflow_informations_without_group = @title_workflow_informations_without_group %>
-                    <%= render '/search/model_content' %>
+            <% end %>
+            <% if params[:search_for] == "use_case"%>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="all">
+                        <% @process_informations = @all_process_informations %>
+                        <%= render '/search/use_case_content' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="title">
+                        <% @process_informations = @all_process_informations %>
+                        <%= render '/search/use_case_content' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="other">
+                        <% @process_informations = @all_process_informations %>
+                        <%= render '/search/use_case_content' %>
+                    </div>
                 </div>
-                <div role="tabpanel" class="tab-pane " id="tag">
-                    <% @workflow_informations = @tag_workflow_informations %>
-                    <% @workflow_informations_without_group = @tag_workflow_informations_without_group %>
-                    <%= render '/search/model_content' %>
-                </div>
-                <div role="tabpanel" class="tab-pane " id="other">
-                    <% @workflow_informations = @other_workflow_informations %>
-                    <% @workflow_informations_without_group = @other_workflow_informations_without_group %>
-                    <%= render '/search/model_content' %>
-                </div>
-            </div>
-        <% end %>
-        <% if params[:search_for] == "use_case"%>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="all">
-                    <% @process_informations = @all_process_informations %>
-                    <%= render '/search/use_case_content' %>
-                </div>
-                <div role="tabpanel" class="tab-pane " id="title">
-                    <% @process_informations = @all_process_informations %>
-                    <%= render '/search/use_case_content' %>
-                </div>
-                <div role="tabpanel" class="tab-pane " id="other">
-                    <% @process_informations = @all_process_informations %>
-                    <%= render '/search/use_case_content' %>
-                </div>
-            </div>
-        <% end %>
+            <% end %>
 
+        </div>
     </div>
-</div>
 
 </div> <!-- /container -->
 
