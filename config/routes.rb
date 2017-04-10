@@ -26,10 +26,12 @@ Rails.application.routes.draw do
   #get 'process/execute/:id/', to: 'process#show_execute'
 #  get 'process/refresh/', to: 'process#refresh_info'
   post 'process/upload/', to: 'process#upload'
+  post 'process/download/', to: 'process#download'
 
   
   get 'history/model/', to: 'history#show_model'
   get 'history/use_case/', to: 'history#show_use_case'
+  get 'history/running_record/', to: 'history#show_running_record'
 
 
   # Example of regular route:

@@ -1,12 +1,21 @@
-<form class="form-horizontal" role="form">
+<%= form_for :download, :html => {:class => "form-horizontal", :role => "form"}, url: process_download_path do |f|%>
+    <h4>Result</h4>
+    <p><%= raw(@process_result) %></p>
+    <!--
+    <p><%= @process_output_file %></p>
+    -->
+
+    <%= f.hidden_field :process_id, :value => params[:process_id] %>
     <div class="form-group">
-        <label class="col-md-12">Output filename</label>
-        <div class="col-md-9">
-            <input type="text" class="form-control" placeholder="Algorithm A output i">
-        </div>
+        <label class="col-md-12">Download Result</label>
         <div class="col-md-3">
-            <button class="btn btn-default btn-block">Download</button>
+            <%= f.submit :"Download", :class => "btn btn-default btn-block" %>
         </div>
     </div>
-</form>
+    <div class="form-group">
+        <div class="col-md-offset-9 col-md-3">
+            <%= f.submit :"Next", :class => "btn btn-primary btn-block" %>
+        </div>
+    </div>
+<% end %>
 

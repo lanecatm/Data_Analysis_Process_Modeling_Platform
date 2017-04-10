@@ -22,7 +22,7 @@ class SearchController < ApplicationController
                 @title_workflow_informations_without_group = WorkflowInformation.all
                 @other_workflow_informations_without_group = WorkflowInformation.all
 
-                @workflow_information_by_categories = WorkflowInformation.group(:category_id).count
+                @workflow_information_by_categories = WorkflowInformation.group(:name).group(:category_id).count
 
             else
                 search_content_str = "%" + params[:search_content] + "%"

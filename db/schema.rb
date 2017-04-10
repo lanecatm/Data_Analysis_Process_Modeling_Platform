@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406090808) do
+ActiveRecord::Schema.define(version: 20170409044044) do
 
   create_table "caseinformation", force: :cascade do |t|
     t.string   "ProcessID",     limit: 50,  default: "", null: false
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 20170406090808) do
   add_index "department_informations", ["manager_id"], name: "index_department_informations_on_manager_id", using: :btree
   add_index "department_informations", ["parent_department_id"], name: "index_department_informations_on_parent_department_id", using: :btree
   add_index "department_informations", ["vice_manager_id"], name: "index_department_informations_on_vice_manager_id", using: :btree
+
+  create_table "download_files", force: :cascade do |t|
+    t.text     "name",                   limit: 65535
+    t.text     "path",                   limit: 65535
+    t.integer  "process_information_id", limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "download_files", ["process_information_id"], name: "index_download_files_on_process_information_id", using: :btree
 
   create_table "javaclassmethod", force: :cascade do |t|
     t.integer "ApplicationID",  limit: 4,        default: 0, null: false
@@ -100,6 +110,15 @@ ActiveRecord::Schema.define(version: 20170406090808) do
   add_index "process_informations", ["process_type"], name: "index_process_informations_on_process_type_and_process_id", using: :btree
   add_index "process_informations", ["user_id"], name: "index_process_informations_on_user_id", using: :btree
   add_index "process_informations", ["workflow_information_id"], name: "index_process_informations_on_workflow_information_id", using: :btree
+
+  create_table "process_results", force: :cascade do |t|
+    t.text     "body",                   limit: 65535
+    t.integer  "process_information_id", limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "process_results", ["process_information_id"], name: "index_process_results_on_process_information_id", using: :btree
 
   create_table "processactivityinformation", force: :cascade do |t|
     t.string  "ProcessID",              limit: 50,  default: "", null: false
@@ -570,5 +589,7 @@ ActiveRecord::Schema.define(version: 20170406090808) do
     t.float   "ProbabilityCoefficient", limit: 24
   end
 
+  add_foreign_key "download_files", "process_informations"
+  add_foreign_key "process_results", "process_informations"
   add_foreign_key "upload_files", "process_informations"
 end

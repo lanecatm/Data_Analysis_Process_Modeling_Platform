@@ -76,7 +76,7 @@
                 <% if @workflow_information_by_categories != nil %>
                     <% @workflow_information_by_categories.each do |wf_key, wf_value| %>
                         <li class="list-group-item">
-                        <%= WorkflowCategory.find(wf_key).name %>
+                        <%= WorkflowCategory.find(wf_key[1]).name %>
                         <span class="badge"><%= wf_value %></span>
                         </li>
                     <% end %>

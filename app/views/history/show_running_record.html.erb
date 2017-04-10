@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://v3.bootcss.com/examples/jumbotron/ -->
+
+
+
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class = "row">
+        <div class="col-md-offset-1 col-md-10">
+            <br/>
+            <br/>
+            <h3> We have found <%= @process_informations.length %> running record. </h3>
+            <br/>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-md-offset-1 col-md-10">
+            <%= render '/history/running_record' %>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+
+

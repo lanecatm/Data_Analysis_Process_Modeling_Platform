@@ -1,5 +1,5 @@
 module SimpleStomp
-  HOST = '192.168.1.105'
+  HOST = 'localhost'
   PORT = '61613'
 
   def self.receive(options = {})

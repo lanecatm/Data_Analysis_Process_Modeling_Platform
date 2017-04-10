@@ -46,3 +46,5 @@
 #rails d model UplaodFile
 #rails generate model UploadFile name:text path:text process_information:references
 #rails generate model TestAlgorithm name:string param1:integer param2:string param3:string process_information:references 
+#rails generate model DownloadFile name:text path:text process_information:references
+rails generate model ProcessResult body:text process_information:references

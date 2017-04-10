@@ -38,7 +38,9 @@ class ProcessController < ApplicationController
 
         # 发送运行请求
         timestamp = Time.now.to_f.to_s
-        cond = {timestamp: timestamp, workflow_id: 3, param1: @param1, process_id: @process_id, filepath: filepath}
+        cond = {timestamp: timestamp, workflow_id: 3, param1: @param1, process_id: @process_id, file_path: filepath}
+        puts "notice!!!!!!!\n"
+        puts cond
         msg = {body: cond.to_json}
         recv = send_receive msg, dest: "run_case", dest_reply: "run_case.reply", timelimit: 1
         case recv['status']
@@ -104,10 +106,44 @@ class ProcessController < ApplicationController
 
         @upload_file_name = @process_information.upload_file == nil ? "" : @process_information.upload_file.name
         @param1 = @process_information.test_algorithm == nil ? "" : @process_information.test_algorithm.param1
+        @process_result = @process_information.process_result == nil ? "" : @process_information.process_result.body.gsub(/\n/, "\n"=> "<br/>")
+        @process_output_file = @process_information.download_file == nil ? "" : @process_information.download_file.path
+        @process_percentage = 0;
+        @all_percentage = 7
 
         # TODO 修改显示的信息
         if params[:active_page] == "running"
-            @refresh_info = receive dest_reply: "INFO"
+            @refresh_params = receive dest_reply: "INFO"
+            if @refresh_params["status"] == "ok"
+                if @refresh_params.has_key?"cnt"
+                    @refresh_info = @refresh_params["EventReprestion"]
+                    if @refresh_info == "EndOf(1)"
+                        @process_percentage = 1
+                    elsif @refresh_info == "Initialized(3)"
+                        @process_percentage = 3
+                    elsif @refresh_info == "Started(3)"
+                        @process_percentage = 4
+                    elsif @refresh_info == "EndOf(3)"
+                        @process_percentage = 5
+                    elsif @refresh_info == "Initialized(2)"
+                        @process_percentage = 6
+                    elsif @refresh_info == "EndOf(2)"
+                        @process_percentage = 7
+                    end
+                else
+                    @process_percentage = 2
+                    @refresh_info = "Processing"
+                    if @refresh_params["procedure"] == "label result"
+                        result = @refresh_params["detail"]["finalClusterCentroids"]
+                        output_file_name = @refresh_params["detail"]["resultFileName"]
+                        DownloadFile.create(:path => output_file_name, :process_information_id => @process_information.id)
+                        ProcessResult.create(:body => result, :process_information_id => @process_information.id)
+                    end
+                end
+            else
+                @refresh_info = @refresh_params["status"]
+                redirect_to process_execute_path(@process_information.id, :active_page => "output")
+            end
         end
     end
 
@@ -130,6 +166,15 @@ class ProcessController < ApplicationController
         end
         redirect_to process_execute_path(@process_information.id, :active_page => "param")
     end
+    def download
+        @process_information = ProcessInformation.find(params[:download][:process_id])
+        if params[:commit] == "Download"
+            download_file(@process_information.download_file.path)
+        elsif params[:commit] == "Next"
+            redirect_to process_execute_path(@process_information.id, :active_page => "share")
+        end
+    end
+
 
     private
     def create_params
@@ -150,6 +195,16 @@ class ProcessController < ApplicationController
             return [@filename, @filepath]
         end 
     end 
+    def download_file(file_path)
+        if File.exist?(file_path)
+            io = File.open(file_path)
+            io.binmode
+            send_data(io.read)
+            io.close
+        else
+            redirect_to system_uploadfiles_path, :notice => '文件不存在，下载失败！'
+        end
+    end
 
     def get_file_name(filename) 
         if !filename.nil? 

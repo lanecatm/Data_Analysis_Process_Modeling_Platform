@@ -1,0 +1,25 @@
+<br/>
+<br/>
+<br/>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>ID </th>
+            <th>Update time</th>
+            <th>Is shared </th>
+        </tr>
+        <% @process_informations.each do |process_information| %>
+            <% if process_information.is_shared == true %>
+            <tr>
+                <td>
+                    <%= process_information.id %>
+                </td>
+                <td>
+                    <%= process_information.updated_at.strftime("%Y-%m-%d %H:%M:%S")  %>
+                </td>
+                <td>
+                    <%= process_information.is_shared %>
+                </td>
+            </tr>
+        <% end %>
+        <% end %>
+    </table>
