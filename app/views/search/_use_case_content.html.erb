@@ -25,11 +25,16 @@
     <hr/>
     </li>
     <% @process_informations.each do |process_information| %>
+        
+        <% if process_information.is_shared == true and process_information.workflow_information != nil%>
         <li>
         <h3>
-            <%= link_to process_information.name, process_execute_path %>
+            <%= link_to process_information.name, process_execute_path(process_information.id) %>
         </h3>
         <div>
+            <p>
+            Model <%= process_information.workflow_information.name%> <small><%=process_information.workflow_information.version_name%> </small>
+            </p>
             <p>
             Author: Admin
             Update time: 
@@ -38,5 +43,6 @@
         </div>
         </li>
         <hr/>
+    <% end %>
     <% end %>
 </ul>

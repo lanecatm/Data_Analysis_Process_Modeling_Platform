@@ -28,7 +28,7 @@
     </tr>
 
     <tr>
-        <th rowspan="5">Jurisdiction</th>
+        <th rowspan="5">Authorization</th>
         <th>Author</th>
         <td>
             <% if @workflow_information.author != nil %>
@@ -45,7 +45,7 @@
         </td>
     </tr>
     <tr>
-        <th>Edit jurisdiction</th>
+        <th>Edit user group</th>
         <td>
             <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.edit_department != nil %>
                 <%= @workflow_information.workflow_privilege.edit_department.name %>
@@ -53,7 +53,7 @@
         </td>
     </tr>
     <tr>
-        <th>Delete jurisdiction</th>
+        <th>Delete user group</th>
         <td>
             <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.delete_department != nil %>
                 <%= @workflow_information.workflow_privilege.delete_department.name %>
@@ -61,7 +61,7 @@
         </td>
     </tr>
     <tr>
-        <th>Execute jurisdiction</th>
+        <th>Execute user group</th>
         <td>
             <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.execute_department != nil %>
                 <%= @workflow_information.workflow_privilege.execute_department.name %>

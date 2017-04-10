@@ -38,7 +38,7 @@ class ProcessController < ApplicationController
 
         # 发送运行请求
         timestamp = Time.now.to_f.to_s
-        cond = {timestamp: timestamp, workflow_id: 3, param1: @param1, process_id: @process_id, file_path: filepath}
+        cond = {timestamp: timestamp, workflow_id: workflow_id, param1: @param1, process_id: @process_id, file_path: filepath}
         puts "notice!!!!!!!\n"
         puts cond
         msg = {body: cond.to_json}

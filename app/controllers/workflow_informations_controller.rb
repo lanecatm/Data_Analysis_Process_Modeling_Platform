@@ -149,7 +149,7 @@ class WorkflowInformationsController < ApplicationController
     def show
         @active_page = params[:active_page] == nil ? "preview" : params[:active_page]
         @workflow_information = WorkflowInformation.find(params[:id])
-        @version_workflow_informations = WorkflowInformation.where(:name => @workflow_information.name)
+        @version_workflow_informations = WorkflowInformation.where(:name => @workflow_information.name, :status => WORKFLOW_INFO_PUBLISH)
         @process_informations = ProcessInformation.where(:workflow_information_id => @workflow_information.id)
     end
 

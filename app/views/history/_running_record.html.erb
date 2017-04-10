@@ -7,6 +7,7 @@
             <th>Is shared </th>
         </tr>
         <% @process_informations.each do |process_information| %>
+            <% if process_information.workflow_information != nil%>
             <tr>
                 <td>
                     <%= process_information.id %>
@@ -21,5 +22,6 @@
                     <%= process_information.is_shared %>
                 </td>
             </tr>
+        <% end %>
         <% end %>
     </table>
