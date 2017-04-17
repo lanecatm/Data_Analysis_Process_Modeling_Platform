@@ -53,7 +53,6 @@ class WorkflowInformationsController < ApplicationController
 
 
             # TODO last version
-
             redirect_to edit_workflow_information_path(@new_workflow_information.id)
         end
 
@@ -76,7 +75,7 @@ class WorkflowInformationsController < ApplicationController
             @active_page = "diagram"
 
             # delete origin tags
-            origin_tags = @workflow_information.workflow_tags.all
+            origin_tags = @workflow_information.workflow_information_and_tags.all
             origin_tags.each do |origin_tag|
                 origin_tag.destroy
             end
@@ -103,7 +102,7 @@ class WorkflowInformationsController < ApplicationController
             @active_page = "jurisdiction"
             redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
 
-        when "Save Privilege"
+        when "Save Authorization"
             @active_page = "version"
             @workflow_privilege = @workflow_information.workflow_privilege
             if @workflow_privilege.update(workflow_privilege_params[:workflow_privilege])

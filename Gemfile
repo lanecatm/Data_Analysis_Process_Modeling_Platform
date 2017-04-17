@@ -56,3 +56,5 @@ gem 'paperclip'
 gem 'simple_form'
 gem 'ransack'
 gem 'faker'
+
+gem 'cancancan'

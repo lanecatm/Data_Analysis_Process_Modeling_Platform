@@ -16,7 +16,7 @@ class ProcessController < ApplicationController
 
         is_shared_sample_input = params[:save_input] == "no" ? false : true
         @shared_process_privilege = SharedProcessPrivilege.create(:execute_department_id =>share_department_params[:share_department_id] , :is_shared_sample_input => is_shared_sample_input, :process_id => @process_id)
-        redirect_to history_use_case_path
+        redirect_to workflow_information_path(@process_information.workflow_information_id) 
     end
 
     def execute

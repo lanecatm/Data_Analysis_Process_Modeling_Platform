@@ -1,4 +1,10 @@
+<% if @workflow_information.id == 20%>
 <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" src="/assets/Example1.png" data-holder-rendered="true" >
+<% elsif @workflow_information.id == 19 %>
+<img data-src="holder.js/200x200" class="img-thumbnail" alt="image" src="/assets/Example0.png" data-holder-rendered="true" >
+<% else %>
+<img data-src="holder.js/200x200" class="img-thumbnail" alt="image" src="/assets/Example2.png" data-holder-rendered="true" >
+<% end %>
 <div class="container">
     <div class="row">
     </div>
