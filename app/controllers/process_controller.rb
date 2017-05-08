@@ -1,4 +1,5 @@
 class ProcessController < ApplicationController
+    before_action :authenticate_user!
     include SimpleStomp::Helper
     include SimpleStomp
     RAILS_ROOT = Rails.root
@@ -16,7 +17,7 @@ class ProcessController < ApplicationController
 
         is_shared_sample_input = params[:save_input] == "no" ? false : true
         @shared_process_privilege = SharedProcessPrivilege.create(:execute_department_id =>share_department_params[:share_department_id] , :is_shared_sample_input => is_shared_sample_input, :process_id => @process_id)
-        redirect_to history_use_case_path
+        redirect_to workflow_information_path(@process_information.workflow_information_id) 
     end
 
     def execute
@@ -38,7 +39,7 @@ class ProcessController < ApplicationController
 
         # 发送运行请求
         timestamp = Time.now.to_f.to_s
-        cond = {timestamp: timestamp, workflow_id: 3, param1: @param1, process_id: @process_id, file_path: filepath}
+        cond = {timestamp: timestamp, workflow_id: workflow_id, param1: @param1, process_id: @process_id, file_path: filepath}
         puts "notice!!!!!!!\n"
         puts cond
         msg = {body: cond.to_json}

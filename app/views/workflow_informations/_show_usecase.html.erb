@@ -13,7 +13,7 @@
                 <%= process_information.id %>
             </td>
             <td>
-                <%= process_information.name%>
+                    <%= link_to process_information.name, process_copy_path(:process_id => process_information.id), method: :post %>
             </td>
             <td>
                 <p>Admin</p>

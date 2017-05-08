@@ -1,0 +1,21 @@
+
+<%= form_for :workflow_information, method: :patch, :html => {:class => "form-horizontal", :role => "form"}, url:workflow_information_path do |f|%>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" data-holder-rendered="true" src="/assets/image_for_drawing.png">
+            </div>
+        </div>
+        <div class="row">
+        <hr/>
+            <div class="form-group">
+                <!-- Button trigger modal -->
+                <div class="col-md-offset-9 col-md-3">
+                    <%= f.submit :"Save Diagram", :class => "btn btn-primary btn-block" %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<% end %>

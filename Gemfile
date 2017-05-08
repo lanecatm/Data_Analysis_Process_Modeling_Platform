@@ -1,4 +1,6 @@
 source 'https://ruby.taobao.org'
+#source 'https://rubygems.org/'
+#source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -56,3 +58,12 @@ gem 'paperclip'
 gem 'simple_form'
 gem 'ransack'
 gem 'faker'
+
+gem 'cancancan'
+gem 'devise'
+
+
+# Weka 
+#gem 'jrb'
+#gemspec
+#gem 'weka'

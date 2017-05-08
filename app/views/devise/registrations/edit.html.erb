@@ -1,0 +1,83 @@
+<!--
+-->
+<br/>
+<br/>
+
+<!-- 表单 -->
+<div class="container">
+    <div class = "row">
+        <div class="col-md-2">
+            <div class = "row">
+                <div class="col-md-12">&nbsp;</div>
+                <div class="col-md-12">
+                    <h3>&nbsp;</h3>
+
+                    <div class="box-body">
+                        <div class="tab-custom">
+                            <ul class="nav nav-tabs nav-bordered" data-spy="affix" role="tablist">
+                                <li role="presentation" class="
+                                    <%= 'active' if (@active_page == nil or @active_page == "preview") %>
+                                ">
+                                </li>
+                                <li role="presentation">
+                                <a href="#information" aria-controls="information" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Basic Information
+                                </a>
+                                </li>
+                                <!--
+                                <li role="presentation">
+                                <a href="#detail" aria-controls="detail" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span> Detail Information
+                                </a>
+                                </li>
+                                -->
+                                <li role="presentation">
+                                <a href="#picture" aria-controls="picture" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span> User Picture
+                                </a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#setting" aria-controls="setting" role="tab" data-toggle="tab">
+                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Settings
+                                </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class = "row">
+                <div class="col-md-7">
+                    <h3 >
+                        Edit User
+                    </h3>
+                </div>
+            </div>
+            <hr/>
+
+            <div class = "row">
+                <!-- Nav tabs -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="information">
+                        <%= render '/devise/registrations/edit_info' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="detail">
+                        <%= render '/devise/registrations/edit_detail' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="picture">
+                        <%= render '/devise/registrations/edit_picture' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="setting">
+                        <%= render '/devise/registrations/edit_setting' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+
+

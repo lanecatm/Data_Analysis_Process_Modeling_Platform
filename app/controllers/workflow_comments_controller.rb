@@ -1,4 +1,5 @@
 class WorkflowCommentsController < ApplicationController
+    before_action :authenticate_user!
     def create
         @workflow_information = WorkflowInformation.find(params[:workflow_information_id])
         @comment = @workflow_information.workflow_comments.create(comment_params)

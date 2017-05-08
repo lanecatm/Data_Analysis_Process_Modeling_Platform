@@ -32,6 +32,7 @@ module AnalysisWebsite
     config.autoload_paths += %W( #{config.root}/lib )
     # config for SimpleStomp
     #config.stomp = config_for(:stomp)
+    config.assets.paths << "#{Rails.root}/public/user_picture"
 
   end
 end

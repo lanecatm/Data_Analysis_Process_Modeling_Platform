@@ -2,6 +2,7 @@ class WorkflowInformationsController < ApplicationController
     WORKFLOW_INFO_INIT = 1
     WORKFLOW_INFO_PUBLISH = 2
     WORKFLOW_INFO_EDITING = 3
+    before_action :authenticate_user!
 
     def new
         
@@ -11,8 +12,8 @@ class WorkflowInformationsController < ApplicationController
         @workflow_information = WorkflowInformation.create(all_params)
         @workflow_information.status = WORKFLOW_INFO_INIT
         # TODO 这些参数从页面传回
-        @workflow_information.author = PersonInformation.find(1)
-        @workflow_information.last_editor = PersonInformation.find(1)
+        @workflow_information.author = User.find(1)
+        @workflow_information.last_editor = User.find(1)
         @workflow_information.save
 
         @workflow_privilege = WorkflowPrivilege.create
@@ -34,7 +35,7 @@ class WorkflowInformationsController < ApplicationController
             @new_workflow_information = WorkflowInformation.create(workflow_information_hash)
             @new_workflow_information.status = WORKFLOW_INFO_EDITING
             # TODO change
-            @new_workflow_information.last_editor = PersonInformation.find(1)
+            @new_workflow_information.last_editor = User.find(1)
             @new_workflow_information.save
 
             @new_workflow_privilege = WorkflowPrivilege.create
@@ -53,7 +54,6 @@ class WorkflowInformationsController < ApplicationController
 
 
             # TODO last version
-
             redirect_to edit_workflow_information_path(@new_workflow_information.id)
         end
 
@@ -76,7 +76,7 @@ class WorkflowInformationsController < ApplicationController
             @active_page = "diagram"
 
             # delete origin tags
-            origin_tags = @workflow_information.workflow_tags.all
+            origin_tags = @workflow_information.workflow_information_and_tags.all
             origin_tags.each do |origin_tag|
                 origin_tag.destroy
             end
@@ -103,7 +103,7 @@ class WorkflowInformationsController < ApplicationController
             @active_page = "jurisdiction"
             redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
 
-        when "Save Privilege"
+        when "Save Authorization"
             @active_page = "version"
             @workflow_privilege = @workflow_information.workflow_privilege
             if @workflow_privilege.update(workflow_privilege_params[:workflow_privilege])
@@ -149,7 +149,7 @@ class WorkflowInformationsController < ApplicationController
     def show
         @active_page = params[:active_page] == nil ? "preview" : params[:active_page]
         @workflow_information = WorkflowInformation.find(params[:id])
-        @version_workflow_informations = WorkflowInformation.where(:name => @workflow_information.name)
+        @version_workflow_informations = WorkflowInformation.where(:name => @workflow_information.name, :status => WORKFLOW_INFO_PUBLISH)
         @process_informations = ProcessInformation.where(:workflow_information_id => @workflow_information.id)
     end
 

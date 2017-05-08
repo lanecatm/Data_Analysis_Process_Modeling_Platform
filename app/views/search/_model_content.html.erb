@@ -63,8 +63,10 @@
                 </p>
             </div>
             <div>
-                <% workflow_information.workflow_tags.each do |tag| %>
-                    <span class="label label-default"><%= raw(tag.name) %></span>
+                <% workflow_information.workflow_information_and_tags.each do |tag| %>
+                    <% if tag.workflow_tag != nil %>
+                    <span class="label label-default"><%= raw(tag.workflow_tag.name) %></span>
+                    <% end %>
                 <% end %>
             </div>
             </li>

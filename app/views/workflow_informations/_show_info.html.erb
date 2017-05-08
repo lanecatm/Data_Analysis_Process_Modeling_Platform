@@ -21,14 +21,16 @@
     <tr>
         <th>Tag</th>
         <td>
-        <% @workflow_information.workflow_tags.each do |tag| %>
-            <span class="label label-default"><%= raw(tag.name) %></span>
+        <% @workflow_information.workflow_information_and_tags.each do |tag| %>
+            <% if tag.workflow_tag != nil %>
+            <span class="label label-default"><%= raw(tag.workflow_tag.name) %></span>
+            <% end %>
         <% end %>
         </td>
     </tr>
 
     <tr>
-        <th rowspan="5">Jurisdiction</th>
+        <th rowspan="5">Authorization</th>
         <th>Author</th>
         <td>
             <% if @workflow_information.author != nil %>
@@ -45,7 +47,7 @@
         </td>
     </tr>
     <tr>
-        <th>Edit jurisdiction</th>
+        <th>Edit user group</th>
         <td>
             <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.edit_department != nil %>
                 <%= @workflow_information.workflow_privilege.edit_department.name %>
@@ -53,7 +55,7 @@
         </td>
     </tr>
     <tr>
-        <th>Delete jurisdiction</th>
+        <th>Delete user group</th>
         <td>
             <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.delete_department != nil %>
                 <%= @workflow_information.workflow_privilege.delete_department.name %>
@@ -61,7 +63,7 @@
         </td>
     </tr>
     <tr>
-        <th>Execute jurisdiction</th>
+        <th>Execute user group</th>
         <td>
             <% if @workflow_information.workflow_privilege != nil and @workflow_information.workflow_privilege.execute_department != nil %>
                 <%= @workflow_information.workflow_privilege.execute_department.name %>
