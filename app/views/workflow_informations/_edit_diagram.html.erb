@@ -1,21 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bpmn-js-properties-panel extension demo</title>
 
-<%= form_for :workflow_information, method: :patch, :html => {:class => "form-horizontal", :role => "form"}, url:workflow_information_path do |f|%>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-                <img data-src="holder.js/200x200" class="img-thumbnail" alt="image" data-holder-rendered="true" src="/assets/image_for_drawing.png">
-            </div>
-        </div>
-        <div class="row">
-        <hr/>
-            <div class="form-group">
-                <!-- Button trigger modal -->
-                <div class="col-md-offset-9 col-md-3">
-                    <%= f.submit :"Save Diagram", :class => "btn btn-primary btn-block" %>
-                </div>
-            </div>
-        </div>
+  <link rel="stylesheet" href="css/diagram-js.css" />
+  <link rel="stylesheet" href="vendor/bpmn-font/css/bpmn-embedded.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div class="content" id="js-drop-zone">
+
+    <div class="message intro">
+      <div class="note">
+        Drop BPMN diagram from your desktop or <a id="js-create-diagram" href>create a new diagram</a> to get started.
+      </div>
     </div>
 
+    <div class="message error">
+      <div class="note">
+        <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
 
-<% end %>
+        <div class="details">
+          <span>cause of the problem</span>
+          <pre></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="canvas" id="js-canvas"></div>
+    <div id="js-properties-panel"></div>
+  </div>
+
+  <ul class="buttons">
+    <li>
+      Download
+    </li>
+    <li>
+      <a id="js-download-diagram" href title="download BPMN diagram">
+        BPMN diagram
+      </a>
+    </li>
+    <li>
+      <a id="js-download-svg" href title="download as SVG image">
+        SVG image
+      </a>
+    </li>
+  </ul>
+  <p id='ans'></p>
+  <script src="index.js"></script>
+</html>

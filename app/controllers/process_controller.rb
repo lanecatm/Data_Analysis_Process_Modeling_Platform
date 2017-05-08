@@ -1,4 +1,5 @@
 class ProcessController < ApplicationController
+    before_action :authenticate_user!
     include SimpleStomp::Helper
     include SimpleStomp
     RAILS_ROOT = Rails.root

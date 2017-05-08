@@ -1,0 +1,75 @@
+{
+  "name": "Magic",
+  "prefix": "magic",
+  "uri": "http://magic",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "BewitchedStartEvent",
+      "extends": [
+        "bpmn:StartEvent"
+      ],
+      "properties": [
+        {
+          "name": "spell",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "checkboxexample",
+          "isAttr": true,
+          "type": "Boolean"
+        },
+      ]
+    },
+    {
+      "name": "AlgoTask",
+      "extends": [
+        "bpmn:Task"
+      ],
+      "properties": [
+        {
+          "name": "algorithm",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "parameter-0",
+          "isAttr": true,
+          "type": "Float"
+        },
+        {
+          "name": "input-file-type",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "input-file-path",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "task-type",
+          "isAttr": true,
+          "type": "String"
+        },
+      ]
+    },
+    {
+      "name": "SquenceFlowEvent",
+      "extends": [
+        "bpmn:SequenceFlow"
+      ],
+      "properties": [
+        {
+          "name": "event-type",
+          "isAttr": true,
+          "type": "String"
+        },
+      ]
+    },
+  ]
+}

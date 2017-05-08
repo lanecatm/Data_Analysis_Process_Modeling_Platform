@@ -1,5 +1,6 @@
 class HistoryController < ApplicationController
 
+    before_action :authenticate_user!
     def show_model
         @workflow_informations = WorkflowInformation.all
     end
