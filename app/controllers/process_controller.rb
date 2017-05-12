@@ -40,8 +40,6 @@ class ProcessController < ApplicationController
         # 发送运行请求
         timestamp = Time.now.to_f.to_s
         cond = {timestamp: timestamp, workflow_id: workflow_id, param1: @param1, process_id: @process_id, file_path: filepath}
-        puts "notice!!!!!!!\n"
-        puts cond
         msg = {body: cond.to_json}
         recv = send_receive msg, dest: "run_case", dest_reply: "run_case.reply", timelimit: 1
         case recv['status']
@@ -167,6 +165,7 @@ class ProcessController < ApplicationController
         end
         redirect_to process_execute_path(@process_information.id, :active_page => "param")
     end
+
     def download
         @process_information = ProcessInformation.find(params[:download][:process_id])
         if params[:commit] == "Download"
