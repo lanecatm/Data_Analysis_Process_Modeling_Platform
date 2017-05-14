@@ -34,6 +34,11 @@ Rails.application.routes.draw do
   get 'history/use_case/', to: 'history#show_use_case'
   get 'history/running_record/', to: 'history#show_running_record'
 
+  resources :data_pre_processing
+  post 'data_pre_processing/upload/', to: 'data_pre_processing#upload'
+
+  resources :node
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  node_function_id: 
+  node_index: 1
+  name: MyText
+  description: MyText
+  default_value: MyText
+  node_option_type_id: 
+
+two:
+  node_function_id: 
+  node_index: 1
+  name: MyText
+  description: MyText
+  default_value: MyText
+  node_option_type_id: 

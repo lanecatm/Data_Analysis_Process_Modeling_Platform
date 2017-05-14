@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501140752) do
+ActiveRecord::Schema.define(version: 20170513121815) do
 
   create_table "caseinformation", force: :cascade do |t|
     t.string   "ProcessID",     limit: 50,  default: "", null: false
@@ -61,6 +61,60 @@ ActiveRecord::Schema.define(version: 20170501140752) do
     t.integer "OutputXMLID",    limit: 4
   end
 
+  create_table "node_categories", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "node_functions", force: :cascade do |t|
+    t.text     "name",             limit: 65535
+    t.text     "description",      limit: 65535
+    t.integer  "node_type_id",     limit: 4
+    t.integer  "node_function_id", limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "node_functions", ["node_function_id"], name: "index_node_functions_on_node_function_id", using: :btree
+  add_index "node_functions", ["node_type_id"], name: "index_node_functions_on_node_type_id", using: :btree
+
+  create_table "node_option_choices", force: :cascade do |t|
+    t.integer  "node_option_id", limit: 4
+    t.text     "name",           limit: 65535
+    t.text     "value",          limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "node_option_choices", ["node_option_id"], name: "index_node_option_choices_on_node_option_id", using: :btree
+
+  create_table "node_option_types", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "node_options", force: :cascade do |t|
+    t.integer  "node_function_id",    limit: 4
+    t.integer  "node_index",          limit: 4
+    t.text     "name",                limit: 65535
+    t.text     "description",         limit: 65535
+    t.text     "default_value",       limit: 65535
+    t.integer  "node_option_type_id", limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "node_options", ["node_function_id"], name: "index_node_options_on_node_function_id", using: :btree
+  add_index "node_options", ["node_option_type_id"], name: "index_node_options_on_node_option_type_id", using: :btree
+
+  create_table "node_types", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "packageinformation", force: :cascade do |t|
     t.integer  "PackageID",    limit: 4,        default: 0, null: false
     t.string   "PackageName",  limit: 50
@@ -86,6 +140,17 @@ ActiveRecord::Schema.define(version: 20170501140752) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
+
+  create_table "process_files", force: :cascade do |t|
+    t.text     "name",                   limit: 65535
+    t.text     "path",                   limit: 65535
+    t.integer  "process_information_id", limit: 4
+    t.integer  "node",                   limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "process_files", ["process_information_id"], name: "index_process_files_on_process_information_id", using: :btree
 
   create_table "process_informations", force: :cascade do |t|
     t.integer  "workflow_information_id", limit: 4
@@ -354,16 +419,6 @@ ActiveRecord::Schema.define(version: 20170501140752) do
 
   add_index "test_algorithms", ["process_information_id"], name: "index_test_algorithms_on_process_information_id", using: :btree
 
-  create_table "uplaod_files", force: :cascade do |t|
-    t.text     "name",                   limit: 65535
-    t.text     "path",                   limit: 65535
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.integer  "process_information_id", limit: 4
-  end
-
-  add_index "uplaod_files", ["process_information_id"], name: "index_uplaod_files_on_process_information_id", using: :btree
-
   create_table "upload_files", force: :cascade do |t|
     t.text     "name",                   limit: 65535
     t.text     "path",                   limit: 65535
@@ -623,6 +678,12 @@ ActiveRecord::Schema.define(version: 20170501140752) do
   end
 
   add_foreign_key "download_files", "process_informations"
+  add_foreign_key "node_functions", "node_functions"
+  add_foreign_key "node_functions", "node_types"
+  add_foreign_key "node_option_choices", "node_options"
+  add_foreign_key "node_options", "node_functions"
+  add_foreign_key "node_options", "node_option_types"
+  add_foreign_key "process_files", "process_informations"
   add_foreign_key "process_results", "process_informations"
   add_foreign_key "upload_files", "process_informations"
   add_foreign_key "user_pictures", "users"

@@ -48,4 +48,12 @@
 #rails generate model TestAlgorithm name:string param1:integer param2:string param3:string process_information:references 
 #rails generate model DownloadFile name:text path:text process_information:references
 #rails generate model ProcessResult body:text process_information:references
-rails generate model UserPicture name:text path:text user:references
+#rails generate model UserPicture name:text path:text user:references
+#rails generate model ProcessFile name:text path:text process_information:references node:integer
+
+rails generate model NodeType name:text
+rails generate model NodeCategory name:text
+rails generate model NodeFunction name:text description:text node_type:references node_function:references 
+rails generate model NodeOptionType name:text
+rails generate model NodeOption node_function:references node_index:integer name:text description:text default_value:text node_option_type:references 
+rails generate model NodeOptionChoices node_option:references name:text value:text
