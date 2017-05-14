@@ -1,26 +1,37 @@
 class DataPreProcessingController < ApplicationController
+    respond_to :html, :js
 
     RAILS_ROOT = Rails.root
 
     def new
     end
 
-    def show
+    def index
+        @upload_file = nil
+        @upload_files = ProcessFile.all
+        if params.has_key?"file"
+            @upload_file = ProcessFile.find(params[:file])
+            file_path = @upload_file.filepath
+            if File.exist?(file_path)
+                io = File.open(file_path)
+                io.close
+            end
+        end
     end
 
-    def upload
+    # 上传文件
+    def create
         uploaded_io = params[:upload][:file]
         filename, filepath = upload_file(uploaded_io)
-        #@upload_file = UploadFile.create(:name => filename, :path => filepath)
-        #if @process_information.upload_file != nil
-        #    UploadFile.delete(@process_information.upload_file.id)
-        #end
-        #@process_information.upload_file = @upload_file
-        #@process_information.save
-
-        redirect_to preprocess_data_path
-
+        @upload_file = ProcessFile.create(:name => filename, :path => filepath)
+        respond_to do |format|
+            format.html { redirect_to data_pre_processing_index_path, notice: 'Upload file successfully!' }
+            format.js   {}
+        end
     end
+
+    private
+
     def upload_file(file) 
         if !file.original_filename.empty? 
             @filename = file.original_filename
@@ -35,5 +46,5 @@ class DataPreProcessingController < ApplicationController
             return [@filename, @filepath]
         end 
     end 
- 
+
 end

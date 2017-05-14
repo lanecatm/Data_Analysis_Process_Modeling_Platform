@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  path: MyText
+  process_information_id: 
+  node_id: 
+
+two:
+  name: MyText
+  path: MyText
+  process_information_id: 
+  node_id: 

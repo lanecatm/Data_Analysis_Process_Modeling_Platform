@@ -1,0 +1,4 @@
+
+$("<%= escape_javascript(render @upload_file) %>").appendTo("#upload_files");
+$('#upload_file_table').prepend('<%= j render(@upload_file %>');
+
