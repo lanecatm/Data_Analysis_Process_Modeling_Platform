@@ -60,9 +60,10 @@ a:link {
 .content .canvas {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 100%;
   right: 0;
   bottom: 0;
+  margin: auto;
 }
 /* line 71, styles/app.less */
 .content .canvas,
@@ -108,7 +109,7 @@ a:link {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 260px;
+  width: 220px;
   z-index: 10;
   border-left: 1px solid #ccc;
   overflow: auto;
