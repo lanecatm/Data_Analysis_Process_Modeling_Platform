@@ -1,0 +1,24 @@
+    <div class="aw-item article">
+        <!--
+        <%= user_avatar_tag(topic) %>
+        -->
+        <a class="aw-user-name hidden-xs" href="#" rel="nofollow"><img src="/assets/user.png" alt=""></a>	
+        <div class="aw-question-content">
+            <h4>
+                <%= link_to topic.title, homeland.topic_path(topic)%>
+            </h4>
+            <p>
+            <a href="#" class="aw-user-name">User name</a> <span class="text-color-999">发表了文章 • <%= topic.replies_count %> 个评论 • <%= timeago topic.activity_at %></span>
+            <span class="text-color-999 related-topic hide"> • 来自话题<%= node_tag(topic.node) %> </span>
+            </p>
+
+            <!-- 文章内容调用 -->
+            <div class="markitup-box">
+                <div class="img pull-right"></div>
+                xxxxxxxxxxxxxxx
+            </div>
+            <a class="more" href="http://www.houziquan.com/article/3">查看更多</a>
+            <!-- end 文章内容调用 -->
+        </div>
+    </div>
+

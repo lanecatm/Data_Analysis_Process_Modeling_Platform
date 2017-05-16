@@ -1,3 +1,111 @@
-<% @upload_files.each do |upload_file| %>
-    <li><%= upload_file.name %></li>
+
+<% if params.has_key?"file" %>
+<%= form_for :seperator, :html => {:class => "form-horizontal", :role => "form"}, url: data_pre_processing_seperate_path do |f|%>
+    <div class="form-group">
+        <%= f.hidden_field :upload_file_id, :value => params[:file] %>
+        <label class="col-md-12">Seperator</label>
+        <% Separator.all.each do |seperator| %>  
+            <div class="col-md-2">
+                <% if params[:seperator] != nil and params[:seperator].index(seperator.value)%>
+                    <%= check_box_tag 'seperators[]', seperator.value, true %>  
+                <% else %>
+                    <%= check_box_tag 'seperators[]', seperator.value, false %>  
+                <% end %>
+                <%= label_tag seperator.name + " " + seperator.value %>
+                <% @last_seperator_id = seperator.id %>
+            </div>
+        <% end %> 
+    </div>
+    <div class="form-group">
+        <div class="col-md-1">
+            <%= f.submit :"Seperate", :class => "btn btn-primary btn-block" %>
+        </div>
+    </div>
+<% end %>
+<% end %>
+
+
+<% if params.has_key?"seperator" %>
+<%= form_for :choose, :html => {:class => "form-horizontal", :role => "form"}, url: data_pre_processing_choose_path do |f|%>
+    <div class="form-group">
+        <%= f.hidden_field :upload_file_id, :value => params[:file] %>
+        <%= f.hidden_field :seperator, :value => params[:seperator].join(" ") %>
+        <div class="col-md-6">
+            <label >Useless Column</label>
+            <%= f.text_field :useless_column, :class => "form-control", :placeholder => "1 or 1,2,...", :value => params[:useless_column].join(",") %>
+        </div>
+        <div class="col-md-6">
+            <label>Useless Row</label>
+            <%= f.text_field :useless_row, :class => "form-control", :placeholder => "1 or 1,2,..." , :value => params[:useless_row].join(",")%>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-1">
+            <%= f.submit :"Submit", :class => "btn btn-primary btn-block" %>
+        </div>
+    </div>
+<% end %>
+<% end %>
+
+<% if params.has_key?"file" %>
+<%= form_for :seperator, :html => {:class => "form-horizontal", :role => "form"}, url: data_pre_processing_seperate_path do |f|%>
+    <div class="col-md-12">
+        <br/>
+        <h3>Preview</h3>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td></td>
+                <% for i in 1..@column_number %>
+                    <% if params[:useless_column].index(i.to_s) == nil %>
+                        <td>
+                            Column <%= i %>
+                        </td>
+                    <% end %>
+                <% end %>
+            </tr>
+
+
+            <tr>
+                <td>Column name</td>
+                <% for i in 1..@column_number %>
+                    <% if params[:useless_column].index(i.to_s) == nil %>
+                        <td>
+                            <%= f.text_field :column_name, :class => "form-control", :placeholder => "Column name" %>
+                        </td>
+                    <% end %>
+                <% end %>
+            </tr>
+
+            <tr>
+                <td>Column type</td>
+                <% for i in 1..@column_number %>
+                    <% if params[:useless_column].index(i.to_s) == nil %>
+                        <td>
+                            <%=f.select :arff_type_id, ArffType.all.collect{|c|[ c.name, c.id ]}, 
+                                {},
+                                { class: "form-control" } 
+                            %>
+                        </td>
+                    <% end %>
+                <% end %>
+            </tr>
+            <% row_index = 1 %>
+            <% @file_content_array.each do |file_content| %>
+                <% if params[:useless_row].index(row_index.to_s) == nil %>
+                    <tr>
+                        <td><%= row_index %></td>
+                        <% column_index = 1 %>
+                        <% file_content.each do |line_content| %>
+                            <% if params[:useless_column].index(column_index.to_s) == nil %>
+                                <td><%= line_content %></td>
+                            <% end %>
+                            <% column_index = column_index + 1 %>
+                        <% end %>
+                    </tr>
+                <% end %>
+                <% row_index = row_index + 1 %>
+            <% end %>
+        </table>
+    </div>
+<% end %>
 <% end %>

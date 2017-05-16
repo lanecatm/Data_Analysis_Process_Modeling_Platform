@@ -47,53 +47,51 @@
     </div>
 
     <div class = "row">
-        <div class="col-md-offset-3 col-md-6">
-            <div class = "row">
-                <br/>
-                <br/>
-                <!-- Nav tabs -->
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane 
-                        <%= 'active' if @active_page == 'info' %>
-                        " id="information">
-                        <div class="col-md-12">
-                            <div class = "row">
-                                <%= render '/workflow_informations/edit_info' %>
-                            </div>
-                        </div>
-                    </div><!-- tab -->
-                    <div role="tabpanel" class="tab-pane
-                        <%= 'active' if @active_page == 'diagram' %>
-                        " id="diagram">
-                        <div class="col-md-12">
-                            <div class = "row">
-                                <%= render '/workflow_informations/edit_diagram' %>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane
-                        <%= 'active' if @active_page == 'version' %>
-                        " id="version">
-                        <div class="col-md-12">
-                            <div class = "row">
-                                <%= render '/workflow_informations/edit_version' %>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane
-                        <%= 'active' if @active_page == 'jurisdiction' %>
-                        " id="jurisdiction">
-                        <div class="col-md-12">
-                            <div class = "row">
-                                <%= render '/workflow_informations/edit_jurisdiction' %>
-                            </div>
-                        </div>
+        <br/>
+        <br/>
+        <!-- Nav tabs -->
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane 
+                <%= 'active' if @active_page == 'info' %>
+                " id="information">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class = "row">
+                        <%= render '/workflow_informations/edit_info' %>
                     </div>
                 </div>
-
+            </div><!-- tab -->
+            <div role="tabpanel" class="tab-pane
+                <%= 'active' if @active_page == 'diagram' %>
+                " id="diagram">
+                <div class="col-md-12">
+                    <div class = "row">
+                        <%= render '/workflow_informations/edit_diagram' %>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane
+                <%= 'active' if @active_page == 'version' %>
+                " id="version">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class = "row">
+                        <%= render '/workflow_informations/edit_version' %>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane
+                <%= 'active' if @active_page == 'jurisdiction' %>
+                " id="jurisdiction">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class = "row">
+                        <%= render '/workflow_informations/edit_jurisdiction' %>
+                    </div>
+                </div>
             </div>
         </div>
+
+    </div>
+</div>
     </div>
 </div> <!-- /container -->
 

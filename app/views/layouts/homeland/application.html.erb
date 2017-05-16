@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://v3.bootcss.com/examples/jumbotron/ -->
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Latest compiled and minified CSS -->
+
+        <!-- Latest compiled and minified JavaScript -->
+
+        <!-- Latest compiled and minified Locales -->
+        <title>IADSP</title>
+
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+        <!--
+        <link href="/stylesheets/chl.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/pace-theme-minimal.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/theme-peter-river.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/star-rating.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/bs-is-fun.min.css?<%= rand %>" media="screen" rel="stylesheet" type="text/css"/>
+        -->
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+        <%= csrf_meta_tags %>
+        <link rel="Shortcut Icon" href="assets/LOGO_2_s.png">
+    </head>
+
+    <body data-no-turbolink="true" >
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!--
+            <div class="navbar-header">
+                <%= link_to 'IADSP', main_app.root_path, :class => "navbar-brand" %>
+            </div>
+            -->
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>
+                    <%= link_to image_tag("/assets/LOGO_2_w.png", :style => "width: 72px; height: 25px;"), main_app.root_path, :class => "navbar-brand" %>
+                    </li>
+                    <li>
+                    <%= link_to 'Search', main_app.search_path(:search_content => "", :search_for => "model") %>
+                    </li>
+                    <li>
+                    <%= link_to 'Create', main_app.new_workflow_information_path %>
+                    </li>
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">History <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><%= link_to 'Model', main_app.history_model_path %></li>
+                        <li><%= link_to 'Running case', main_app.history_use_case_path %></li>
+                        <li><%= link_to 'Running record', main_app.history_running_record_path %></li>
+                    </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <% if user_signed_in? %>
+                        <li>
+                        </li>
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <% if not current_user.user_picture == nil %>
+                                <%= image_tag("/assets/"+current_user.user_picture.name, :style => "width: 25px; height: 25px;") %>
+                            <% end %>
+                            &nbsp;
+                            <%= current_user.user_name %>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><%= link_to 'Edit account', main_app.edit_user_registration_path %></li>
+                            <li><%= link_to 'Sign out', main_app.destroy_user_session_path, :method=>'delete' %></li>
+                        </ul>
+                        </li>
+                    <% else %>
+                        <li><%= link_to 'Sign in', main_app.new_user_session_path %></li>
+                        <li><%= link_to 'Sign up', main_app.new_user_registration_path %></li>
+                    <% end %>
+                </ul>
+            </div><!--/.navbar-collapse -->
+        </div>
+        </nav>
+        <div class="main-layout">
+            <div class="container">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <%= notice_message %>
+
+                <%= yield %>
+            </div>
+        </div>
+
+
+
+
+        <div class="container">
+            <hr/>
+            <p>© SJTU 2017</p>
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+        </div> <!-- /container -->
+
+    </body>
+</html>
+
