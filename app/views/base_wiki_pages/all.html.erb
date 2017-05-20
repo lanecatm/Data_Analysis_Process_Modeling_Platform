@@ -1,0 +1,35 @@
+<div class="container">
+    <div class = "row">
+        <div class = "col-md-offset-3 col-md-6">
+            <br/>
+            <br/>
+            <%= wiki_page_style -%>
+
+            <h1><%=wt 'All task' %></h1>
+            <hr/>
+
+            <table class="table table-striped table-bordered" >
+                <tr>
+                    <th>Task title </th>
+                    <th>Author</th>
+                    <th>Updated at</th>
+                </tr>
+                <%= wiki_paginate @pages do -%>
+                    <% @pages.each do |page| -%>
+                        <tr>
+                            <td>
+                                <%= link_to page.title, wiki_page_path( page ) %>
+                            </td>
+                            <td>
+                                <%= wiki_user( page.updator ) %>
+                            </td>
+                            <td>
+                                <%= l( page.updated_at, :format => :long )%>
+                            </td>
+                        </tr>
+                    <% end -%>
+                <% end -%>
+            </table>
+        </div>
+    </div>
+</div>

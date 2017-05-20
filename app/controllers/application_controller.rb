@@ -12,4 +12,11 @@ class ApplicationController < ActionController::Base
       #devise_parameter_sanitizer.for(:sign_up)        << :user_name
       #devise_parameter_sanitizer.for(:account_update) << :user_name << :person_name << :gender << :phone_number
   end
+
+  def authenticate_admin
+      unless current_user.admin?
+          flash[:alert] = "Not allow!"
+          redirect_to root_path
+      end
   end
+end

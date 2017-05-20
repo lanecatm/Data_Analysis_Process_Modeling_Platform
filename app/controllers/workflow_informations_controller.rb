@@ -11,15 +11,12 @@ class WorkflowInformationsController < ApplicationController
     def create
         @workflow_information = WorkflowInformation.create(all_params)
         @workflow_information.status = WORKFLOW_INFO_INIT
-        # TODO 这些参数从页面传回
-        @workflow_information.author = User.find(1)
-        @workflow_information.last_editor = User.find(1)
+        @workflow_information.author = current_user
+        @workflow_information.last_editor = current_user
         @workflow_information.save
 
         @workflow_privilege = WorkflowPrivilege.create
-        @workflow_privilege.edit_department = DepartmentInformation.find(1)
-        @workflow_privilege.execute_department = DepartmentInformation.find(1)
-        @workflow_privilege.delete_department = DepartmentInformation.find(1)
+        @workflow_privilege.default_department
         @workflow_privilege.workflow_information = @workflow_information
         @workflow_privilege.save
         #@workflow_information.save
@@ -34,26 +31,24 @@ class WorkflowInformationsController < ApplicationController
             workflow_information_hash.delete("id")
             @new_workflow_information = WorkflowInformation.create(workflow_information_hash)
             @new_workflow_information.status = WORKFLOW_INFO_EDITING
-            # TODO change
-            @new_workflow_information.last_editor = User.find(1)
+            @new_workflow_information.last_editor = current_user
             @new_workflow_information.save
 
+            # TODO change the pricilege copy
             @new_workflow_privilege = WorkflowPrivilege.create
             @new_workflow_privilege.edit_department = @workflow_information.workflow_privilege.edit_department
             @new_workflow_privilege.execute_department = @workflow_information.workflow_privilege.execute_department
             @new_workflow_privilege.delete_department = @workflow_information.workflow_privilege.delete_department
             @new_workflow_privilege.workflow_information = @new_workflow_information
             @new_workflow_privilege.save
-            
+
             @workflow_information.workflow_information_and_tags.each do |tag|
                 workflow_information_and_tag = WorkflowInformationAndTag.create
                 workflow_information_and_tag.workflow_information = @new_workflow_information
                 workflow_information_and_tag.workflow_tag = tag.workflow_tag
                 workflow_information_and_tag.save
             end
-
-
-            # TODO last version
+            # TODO redirect_to last version
             redirect_to edit_workflow_information_path(@new_workflow_information.id)
         end
 
@@ -112,13 +107,6 @@ class WorkflowInformationsController < ApplicationController
             else
                 render 'edit'
             end
-            #when "Save Version"
-            #    @active_page = "version"
-            #    if @workflow_information.update(version_params)
-            #        redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
-            #    else
-            #        render 'edit'
-            #    end
         when "Publish"
             if @workflow_information.status == WORKFLOW_INFO_INIT
                 if @workflow_information.update(version_params)
@@ -132,10 +120,8 @@ class WorkflowInformationsController < ApplicationController
                 if @workflow_information.update(version_params)
                     @workflow_information.status = WORKFLOW_INFO_PUBLISH
                     @workflow_information.save
-                    # TODO 关联父节点
-
+                    # TODO 关联父节点, connect to parent workflow_informations
                     redirect_to workflow_information_path(@workflow_information.id)
-
                 else
                     render 'edit'
                 end
@@ -153,13 +139,12 @@ class WorkflowInformationsController < ApplicationController
         @process_informations = ProcessInformation.where(:workflow_information_id => @workflow_information.id)
     end
 
-   
+
     def destroy
         @workflow_information = WorkflowInformation.find(params[:id])
         @workflow_information.destroy
         redirect_to root_path
     end
-
 
     private
     def all_params

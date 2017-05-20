@@ -67,3 +67,9 @@ gem 'devise'
 #gem 'jrb'
 #gemspec
 #gem 'weka'
+# WIKI 插件
+gem 'irwi', :git => 'git://github.com/alno/irwi.git'
+# 论坛插件
+gem "homeland"
+gem 'font-awesome-sass-rails'
+gem 'github-markup'

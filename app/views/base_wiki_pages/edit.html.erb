@@ -1,0 +1,43 @@
+<br/>
+<br/>
+<div class="container">
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class = "row">
+                <h3><%=wt 'Editing ' %><%= @page.title %></h1>
+                <hr/>
+
+                <% if params[:preview] %>
+                    <div class="wiki_content">
+                        <%=raw(@page.content) %>
+                    </div>
+                <% end %>
+
+                <%= wiki_page_form( :html => {:class => "form-horizontal", :role => "form"}, method: :post , :url => update_wiki_page_path) do |f| %>
+                    <%= f.hidden_field :previous_version_number, :value => f.object.last_version_number %>
+                    <%= hidden_field_tag :path, @page.path %>
+
+                    <div class="form-group">
+                        <label class="col-md-12 ">Content:</label>
+                        <div class="col-md-12">
+                            <%= f.text_area :content, :class => "tinymce", :rows => 15, :cols => 120 %>
+                            <%= tinymce %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12 ">Comment on this change (optional):</label>
+                        <div class="col-md-12">
+                            <%= f.text_field :comment, :class => "form-control", :placeholder => "" %>
+                        </div>
+                    </div>
+                    <input type="submit" name="save" value="<%=wt 'Save page' %>" class="submit" />
+                    <input type="submit" name="preview" value="<%=wt 'Preview' %>" class="submit" />
+                    <input type="submit" name="cancel" value="<%=wt 'Cancel' %>" class="submit" />
+                <% end %>
+
+                <%= wiki_page_attachments(@page) %>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513121815) do
+ActiveRecord::Schema.define(version: 20170515044523) do
+
+  create_table "arff_types", force: :cascade do |t|
+    t.text     "name",        limit: 65535
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "caseinformation", force: :cascade do |t|
     t.string   "ProcessID",     limit: 50,  default: "", null: false
@@ -47,6 +54,55 @@ ActiveRecord::Schema.define(version: 20170513121815) do
   end
 
   add_index "download_files", ["process_information_id"], name: "index_download_files_on_process_information_id", using: :btree
+
+  create_table "homeland_nodes", force: :cascade do |t|
+    t.string   "name",         limit: 255,             null: false
+    t.string   "description",  limit: 255
+    t.string   "color",        limit: 255
+    t.integer  "sort",         limit: 4,   default: 0, null: false
+    t.integer  "topics_count", limit: 4,   default: 0, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "homeland_nodes", ["sort"], name: "index_homeland_nodes_on_sort", using: :btree
+
+  create_table "homeland_replies", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "topic_id",    limit: 4
+    t.text     "body",        limit: 65535
+    t.text     "body_html",   limit: 65535
+    t.datetime "deleted_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "reply_to_id", limit: 4
+  end
+
+  add_index "homeland_replies", ["reply_to_id"], name: "index_homeland_replies_on_reply_to_id", using: :btree
+  add_index "homeland_replies", ["topic_id"], name: "index_homeland_replies_on_topic_id", using: :btree
+  add_index "homeland_replies", ["user_id"], name: "index_homeland_replies_on_user_id", using: :btree
+
+  create_table "homeland_topics", force: :cascade do |t|
+    t.integer  "node_id",            limit: 4,                 null: false
+    t.integer  "user_id",            limit: 4,                 null: false
+    t.string   "title",              limit: 255,               null: false
+    t.text     "body",               limit: 65535
+    t.text     "body_html",          limit: 65535
+    t.integer  "last_reply_id",      limit: 4
+    t.integer  "last_reply_user_id", limit: 4
+    t.integer  "last_active_mark",   limit: 4,     default: 0, null: false
+    t.datetime "replied_at"
+    t.integer  "replies_count",      limit: 4,     default: 0, null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
+
+  add_index "homeland_topics", ["deleted_at"], name: "index_homeland_topics_on_deleted_at", using: :btree
+  add_index "homeland_topics", ["last_active_mark", "deleted_at"], name: "index_homeland_topics_on_last_active_mark_and_deleted_at", using: :btree
+  add_index "homeland_topics", ["node_id", "deleted_at"], name: "index_homeland_topics_on_node_id_and_deleted_at", using: :btree
+  add_index "homeland_topics", ["node_id", "last_active_mark"], name: "index_homeland_topics_on_node_id_and_last_active_mark", using: :btree
+  add_index "homeland_topics", ["user_id"], name: "index_homeland_topics_on_user_id", using: :btree
 
   create_table "javaclassmethod", force: :cascade do |t|
     t.integer "ApplicationID",  limit: 4,        default: 0, null: false
@@ -367,6 +423,13 @@ ActiveRecord::Schema.define(version: 20170513121815) do
     t.string   "Parameter3",   limit: 50
   end
 
+  create_table "separators", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.text     "value",      limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "shared_process_privileges", force: :cascade do |t|
     t.integer  "process_id",             limit: 4
     t.integer  "edit_department_id",     limit: 4
@@ -457,10 +520,38 @@ ActiveRecord::Schema.define(version: 20170513121815) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role",                   limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "wiki_page_versions", force: :cascade do |t|
+    t.integer  "page_id",    limit: 4,          null: false
+    t.integer  "updator_id", limit: 4
+    t.integer  "number",     limit: 4
+    t.string   "comment",    limit: 255
+    t.string   "path",       limit: 255
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 4294967295
+    t.datetime "updated_at"
+  end
+
+  add_index "wiki_page_versions", ["page_id"], name: "index_wiki_page_versions_on_page_id", using: :btree
+  add_index "wiki_page_versions", ["updator_id"], name: "index_wiki_page_versions_on_updator_id", using: :btree
+
+  create_table "wiki_pages", force: :cascade do |t|
+    t.integer  "creator_id", limit: 4
+    t.integer  "updator_id", limit: 4
+    t.string   "path",       limit: 255
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 4294967295
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wiki_pages", ["creator_id"], name: "index_wiki_pages_on_creator_id", using: :btree
+  add_index "wiki_pages", ["path"], name: "index_wiki_pages_on_path", unique: true, using: :btree
 
   create_table "workflow_categories", force: :cascade do |t|
     t.string   "name",        limit: 255

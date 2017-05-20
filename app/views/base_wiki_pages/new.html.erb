@@ -1,0 +1,32 @@
+<br/>
+<br/>
+<div class="container">
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="row">
+                <%= wiki_page_form( :html => {:class => "form-horizontal", :role => "form"}) do |f| %>
+                    <h3>
+                        New task <%= @page.title %>
+                    </h3>
+                    <hr/>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <%= f.hidden_field :previous_version_number, :value => f.object.last_version_number %>
+                            <%= f.hidden_field :title %>
+                            <%= f.text_area :content, :class => "tinymce", :rows => 15, :cols => 120 %>
+                            <%= tinymce %>
+                            <%= f.hidden_field :comment, :value => 'First Revision'%>
+                            <%= hidden_field_tag :path, @page.path %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-9 col-md-3">
+                            <%= f.submit :"Create", :class => "btn btn-primary btn-block" %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+</div>
