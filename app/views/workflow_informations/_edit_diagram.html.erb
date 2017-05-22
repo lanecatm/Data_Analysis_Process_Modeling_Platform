@@ -44,32 +44,22 @@
 </div>
         <div class="col-md-12">
             <ul class="nav nav-tabs"  >
-                <li role="presentation" 
-                class="<%= 'active' if @active_page == 'info' %>"
-                >
-                <a href="#information" aria-controls="information" role="tab" data-toggle="tab">Node 1</a>
+                <li role="presentation" >
+                <a href="#node1" aria-controls="node1" role="tab" data-toggle="tab">Node 1</a>
                 </li>
-                <li role="presentation" 
-                class="<%= 'active' if @active_page == 'diagram' %>"
-                >
-                <a href="#diagram" aria-controls="diagram" role="tab" data-toggle="tab">Node 2</a>
+                <li role="presentation" >
+                <a href="#node2" aria-controls="node2" role="tab" data-toggle="tab">Node 2</a>
                 </li>
-                <li role="presentation"
-                class="<%= 'active' if @active_page == 'jurisdiction' %>"
-                >
-                <a href="#jurisdiction" aria-controls="input" role="tab" data-toggle="tab">Node 3</a>
+                <li role="presentation" >
+                <a href="#node4" aria-controls="node4" role="tab" data-toggle="tab">Node 3</a>
                 </li>
-                <li role="presentation"
-                class="<%= 'active' if @active_page == 'version' %>"
-                >
-                <a href="#version" aria-controls="version" role="tab" data-toggle="tab">Node 4</a>
+                <li role="presentation" >
+                <a href="#node3" aria-controls="node3" role="tab" data-toggle="tab">Node 4</a>
                 </li>
             </ul>
         </div>
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane 
-                <%= 'active' if @active_page == 'info' %>
-                " id="information">
+            <div role="tabpanel" class="tab-pane active" id="node1">
                 <div class="col-md-offset-3 col-md-6">
                     <div class = "row">
 
@@ -77,25 +67,19 @@
                     </div>
                 </div>
             </div><!-- tab -->
-            <div role="tabpanel" class="tab-pane
-                <%= 'active' if @active_page == 'diagram' %>
-                " id="diagram">
+            <div role="tabpanel" class="tab-pane " id="node2">
                 <div class="col-md-offset-3 col-md-6">
                     <div class = "row">
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane
-                <%= 'active' if @active_page == 'version' %>
-                " id="version">
+            <div role="tabpanel" class="tab-pane " id="node3">
                 <div class="col-md-offset-3 col-md-6">
                     <div class = "row">
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane
-                <%= 'active' if @active_page == 'jurisdiction' %>
-                " id="jurisdiction">
+            <div role="tabpanel" class="tab-pane " id="node4">
                 <div class="col-md-offset-3 col-md-6">
                     <div class = "row">
                     </div>
