@@ -10,9 +10,9 @@
         </h4>
         <h4>
             <small>
-                <a href="" class="aw-user-name" data-id="78">林灿斌</a> 
-                <span class="text-color-999">回复了问题 • <%= topic.replies_count %> 个回复 • <%= timeago topic.activity_at %></span>
-                <span class="text-color-999 related-topic hide"> •  <%= node_tag(topic.node) %> </span>
+                <a href="" class="aw-user-name" data-id="78"><%= topic.user.user_name %></a> 
+                <span class="text-color-999">, <%= topic.replies_count %> replies, <%= timeago topic.activity_at %></span>
+                <span class="text-color-999 related-topic hide"> Task <%= node_tag(topic.node) %> </span>
             </small>
         </h4>
     </div>

@@ -1,16 +1,24 @@
 <!--
 <% if admin? %>
-<ul class="nav nav-pills" style="margin-bottom:20px ">
-  <li class="nav-item">
-    <a class="nav-link active" href="<%= homeland.nodes_path %>"><%= t("homeland.nav.node") %></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<%= homeland.new_node_path %>"><%= t("homeland.new") %></a>
-  </li>
-</ul>
+    <ul class="nav nav-pills" style="margin-bottom:20px ">
+        <li class="nav-item">
+        <a class="nav-link active" href="<%= homeland.nodes_path %>"><%= t("homeland.nav.node") %></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<%= homeland.new_node_path %>"><%= t("homeland.new") %></a>
+        </li>
+    </ul>
 <% end %>
 -->
+<br/>
+<br/>
+<div class="container">
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
 
-<div class="nodes">
-  <%= render @nodes %>
+            <div class="nodes">
+                <%= render @nodes %>
+            </div>
+        </div>
+    </div>
 </div>

@@ -17,12 +17,13 @@ class SearchController < ApplicationController
                 @tag_workflow_informations = WorkflowInformation.all.group(:name)
                 @title_workflow_informations = WorkflowInformation.all.group(:name)
                 @other_workflow_informations = WorkflowInformation.all.group(:name)
+
                 @all_workflow_informations_without_group = WorkflowInformation.all
                 @tag_workflow_informations_without_group = WorkflowInformation.all
                 @title_workflow_informations_without_group = WorkflowInformation.all
                 @other_workflow_informations_without_group = WorkflowInformation.all
 
-                @workflow_information_by_categories = WorkflowInformation.group(:name).group(:category_id).count
+                @workflow_information_by_categories = WorkflowInformation.group(:category_id).count
 
             else
                 search_content_str = "%" + params[:search_content] + "%"
@@ -36,14 +37,21 @@ class SearchController < ApplicationController
                 @all_workflow_informations_without_group = WorkflowInformation.where("name like ? or introduction like ? or detial_description like ? or id in(?)", search_content_str, search_content_str, search_content_str, @workflow_information_ids)
                 @title_workflow_informations_without_group = WorkflowInformation.where("name like ?", search_content_str)
                 @other_workflow_informations_without_group = WorkflowInformation.where("introduction like ? or detial_description like ?", search_content_str, search_content_str)
-                @workflow_information_by_categories = @all_workflow_informations.group(:category_id).count
+                @workflow_information_by_categories = WorkflowInformation.where("name like ? or introduction like ? or detial_description like ? or id in(?)", search_content_str, search_content_str, search_content_str, @workflow_information_ids).group(:category_id).count
             end
         when "use_case"
             search_content_str = "%" + params[:search_content] + "%"
             @all_process_informations = ProcessInformation.where("name like ?", search_content_str)
+            # TODO change
             @title_workflow_informations = []
             @other_workflow_informations = []
+        when "task"
+            search_content_str = "%" + params[:search_content] + "%"
+            @all_tasks = WikiPage.where("title like ? or content like ?", search_content_str,search_content_str).all
+            @title_tasks = WikiPage.where("title like ?", search_content_str).all
+            @other_tasks = WikiPage.where("content like ?", search_content_str).all
         end
+ 
         @active_choice = params[:search_for]
 
     end

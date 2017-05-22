@@ -14,11 +14,11 @@
                     <th>Author</th>
                     <th>Updated at</th>
                 </tr>
-                <%= wiki_paginate @pages do -%>
-                    <% @pages.each do |page| -%>
+                <%= wiki_paginate @pages do %>
+                    <% @pages.each do |page| %>
                         <tr>
                             <td>
-                                <%= link_to page.title, wiki_page_path( page ) %>
+                                <%= link_to page.title, wiki_page_path( page.path ) %>
                             </td>
                             <td>
                                 <%= wiki_user( page.updator ) %>

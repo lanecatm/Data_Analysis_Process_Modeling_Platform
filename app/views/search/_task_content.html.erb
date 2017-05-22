@@ -1,0 +1,42 @@
+<ul class="list-unstyled">
+    <li>
+    <div class = "row">
+        <div class="col-md-8">
+            <h3> We have found <%= @tasks.length %> results</h3>
+        </div>
+        <div class="col-md-4">
+            <br/>
+            <div class="dropdown">
+                <button id="sortBtn" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort: Best match
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortBtn">
+                    <li><a>Highest score</a></li>  
+                    <li><a>Lowest score</a></li>
+                    <li><a>Most user</a></li>
+                    <li><a>Fewest user</a></li>
+                    <li><a>Recently update</a></li>
+                    <li><a>Least recently update</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    </li>
+    <% @tasks.each do |page| %>
+        <li>
+        <h3>
+            <%= link_to page.title, wiki_page_url( page.path ) %>
+        </h3>
+        <div>
+            <p>
+            Author: <%= page.updator.user_name %>
+            Update time: 
+            <%= page.updated_at.strftime("%Y-%m-%d %H:%M:%S")  %>
+            </p>
+        </div>
+        </li>
+        <hr/>
+    <% end %>
+</ul>

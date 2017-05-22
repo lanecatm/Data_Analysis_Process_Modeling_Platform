@@ -59,4 +59,7 @@
 #rails generate model NodeOptionChoices node_option:references name:text value:text
 
 #rails generate model Separator name:text value:text
-rails generate model ArffType name:text description:text
+#rails generate model ArffType name:text description:text
+#rails generate model TaskCategory name:text
+#rails generate model TaskCategoryAndWiki task_category:references wiki_page_path:text
+rails g model WikiAndWorkflowInformation wiki_page:references workflow_information:references

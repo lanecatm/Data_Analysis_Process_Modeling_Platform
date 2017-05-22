@@ -89,6 +89,13 @@ class WorkflowInformationsController < ApplicationController
                 workflow_information_and_tag.workflow_tag = workflow_tag
                 workflow_information_and_tag.save
             end
+
+            wiki_page_id = wiki_params[:wiki_and_workflow_information][:wiki_page_id]
+            wiki_and_workflow_information = WikiAndWorkflowInformation.where(:wiki_page_id => wiki_page_id, :workflow_information_id=> @workflow_information.id).first
+            if wiki_and_workflow_information == nil
+                WikiAndWorkflowInformation.create(:wiki_page_id => wiki_page_id, :workflow_information_id => @workflow_information.id)
+            end
+
             if @workflow_information.update(all_params)
                 redirect_to edit_workflow_information_path(@workflow_information.id, :active_page => @active_page)
             else
@@ -165,6 +172,10 @@ class WorkflowInformationsController < ApplicationController
 
     def tag_params
         params.require(:workflow_information).permit(workflow_tag: [:name])
+    end
+
+    def wiki_params
+        params.require(:workflow_information).permit(wiki_and_workflow_information:[:wiki_page_id])
     end
 
 end

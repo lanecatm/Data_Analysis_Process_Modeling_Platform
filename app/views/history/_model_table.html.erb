@@ -15,7 +15,11 @@
                     <%= workflow_information.id %>
                 </td>
                 <td>
-                    <%= link_to workflow_information.name, workflow_information_path(workflow_information) %>
+                    <% if workflow_information.name != "" %>
+                    <%= link_to workflow_information.name , workflow_information_path(workflow_information) %>
+                    <% else %>
+                    <%= link_to "None name", workflow_information_path(workflow_information) %>
+                    <% end %>
                 </td>
                 <!--
                 <p>

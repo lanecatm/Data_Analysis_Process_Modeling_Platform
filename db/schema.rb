@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515044523) do
+ActiveRecord::Schema.define(version: 20170521090643) do
 
   create_table "arff_types", force: :cascade do |t|
     t.text     "name",        limit: 65535
@@ -470,6 +470,21 @@ ActiveRecord::Schema.define(version: 20170515044523) do
     t.text    "XML",          limit: 16777215
   end
 
+  create_table "task_categories", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "task_category_and_wikis", force: :cascade do |t|
+    t.integer  "task_category_id", limit: 4
+    t.text     "wiki_page_path",   limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "task_category_and_wikis", ["task_category_id"], name: "index_task_category_and_wikis_on_task_category_id", using: :btree
+
   create_table "test_algorithms", force: :cascade do |t|
     t.string   "name",                   limit: 255
     t.integer  "param1",                 limit: 4
@@ -525,6 +540,16 @@ ActiveRecord::Schema.define(version: 20170515044523) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "wiki_and_workflow_informations", force: :cascade do |t|
+    t.integer  "wiki_page_id",            limit: 4
+    t.integer  "workflow_information_id", limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "wiki_and_workflow_informations", ["wiki_page_id"], name: "index_wiki_and_workflow_informations_on_wiki_page_id", using: :btree
+  add_index "wiki_and_workflow_informations", ["workflow_information_id"], name: "index_wiki_and_workflow_informations_on_workflow_information_id", using: :btree
 
   create_table "wiki_page_versions", force: :cascade do |t|
     t.integer  "page_id",    limit: 4,          null: false
@@ -776,6 +801,9 @@ ActiveRecord::Schema.define(version: 20170515044523) do
   add_foreign_key "node_options", "node_option_types"
   add_foreign_key "process_files", "process_informations"
   add_foreign_key "process_results", "process_informations"
+  add_foreign_key "task_category_and_wikis", "task_categories"
   add_foreign_key "upload_files", "process_informations"
   add_foreign_key "user_pictures", "users"
+  add_foreign_key "wiki_and_workflow_informations", "wiki_pages"
+  add_foreign_key "wiki_and_workflow_informations", "workflow_informations"
 end

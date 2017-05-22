@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task_category_id: 
+  wiki_page_path: MyText
+
+two:
+  task_category_id: 
+  wiki_page_path: MyText

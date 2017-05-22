@@ -47,6 +47,21 @@
                     <a href="#other" aria-controls="other" role="tab" data-toggle="tab">Other</a>
                     </li>
                 <% end %>
+                <% if params[:search_for] == "task"%>
+                    <li role="presentation" 
+                    class="<%= 'active' if @active_page == 'all' %>">
+                    <a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a>
+                    </li>
+                    <li role="presentation" 
+                    class="<%= 'active' if @active_page == 'title' %>">
+                    <a href="#title" aria-controls="title" role="tab" data-toggle="tab">Title</a>
+                    </li>
+                    <li role="presentation" 
+                    class="<%= 'active' if @active_page == 'other' %>">
+                    <a href="#other" aria-controls="other" role="tab" data-toggle="tab">Other</a>
+                    </li>
+                <% end %>
+
 
             </ul>
         </div>
@@ -75,10 +90,12 @@
 
                 <% if @workflow_information_by_categories != nil %>
                     <% @workflow_information_by_categories.each do |wf_key, wf_value| %>
-                        <li class="list-group-item">
-                        <%= WorkflowCategory.find(wf_key[1]).name %>
-                        <span class="badge"><%= wf_value %></span>
-                        </li>
+                        <% if wf_key != nil %>
+                            <li class="list-group-item">
+                            <%= WorkflowCategory.find(wf_key).name %>
+                            <span class="badge"><%= wf_value %></span>
+                            </li>
+                        <% end %>
                     <% end %>
                 <% end %>
             </ul>
@@ -126,6 +143,23 @@
                     </div>
                 </div>
             <% end %>
+            <% if params[:search_for] == "task"%>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="all">
+                        <% @tasks = @all_tasks%>
+                        <%= render '/search/task_content' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="title">
+                        <% @tasks= @title_tasks%>
+                        <%= render '/search/task_content' %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="other">
+                        <% @tasks= @other_tasks %>
+                        <%= render '/search/task_content' %>
+                    </div>
+                </div>
+            <% end %>
+
 
         </div>
     </div>

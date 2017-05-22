@@ -67,6 +67,20 @@
             </div>
         </div>
     </div>
+    <%= f.fields_for :wiki_and_workflow_information do |subf| %> 
+    <div class="form-group">
+        <label class="col-md-12">Task</label>
+        <div class="col-md-12">
+            <%=subf.select :wiki_page_id, WikiPage.all.collect{|c|[ c.title, c.id ]}, 
+                {},
+                { class: "form-control" } 
+            %>
+            <h4><small>
+                <%=(wt 'Do not exist the task you need?', :default => 'Do not exist the task you need? <a href="%{new_url}" target="_blank">Create one</a>', :new_url => new_task_path ).html_safe %>  
+            </small></h4>
+        </div>
+    </div>
+    <% end %>
 
 
     <hr/>

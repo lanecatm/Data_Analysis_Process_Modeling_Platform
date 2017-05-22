@@ -11,7 +11,10 @@
                 <div class="form-group">
                     <label class="col-md-12 ">Task category</label>
                     <div class="col-md-12">
-                        <%= f.text_field :category, :class => "form-control", :placeholder => "" %>
+                        <%=f.select :task_category, TaskCategory.all.collect{|c|[ c.name, c.id ]}, 
+                            {},
+                            { class: "form-control" } 
+                        %>
                     </div>
                 </div>
 
@@ -22,14 +25,26 @@
                         <%= f.text_field :name, :class => "form-control", :placeholder => "" %>
                     </div>
                 </div>
+                <%= f.fields_for @node do |subf| %> 
+                    <%= subf.hidden_field :name, class: 'form-control', value: "name" %>
+                    <%= subf.hidden_field :description,  class: 'form-control', value: "name" %>
+                    <%= subf.hidden_field :color, value: "#0E76BD", class: 'form-control' %>
+                    <%= subf.hidden_field :sort, class: 'form-control' %>
+                <% end %>
 
                 <div class="form-group">
                     <div class="col-md-offset-9 col-md-3">
-                        <%= f.submit :"Next", :class => "btn btn-primary btn-block" %>
+                        <%= f.submit :"Next", :class => "btn btn-primary btn-block", :id => "submit_task", :onclick=>"click_submit_task()" %>
                     </div>
                 </div>
-
             <% end %>
         </div>
     </div>
+    <script>
+        function click_submit_task(){
+            var a=document.getElementById("task_name").value;
+            document.getElementById("task_node_name").value = a;
+            document.getElementById("task_node_description").value = a;
+        }
+    </script>
 </div>

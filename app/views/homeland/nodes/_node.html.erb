@@ -1,23 +1,58 @@
+<!--
 <div class="node-item row" style="border-left-color: <%= node.badge_color %>;">
-  <div class="info col-sm-5">
-    <div class="title"><%= link_to node.name, homeland.node_topics_path(node) %> <span class="count"><%= node.topics_count %></span></div>
-    <div class="desc">
-      <%= simple_format node.description %>
-    </div>
-    <div class="opts">
-      <% if admin? %>
-      <a class="btn-opt edit" href="<%= homeland.edit_node_path(node) %>"><i class="fa fa-pencil"></i></a>
+    <div class="info col-sm-5">
+        <div class="title"><%= link_to node.name, homeland.node_topics_path(node) %> <span class="count"><%= node.topics_count %></span></div>
+        <div class="desc">
+            <%= simple_format node.description %>
+        </div>
+        <div class="opts">
+            <% if admin? %>
+                <a class="btn-opt edit" href="<%= homeland.edit_node_path(node) %>"><i class="fa fa-pencil"></i></a>
 
-      <a class="btn-opt delete" href="<%= homeland.node_path(node) %>" data-method="DELETE" data-confirm="<%= t('homeland.are_you_sure_to_delete') %>"><i class="fa fa-trash"></i></a>
-      <% end %>
+                <a class="btn-opt delete" href="<%= homeland.node_path(node) %>" data-method="DELETE" data-confirm="<%= t('homeland.are_you_sure_to_delete') %>"><i class="fa fa-trash"></i></a>
+            <% end %>
+        </div>
     </div>
-  </div>
-  <div class="topics col-sm-7">
-    <% node.topics.recent.limit(3).each do |topic| %>
-    <div class="item">
-      <%= link_to topic.title, homeland.topic_path(topic) %>
-      <%= timeago topic.created_at %>
+    <div class="topics col-sm-7">
+        <% node.topics.recent.limit(3).each do |topic| %>
+            <div class="item">
+                <%= link_to topic.title, homeland.topic_path(topic) %>
+                <%= timeago topic.created_at %>
+            </div>
+        <% end %>
     </div>
-    <% end %>
-  </div>
 </div>
+-->
+<br/>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th colspan="3">
+            <h4 class="text-center">
+            <%= link_to node.name, homeland.node_topics_path(node) %>
+            <span class="badge">
+                <%= node.topics_count %>
+            </span>
+            </h4>
+        </th>
+    </tr>
+    <tr>
+        <th>Task name </th>
+        <th>Created at</th>
+        <th>Author</th>
+    </tr>
+    <% node.topics.recent.limit(3).each do |topic| %>
+        <tr>
+            <td>
+                <%= link_to topic.title, homeland.topic_path(topic) %>
+            </td>
+            <td>
+                <%= timeago topic.created_at %>
+            </td>
+
+            <td>
+                <%= topic.user.user_name %>
+            </td>
+        </tr>
+    <% end %>
+</table>
+

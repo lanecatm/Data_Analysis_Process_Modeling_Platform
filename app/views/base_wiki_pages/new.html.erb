@@ -1,3 +1,9 @@
+<% @task_category_and_wiki = TaskCategoryAndWiki.where(:wiki_page_path => @page.path).first %>
+<% if @task_category_and_wiki == nil %>
+    <% @task_category = TaskCategory.find(1) %>
+<% else %>
+    <% @task_category = @task_category_and_wiki.task_category %>
+<% end %>
 <br/>
 <br/>
 <div class="container">
@@ -6,10 +12,11 @@
             <div class="row">
                 <%= wiki_page_form( :html => {:class => "form-horizontal", :role => "form"}) do |f| %>
                     <h3>
-                        New task <%= @page.title %>
+                        New task <%= @page.title %> <small> in <%= @task_category.name %> </small>
                     </h3>
                     <hr/>
                     <div class="form-group">
+                        <label class="col-md-12 ">Task description</label>
                         <div class="col-md-12">
                             <%= f.hidden_field :previous_version_number, :value => f.object.last_version_number %>
                             <%= f.hidden_field :title %>

@@ -1,5 +1,5 @@
         <%= form_for :search_request, :html => {:class => "form-inline", :role => "form"}, url:search_path do |f|%>
-            <%= f.select :search_for, {"Model" => 'model', "Running case" => 'use_case'},{:selected => @active_choice}, {class: "form-control", style: "width:20%"} %>
+            <%= f.select :search_for, {"Model" => 'model', "Task" => 'task', "Running case" => 'use_case'},{:selected => @active_choice}, {class: "form-control", style: "width:20%"} %>
             <div class="input-group" style="width:79%" >
                 <%= f.text_field :search_content, :class => "form-control", :placeholder => "Search for ..." %>
                 <div class="input-group-btn">

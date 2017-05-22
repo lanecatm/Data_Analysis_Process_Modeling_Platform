@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     #end
 
 
-    wiki_root '/tasks'
-    resources :task
+    wiki_root '/tasks/'
+    resources :task do
+        post 'create_page', to: 'task#create_page'
+    end
     devise_for :users
     get 'home/index'
     get 'home/test'

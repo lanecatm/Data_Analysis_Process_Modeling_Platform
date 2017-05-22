@@ -1,21 +1,31 @@
-<div class="row">
-  <div class="topic-detail col-lg-9">
-    <h1>
-      <%= @topic.title %>
-      <%= node_tag(@topic.node) %>
-    </h1>
+<br/>
+<br/>
+<div class="container">
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <h3>
+                <%= @topic.title %>
+                <%= node_tag(@topic.node) %>
+            </h3>
+            <hr/>
 
-    <div class="topic-content">
-      <%= render partial: 'homeland/replies/reply', locals: { reply: @topic } %>
+            <table class="table table-striped table-bordered" >
+                <tr>
+                    <td>
+                        <%= render partial: 'homeland/replies/reply', locals: { reply: @topic } %>
+                    </td>
+                </tr>
+                <% @replies.each do |reply|%>
+                <tr>
+                    <td>
+                        <%= render reply %>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+
+
+            <%= render 'reply_form' %>
+        </div>
     </div>
-
-    <div class="replies">
-      <%= render @replies %>
-    </div>
-
-  </div>
-
-
 </div>
-
-<%= render 'reply_form' %>

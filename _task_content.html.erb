@@ -1,0 +1,48 @@
+<ul class="list-unstyled">
+    <li>
+    <div class = "row">
+        <div class="col-md-8">
+            <h3> We have found <%= @process_informations.length %> results</h3>
+        </div>
+        <div class="col-md-4">
+            <br/>
+            <div class="dropdown">
+                <button id="sortBtn" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort: Best match
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortBtn">
+                    <li><a>Highest score</a></li>  
+                    <li><a>Lowest score</a></li>
+                    <li><a>Most user</a></li>
+                    <li><a>Fewest user</a></li>
+                    <li><a>Recently update</a></li>
+                    <li><a>Least recently update</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    </li>
+    <% @process_informations.each do |process_information| %>
+        
+        <% if process_information.is_shared == true and process_information.workflow_information != nil%>
+        <li>
+        <h3>
+            <%= link_to process_information.name, process_execute_path(process_information.id) %>
+        </h3>
+        <div>
+            <p>
+            Model <%= process_information.workflow_information.name%> <small><%=process_information.workflow_information.version_name%> </small>
+            </p>
+            <p>
+            Author: Admin
+            Update time: 
+            <%= process_information.updated_at.strftime("%Y-%m-%d %H:%M:%S")  %>
+            </p>
+        </div>
+        </li>
+        <hr/>
+    <% end %>
+    <% end %>
+</ul>

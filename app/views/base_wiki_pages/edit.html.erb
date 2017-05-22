@@ -8,9 +8,13 @@
                 <hr/>
 
                 <% if params[:preview] %>
-                    <div class="wiki_content">
-                        <%=raw(@page.content) %>
-                    </div>
+                <h4>Preview:</h4>
+                <div class="well col-md-12">
+                        <div class="wiki_content">
+                            <%=raw(@page.content) %>
+                        </div>
+                </div>
+                <hr/>
                 <% end %>
 
                 <%= wiki_page_form( :html => {:class => "form-horizontal", :role => "form"}, method: :post , :url => update_wiki_page_path) do |f| %>
@@ -18,7 +22,7 @@
                     <%= hidden_field_tag :path, @page.path %>
 
                     <div class="form-group">
-                        <label class="col-md-12 ">Content:</label>
+                        <h4 class="col-md-12 ">Task description</h4>
                         <div class="col-md-12">
                             <%= f.text_area :content, :class => "tinymce", :rows => 15, :cols => 120 %>
                             <%= tinymce %>
@@ -30,9 +34,17 @@
                             <%= f.text_field :comment, :class => "form-control", :placeholder => "" %>
                         </div>
                     </div>
-                    <input type="submit" name="save" value="<%=wt 'Save page' %>" class="submit" />
-                    <input type="submit" name="preview" value="<%=wt 'Preview' %>" class="submit" />
-                    <input type="submit" name="cancel" value="<%=wt 'Cancel' %>" class="submit" />
+                    <div class="form-group">
+                    <div class="col-md-3">
+                    <input type="submit" name="save" class="btn btn-primary btn-block" value="<%=wt 'Save page' %>" />
+                    </div>
+                    <div class="col-md-3">
+                    <input type="submit" name="preview" value="<%=wt 'Preview' %>" class="btn btn-default btn-block" />
+                    </div>
+                    <div class="col-md-3">
+                    <input type="submit" name="cancel" value="<%=wt 'Cancel' %>" class="btn btn-default btn-block" />
+                    </div>
+                    </div>
                 <% end %>
 
                 <%= wiki_page_attachments(@page) %>

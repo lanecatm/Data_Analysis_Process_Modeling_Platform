@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wiki_page_id: 
+  workflow_information_id: 
+
+two:
+  wiki_page_id: 
+  workflow_information_id: 
