@@ -56,7 +56,9 @@ Rails.application.routes.draw do
     post 'data_pre_processing/seperate/', to: 'data_pre_processing#seperate'
     post 'data_pre_processing/choose/', to: 'data_pre_processing#choose'
 
-    resources :node
+    resources :node do
+        post 'save/', to: 'node#save'
+    end
 
 
     # Example of regular route:

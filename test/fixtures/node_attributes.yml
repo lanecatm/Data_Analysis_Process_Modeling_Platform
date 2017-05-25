@@ -2,12 +2,8 @@
 
 one:
   name: MyText
-  description: MyText
-  node_type_id: 
-  node_category_id: 
+  node_function_id: 
 
 two:
   name: MyText
-  description: MyText
-  node_type_id: 
-  node_category_id: 
+  node_function_id: 

@@ -2,6 +2,8 @@
 
 one:
   name: MyText
+  node_type_id: 
 
 two:
   name: MyText
+  node_type_id: 

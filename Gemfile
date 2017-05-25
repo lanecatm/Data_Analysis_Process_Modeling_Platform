@@ -73,3 +73,6 @@ gem 'irwi', :git => 'git://github.com/alno/irwi.git'
 gem "homeland"
 gem 'font-awesome-sass-rails'
 gem 'github-markup'
+
+# 加号插件
+gem "cocoon"

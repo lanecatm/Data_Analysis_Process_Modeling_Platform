@@ -1,0 +1,45 @@
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class = "row">
+                <h3><%= @node_function.name %></h3>
+                <h4><small><%= @node_function.description %></small></h4>
+                <hr/>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class = "row">
+                <%= form_for :node, :url => node_save_path(params[:id]), :method => :post,:html => {:class => "form-horizontal", :role => "form"}  do |f_node|%>
+                    <%= f_node.hidden_field :workflow_information_id, :value => "1" %>
+                    <%= f_node.hidden_field :node_id, :value => "task_1" %>
+                    <%= f_node.fields_for :option do |f| %>
+                    <% @node_function.node_options.each do |node_option|%>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label><%= node_option.label%></label>
+                                <% if node_option.node_option_type.name == "Numeric" or node_option.node_option_type.name == "String" %>
+                                    <input type="text" name="node[option][<%= node_option.id %>]" id="node_option_<%= node_option.id%>" class="form-control" value=<%=node_option.default_value %>>
+                                <% elsif node_option.node_option_type.name == "Nominal specification" %>
+                                    <select class="form-control" name="node[option][<%= node_option.id %>]" id="node_option_<%= node_option.id%>" >
+                                        <% node_option.node_option_choices.each do |node_option_choice| %>
+                                            <option value ="<%=node_option_choice.id %>"><%= node_option_choice.name%></option>
+                                        <% end %>
+                                    </select>
+                                <% end %>
+                                <p class="help-block"><%= node_option.description %></p>
+                            </div>
+                        </div>
+                    <% end %>
+                    <% end %>
+                    <%= f_node.button :submit, :class => "btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
