@@ -41,4 +41,20 @@
         </div>
     </div>
 </div>
+<script>
+    $('.node-option-type').on('change', function() {
+    selectedValue = $(this).val();
+    defaultValue = $(this).closest('.row').children('.node-option-default-value');
+    choice = $(this).closest('.row').children('.links');
+    if(selectedValue == 2) { 
+    defaultValue.hide();
+    choice.show(); 
+    } 
+    else { 
+    defaultValue.show();
+    choice.hide();
+    choice.children('.nested-fields').remove(); 
+    }
 
+    });
+</script>

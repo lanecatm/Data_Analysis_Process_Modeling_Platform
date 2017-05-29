@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524160542) do
+ActiveRecord::Schema.define(version: 20170528164223) do
 
   create_table "arff_types", force: :cascade do |t|
     t.text     "name",        limit: 65535
@@ -62,16 +62,18 @@ ActiveRecord::Schema.define(version: 20170524160542) do
   end
 
   create_table "homeland_nodes", force: :cascade do |t|
-    t.string   "name",         limit: 255,             null: false
+    t.string   "name",         limit: 255,              null: false
     t.string   "description",  limit: 255
     t.string   "color",        limit: 255
-    t.integer  "sort",         limit: 4,   default: 0, null: false
-    t.integer  "topics_count", limit: 4,   default: 0, null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.integer  "sort",         limit: 4,   default: 0,  null: false
+    t.integer  "topics_count", limit: 4,   default: 0,  null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "wiki_page_id", limit: 4,   default: 18
   end
 
   add_index "homeland_nodes", ["sort"], name: "index_homeland_nodes_on_sort", using: :btree
+  add_index "homeland_nodes", ["wiki_page_id"], name: "index_homeland_nodes_on_wiki_page_id", using: :btree
 
   create_table "homeland_replies", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -123,15 +125,6 @@ ActiveRecord::Schema.define(version: 20170524160542) do
     t.integer "OutputXMLID",    limit: 4
   end
 
-  create_table "node_attributes", force: :cascade do |t|
-    t.text     "name",             limit: 65535
-    t.integer  "node_function_id", limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
-
-  add_index "node_attributes", ["node_function_id"], name: "index_node_attributes_on_node_function_id", using: :btree
-
   create_table "node_categories", force: :cascade do |t|
     t.text     "name",         limit: 65535
     t.integer  "node_type_id", limit: 4
@@ -153,6 +146,17 @@ ActiveRecord::Schema.define(version: 20170524160542) do
   add_index "node_functions", ["node_category_id"], name: "index_node_functions_on_node_category_id", using: :btree
   add_index "node_functions", ["node_type_id"], name: "index_node_functions_on_node_type_id", using: :btree
 
+  create_table "node_informations", force: :cascade do |t|
+    t.text     "name",                    limit: 65535
+    t.integer  "node_function_id",        limit: 4
+    t.integer  "workflow_information_id", limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "node_informations", ["node_function_id"], name: "index_node_informations_on_node_function_id", using: :btree
+  add_index "node_informations", ["workflow_information_id"], name: "index_node_informations_on_workflow_information_id", using: :btree
+
   create_table "node_option_choices", force: :cascade do |t|
     t.integer  "node_option_id", limit: 4
     t.text     "name",           limit: 65535
@@ -170,17 +174,15 @@ ActiveRecord::Schema.define(version: 20170524160542) do
   end
 
   create_table "node_option_values", force: :cascade do |t|
-    t.integer  "node_option_id",          limit: 4
-    t.integer  "workflow_information_id", limit: 4
-    t.string   "value",                   limit: 255
-    t.integer  "node_attribute_id",       limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "node_option_id",      limit: 4
+    t.string   "value",               limit: 255
+    t.integer  "node_information_id", limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
-  add_index "node_option_values", ["node_attribute_id"], name: "index_node_option_values_on_node_attribute_id", using: :btree
+  add_index "node_option_values", ["node_information_id"], name: "index_node_option_values_on_node_information_id", using: :btree
   add_index "node_option_values", ["node_option_id"], name: "index_node_option_values_on_node_option_id", using: :btree
-  add_index "node_option_values", ["workflow_information_id"], name: "index_node_option_values_on_workflow_information_id", using: :btree
 
   create_table "node_options", force: :cascade do |t|
     t.integer  "node_function_id",    limit: 4
@@ -510,12 +512,23 @@ ActiveRecord::Schema.define(version: 20170524160542) do
 
   create_table "task_category_and_wikis", force: :cascade do |t|
     t.integer  "task_category_id", limit: 4
-    t.text     "wiki_page_path",   limit: 65535
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "wiki_page_id",     limit: 4
   end
 
   add_index "task_category_and_wikis", ["task_category_id"], name: "index_task_category_and_wikis_on_task_category_id", using: :btree
+  add_index "task_category_and_wikis", ["wiki_page_id"], name: "index_task_category_and_wikis_on_wiki_page_id", using: :btree
+
+  create_table "task_performances", force: :cascade do |t|
+    t.text     "name",         limit: 65535
+    t.text     "description",  limit: 65535
+    t.integer  "wiki_page_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "task_performances", ["wiki_page_id"], name: "index_task_performances_on_wiki_page_id", using: :btree
 
   create_table "test_algorithms", force: :cascade do |t|
     t.string   "name",                   limit: 255
@@ -664,6 +677,7 @@ ActiveRecord::Schema.define(version: 20170524160542) do
     t.integer  "maximal_duration",       limit: 4
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.text     "xml",                    limit: 65535
   end
 
   add_index "workflow_informations", ["author_id"], name: "index_workflow_informations_on_author_id", using: :btree
@@ -826,19 +840,20 @@ ActiveRecord::Schema.define(version: 20170524160542) do
   end
 
   add_foreign_key "download_files", "process_informations"
-  add_foreign_key "node_attributes", "node_functions"
   add_foreign_key "node_categories", "node_types"
   add_foreign_key "node_functions", "node_categories"
   add_foreign_key "node_functions", "node_types"
+  add_foreign_key "node_informations", "node_functions"
+  add_foreign_key "node_informations", "workflow_informations"
   add_foreign_key "node_option_choices", "node_options"
-  add_foreign_key "node_option_values", "node_attributes"
+  add_foreign_key "node_option_values", "node_informations"
   add_foreign_key "node_option_values", "node_options"
-  add_foreign_key "node_option_values", "workflow_informations"
   add_foreign_key "node_options", "node_functions"
   add_foreign_key "node_options", "node_option_types"
   add_foreign_key "process_files", "process_informations"
   add_foreign_key "process_results", "process_informations"
   add_foreign_key "task_category_and_wikis", "task_categories"
+  add_foreign_key "task_performances", "wiki_pages"
   add_foreign_key "upload_files", "process_informations"
   add_foreign_key "user_pictures", "users"
   add_foreign_key "wiki_and_workflow_informations", "wiki_pages"

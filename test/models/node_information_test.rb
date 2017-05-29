@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NodeAttributeTest < ActiveSupport::TestCase
+class NodeInformationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

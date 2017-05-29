@@ -1,0 +1,34 @@
+<%= f_node.fields_for :option do |f| %>
+    <% node_function.node_options.each do |node_option|%>
+        <% if node_information != nil %>
+            <% node_option_value = node_information.node_option_values.where(:node_option_id => node_option.id).first%>
+        <% else %>
+            <% node_option_value = nil %>
+        <% end %>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label><%= node_option.label%></label>
+                <% if node_option.node_option_type.name == "Numeric" or node_option.node_option_type.name == "String" %>
+                    <% if node_option_value == nil %>
+                        <input type="text" name="node[option][<%= node_option.id %>]" id="node_option_<%= node_option.id %>" class="form-control" value=<%=node_option.default_value %>>
+                    <% else %>
+                        <input type="text" name="node[option][<%= node_option.id %>]" id="node_option_<%= node_option.id %>" class="form-control" value="<%=node_option_value.value %>" >
+                    <% end %>
+                <% elsif node_option.node_option_type.name == "Nominal specification" %>
+                    <select class="form-control" name="node[option][<%= node_option.id %>]" id="node_option_<%= node_option.id %>" class="form-control" >
+                        <% node_option.node_option_choices.each do |node_option_choice| %>
+                            <% if node_option_value == nil or node_option_choice.id != node_option_value.value.to_i %>
+                                <option value ="<%=node_option_choice.id %>"><%= node_option_choice.name%></option>
+                            <% else  %>
+                                <option value ="<%=node_option_choice.id %>"  selected = "selected" ><%= node_option_choice.name%></option>
+                            <% end %>
+                        <% end %>
+                    </select>
+                <% end %>
+                <p class="help-block"><%= node_option.description %></p>
+            </div>
+        </div>
+    <% end %>
+<% end %>
+

@@ -2,12 +2,10 @@
 
 one:
   node_option_id: 
-  workflow_information_id: 
   value: MyString
-  node_attribute_id: 
+  node_information_id: 
 
 two:
   node_option_id: 
-  workflow_information_id: 
   value: MyString
-  node_attribute_id: 
+  node_information_id: 

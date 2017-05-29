@@ -15,15 +15,12 @@ Rails.application.routes.draw do
     wiki_root '/tasks/'
     resources :task do
         post 'create_page', to: 'task#create_page'
+        post 'create_performance', to: 'task#create_performance'
     end
     devise_for :users
     get 'home/index'
     get 'home/test'
 
-    # The priority is based upon order of creation: first created -> highest priority.
-    # See how all your routes lay out with "rake routes".
-
-    # You can have the root of your site routed with "root"
     root 'home#index'
 
     resources :workflow_informations do
@@ -38,11 +35,7 @@ Rails.application.routes.draw do
         post 'execute/', to: 'process#execute'
         post 'copy/', to: 'process#copy'
     end
-    #post "process", to: 'process#create'
-    #get 'process/train/', to: 'process#show_train'
     post 'process/train/', to: 'process#train'
-    #get 'process/execute/:id/', to: 'process#show_execute'
-    #  get 'process/refresh/', to: 'process#refresh_info'
     post 'process/upload/', to: 'process#upload'
     post 'process/download/', to: 'process#download'
 
@@ -59,6 +52,9 @@ Rails.application.routes.draw do
     resources :node do
         post 'save/', to: 'node#save'
     end
+    post '/node/save_all/', to: 'node#save_all'
+
+    post 'user/picture/update', to: 'user_picture#update'
 
 
     # Example of regular route:

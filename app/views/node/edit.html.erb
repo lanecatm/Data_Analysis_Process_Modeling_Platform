@@ -27,21 +27,20 @@
                     <%= f.simple_fields_for :node_options do |node_option| %>
                         <%= render '/node/node_option_fields', :f => node_option %>
                     <% end %>
-                        <div class= "row">
-                            <div class= "col-md-12">
-                                <div class="links">
-                                    <label></label>
-                                    <%= link_to_add_association 'Add New Option', f, :node_options, :class=>"btn btn-default btn-block" %>
-                                </div>
+                    <div class= "row">
+                        <div class= "col-md-12">
+                            <div class="links">
+                                <label></label>
+                                <%= link_to_add_association 'Add New Option', f, :node_options, :class=>"btn btn-default btn-block" %>
+                            </div>
                             <hr/>
-                            </div>
-                            <div class= "col-md-offset-10 col-md-2">
-                                <%= f.submit 'Save', :class => "btn btn-primary btn-block" %>
-                            </div>
                         </div>
-                    <% end %>
+                        <div class= "col-md-offset-10 col-md-2">
+                            <%= f.submit 'Save', :class => "btn btn-primary btn-block" %>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <% end %>
         </div>
     </div>
 </div> <!-- /container -->

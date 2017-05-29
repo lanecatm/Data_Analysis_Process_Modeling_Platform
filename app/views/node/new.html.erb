@@ -13,7 +13,7 @@
             <%= simple_form_for @node_function, :url => node_index_path, :method => :post do |f|%>
                 <div class = "row">
                     <div class="col-md-6">
-                        <%= f.association :node_category%>
+                        <%= f.association :node_category, input_html:{class: "node-category"} %>
                     </div>
                     <div class="col-md-6">
                         <%= f.input :name, as: :string %>
@@ -27,39 +27,40 @@
                     <%= f.simple_fields_for :node_options do |node_option| %>
                         <%= render '/node/node_option_fields', :f => node_option %>
                     <% end %>
-                        <div class= "row">
-                            <div class= "col-md-12">
-                                <div class="links">
-                                    <label></label>
-                                    <%= link_to_add_association 'Add New Option', f, :node_options, :class=>"btn btn-default btn-block" %>
-                                </div>
+                    <div class= "row">
+                        <div class= "col-md-12">
+                            <div class="links">
+                                <label></label>
+                                <%= link_to_add_association 'Add New Option', f, :node_options, :class=>"btn btn-default btn-block" %>
+                            </div>
                             <hr/>
-                            </div>
-                            <div class= "col-md-offset-10 col-md-2">
-                                <%= f.submit 'Save', :class => "btn btn-primary btn-block" %>
-                            </div>
                         </div>
-                    <% end %>
+                        <div class= "col-md-offset-10 col-md-2">
+                            <%= f.submit 'Save', :class => "btn btn-primary btn-block" %>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <% end %>
         </div>
     </div>
 </div> <!-- /container -->
 
-<script type="text/javascript">
+<!--
+<script>
     $('.node-option-type').on('change', function() {
-            selectedValue = $(this).val();
-            defaultValue = $(this).closest('.row').children('.node-option-default-value');
-            choice = $(this).closest('.row').children('.links');
-            if(selectedValue == 2) { 
-            defaultValue.hide();
-            choice.show(); 
-            } 
-            else { 
-            defaultValue.show();
-            choice.hide();
-            choice.children('.nested-fields').remove(); 
-            }
+    selectedValue = $(this).val();
+    defaultValue = $(this).closest('.row').children('.node-option-default-value');
+    choice = $(this).closest('.row').children('.links');
+    if(selectedValue == 2) { 
+    defaultValue.hide();
+    choice.show(); 
+    } 
+    else { 
+    defaultValue.show();
+    choice.hide();
+    choice.children('.nested-fields').remove(); 
+    }
 
-            });
-        </script>
+    });
+</script>
+-->

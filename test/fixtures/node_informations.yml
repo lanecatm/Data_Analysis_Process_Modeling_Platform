@@ -3,7 +3,9 @@
 one:
   name: MyText
   node_function_id: 
+  workflow_information_id: 
 
 two:
   name: MyText
   node_function_id: 
+  workflow_information_id: 

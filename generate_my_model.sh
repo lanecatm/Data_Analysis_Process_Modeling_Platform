@@ -66,5 +66,7 @@
 #rails generate model TaskCategoryAndWiki task_category:references wiki_page_path:text
 #rails g model WikiAndWorkflowInformation wiki_page:references workflow_information:references
 #rails generate model EdgeAttribute name:text
-rails generate model NodeAttribute name:text node_function:references
-rails generate model NodeOptionValue node_option:references workflow_information:references value:string node_attribute:references
+#rails g model TaskPerformance name:text description:text wiki_page:references
+
+rails generate model NodeInformation name:text node_function:references workflow_information:references
+rails generate model NodeOptionValue node_option:references value:string node_information:references

@@ -14,6 +14,7 @@
 
                     <div class="box-body">
                         <div class="tab-custom">
+                            <% @active_page = params[:active_page] %>
                             <ul class="nav nav-tabs nav-bordered" data-spy="affix" role="tablist">
                                 <li role="presentation" class="
                                 <%= 'active' if (@active_page == nil or @active_page == "content") %>
@@ -22,17 +23,23 @@
                                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Introduction
                                 </a>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation" class="
+                                <%= 'active' if (@active_page == "performance") %>
+                                ">
                                 <a href="#performance" aria-controls="performance" role="tab" data-toggle="tab">
                                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Performance
                                 </a>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation" class="
+                                <%= 'active' if (@active_page == "model") %>
+                                ">
                                 <a href="#model" aria-controls="model" role="tab" data-toggle="tab">
                                     <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Model
                                 </a>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation" class="
+                                <%= 'active' if (@active_page == "forum") %>
+                                ">
                                 <a href="#forum" aria-controls="forum" role="tab" data-toggle="tab">
                                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Forum
                                 </a>
@@ -68,13 +75,20 @@
                         <%= render "base_wiki_pages/show_content" %>
                     </div>
 
-                    <div role="tabpanel" class="tab-pane" id="performance">
+                    <div role="tabpanel" class="tab-pane
+                        <%= 'active' if (@active_page == "performance") %>
+                        " id="performance">
                         <%= render "base_wiki_pages/show_performance" %>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="model">
+                    <div role="tabpanel" class="tab-pane
+                        <%= 'active' if (@active_page == "model") %>
+                        " id="model">
                         <%= render "base_wiki_pages/show_model" %>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="forum">
+                    <div role="tabpanel" class="tab-pane
+                        <%= 'active' if (@active_page == "forum") %>
+                        " id="forum">
+                        <%= render "base_wiki_pages/show_forum" %>
                     </div>
                 </div>
             </div>
