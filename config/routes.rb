@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     # You can have the root of your site routed with "root"
     root 'home#index'
 
+    post 'pannel/new', to: 'properties_panel#new'
+
     resources :workflow_informations do
         resources :workflow_privileges
         resources :workflow_comments

@@ -1,0 +1,2 @@
+module PropertiesPanelHelper
+end
