@@ -4,6 +4,7 @@ one:
   node_function_id: 
   node_index: 1
   name: MyText
+  label: MyText
   description: MyText
   default_value: MyText
   node_option_type_id: 
@@ -12,6 +13,7 @@ two:
   node_function_id: 
   node_index: 1
   name: MyText
+  label: MyText
   description: MyText
   default_value: MyText
   node_option_type_id: 

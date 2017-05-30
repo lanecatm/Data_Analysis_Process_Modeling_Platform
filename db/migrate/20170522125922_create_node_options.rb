@@ -4,6 +4,7 @@ class CreateNodeOptions < ActiveRecord::Migration
       t.references :node_function, index: true
       t.integer :node_index
       t.text :name
+      t.text :label
       t.text :description
       t.text :default_value
       t.references :node_option_type, index: true

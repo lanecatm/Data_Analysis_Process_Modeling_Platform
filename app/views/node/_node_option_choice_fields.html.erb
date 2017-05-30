@@ -1,0 +1,17 @@
+<div class="nested-fields">
+
+    <div class= "col-md-12 ">
+        <div class= "row">
+            <div class= "col-md-5 ">
+                <%= f.input :name, :label => "Choice Name", as: :string %>
+            </div>
+            <div class= "col-md-5 ">
+                <%= f.input :value, :label => "Choice Value", as: :string %>
+            </div>
+            <div class= "col-md-2">
+                <label></label>
+                <%= link_to_remove_association '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, f, :class=>"btn btn-danger btn-block" %>
+            </div>
+        </div>
+    </div>
+</div>

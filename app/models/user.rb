@@ -5,8 +5,7 @@ class User < ActiveRecord::Base
         :recoverable, :rememberable, :trackable, :validatable
     has_one :user_picture, dependent: :destroy 
     def admin?
-        #self.role == "admin"
-        true
+        self.role == "admin"
     end
     def name
         self.user_name

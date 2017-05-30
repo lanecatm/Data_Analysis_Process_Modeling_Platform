@@ -1,0 +1,60 @@
+<div class="nested-fields">
+    <div class="panel panel-default">
+        <div class="panel-heading">Option</div>
+        <div class="panel-body">
+
+            <div class = "row">
+                <div class="col-md-6">
+                    <%= f.input :name, as: :string, hint: "Could not contain space" %>
+                </div>
+                <div class="col-md-6">
+                    <%= f.input :label, as: :string, hint: "label to show" %>
+                </div>
+            </div>
+            <div class = "row">
+                <div class="col-md-6">
+                    <%= f.association :node_option_type, label: "Type", input_html:{class: "node-option-type"} %>
+                </div>
+                <div class="col-md-6 node-option-default-value" hidden="hidden">
+                    <%= f.input :default_value, as: :string %>
+                </div>
+
+                <%= f.simple_fields_for :node_option_choices do |node_option_choice| %>
+                    <%= render '/node/node_option_choice_fields', :f => node_option_choice %>
+                <% end %>
+                <div class="links" hidden="hidden">
+                    <div class="col-md-5 ">
+                        <label></label>
+                        <%= link_to_add_association 'Add New Choice', f, :node_option_choices, :class=>"btn btn-default btn-block" %>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <%= f.input :description %>
+
+            <div class= "row">
+                <div class= "col-md-offset-10 col-md-2">
+                    <%= link_to_remove_association "Remove", f, :class=>"btn btn-sm btn-danger btn-block" %>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>
+<script>
+    $('.node-option-type').on('change', function() {
+    selectedValue = $(this).val();
+    defaultValue = $(this).closest('.row').children('.node-option-default-value');
+    choice = $(this).closest('.row').children('.links');
+    if(selectedValue == 2) { 
+    defaultValue.hide();
+    choice.show(); 
+    } 
+    else { 
+    defaultValue.show();
+    choice.hide();
+    choice.children('.nested-fields').remove(); 
+    }
+
+    });
+</script>

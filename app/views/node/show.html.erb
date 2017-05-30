@@ -1,0 +1,30 @@
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class = "row">
+                <h3><%= @node_function.name %></h3>
+                <h4><small><%= @node_function.description %></small></h4>
+                <hr/>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class = "row">
+                <%= form_for :node, :url => node_save_path(params[:id]), :method => :post,:html => {:class => "form-horizontal", :role => "form"}  do |f_node|%>
+                    <%= f_node.hidden_field :workflow_information_id, :value => "54" %>
+                    <%= f_node.hidden_field :name, :value => "task_" + @node_function.id.to_s %>
+                    <%= f_node.hidden_field :node_function_id, :value => @node_function.id %>
+
+                    <%= render 'node/node_fields', :node_information => @node_information, :node_function => @node_function, :f_node => f_node %>
+
+                    <%= f_node.button :submit, :class => "btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+

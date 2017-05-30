@@ -94,6 +94,9 @@ class WorkflowInformationsController < ApplicationController
             wiki_and_workflow_information = WikiAndWorkflowInformation.where(:wiki_page_id => wiki_page_id, :workflow_information_id=> @workflow_information.id).first
             if wiki_and_workflow_information == nil
                 WikiAndWorkflowInformation.create(:wiki_page_id => wiki_page_id, :workflow_information_id => @workflow_information.id)
+            else
+                wiki_and_workflow_information.destroy
+                WikiAndWorkflowInformation.create(:wiki_page_id => wiki_page_id, :workflow_information_id => @workflow_information.id)
             end
 
             if @workflow_information.update(all_params)

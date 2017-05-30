@@ -52,14 +52,21 @@
 #rails generate model ProcessFile name:text path:text process_information:references node:integer
 
 #rails generate model NodeType name:text
-#rails generate model NodeCategory name:text
-#rails generate model NodeFunction name:text description:text node_type:references node_function:references 
+#rails generate model NodeCategory name:text node_type:references
+#rails generate model NodeFunction name:text description:text node_type:references node_category:references 
 #rails generate model NodeOptionType name:text
-#rails generate model NodeOption node_function:references node_index:integer name:text description:text default_value:text node_option_type:references 
-#rails generate model NodeOptionChoices node_option:references name:text value:text
+#rails d model NodeOption
+#rails d model NodeOptionChoices
+#rails generate model NodeOption node_function:references node_index:integer name:text label:text description:text default_value:text node_option_type:references 
+#rails generate model NodeOptionChoice node_option:references name:text value:text
 
 #rails generate model Separator name:text value:text
 #rails generate model ArffType name:text description:text
 #rails generate model TaskCategory name:text
 #rails generate model TaskCategoryAndWiki task_category:references wiki_page_path:text
-rails g model WikiAndWorkflowInformation wiki_page:references workflow_information:references
+#rails g model WikiAndWorkflowInformation wiki_page:references workflow_information:references
+#rails generate model EdgeAttribute name:text
+#rails g model TaskPerformance name:text description:text wiki_page:references
+
+rails generate model NodeInformation name:text node_function:references workflow_information:references
+rails generate model NodeOptionValue node_option:references value:string node_information:references

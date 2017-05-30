@@ -11,4 +11,6 @@ class WorkflowInformation < ActiveRecord::Base
     has_many :workflow_information_and_tags, dependent: :destroy
     has_many :workflow_tags, :through => :workflow_information_and_tags
     has_many :process_informations, dependent: :destroy
+    has_many :wiki_and_workflow_informations, dependent: :destroy
+    has_many :node_informations, dependent: :destroy
 end

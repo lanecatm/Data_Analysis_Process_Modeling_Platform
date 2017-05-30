@@ -2,6 +2,7 @@ module Homeland
   class Node < ActiveRecord::Base
     validates :name, :description, presence: true
     validates :name, uniqueness: true
+    belongs_to :wiki_page
 
     has_many :topics, class_name: 'Homeland::Topic'
 

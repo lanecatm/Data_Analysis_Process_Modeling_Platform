@@ -1,0 +1,7 @@
+
+<%= f.fields_for @node do |subf| %> 
+    <%= subf.hidden_field :name, class: 'form-control', value: "name" %>
+    <%= subf.hidden_field :description,  class: 'form-control', value: "name" %>
+    <%= subf.hidden_field :color, value: "#0E76BD", class: 'form-control' %>
+    <%= subf.hidden_field :sort, class: 'form-control' %>
+<% end %>

@@ -72,7 +72,7 @@
         <label class="col-md-12">Task</label>
         <div class="col-md-12">
             <%=subf.select :wiki_page_id, WikiPage.all.collect{|c|[ c.title, c.id ]}, 
-                {},
+                {:selected => @workflow_information.wiki_and_workflow_informations.first == nil ? 1 : @workflow_information.wiki_and_workflow_informations.first.wiki_page_id},
                 { class: "form-control" } 
             %>
             <h4><small>

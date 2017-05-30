@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  node_option_id: 
+  value: MyString
+  node_information_id: 
+
+two:
+  node_option_id: 
+  value: MyString
+  node_information_id: 

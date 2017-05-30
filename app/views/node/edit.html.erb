@@ -1,0 +1,81 @@
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <h3> Edit algorithm </h3>
+            <hr/>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-md-offset-3 col-md-6">
+            <%= simple_form_for @node_function, :url => node_path(@node_function.id), :method => :patch do |f|%>
+                <div class = "row">
+                    <div class="col-md-6">
+                        <%= f.association :node_category%>
+                    </div>
+                    <div class="col-md-6">
+                        <%= f.input :name, as: :string %>
+                    </div>
+                </div>
+                <%= f.input :description %>
+                <hr/>
+                <h3> Options</h3>
+                <hr/>
+                <div id='node_options'>
+                    <%= f.simple_fields_for :node_options do |node_option| %>
+                        <%= render '/node/node_option_fields', :f => node_option %>
+                    <% end %>
+                    <div class= "row">
+                        <div class= "col-md-12">
+                            <div class="links">
+                                <label></label>
+                                <%= link_to_add_association 'Add New Option', f, :node_options, :class=>"btn btn-default btn-block" %>
+                            </div>
+                            <hr/>
+                        </div>
+                        <div class= "col-md-offset-10 col-md-2">
+                            <%= f.submit 'Save', :class => "btn btn-primary btn-block" %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+            node_options = $('.node-option-type');
+            node_options.each(function(index, node_option){
+                selectedValue = $(node_option).val();
+                defaultValue = $(node_option).closest('.row').children('.node-option-default-value');
+                choice = $(node_option).closest('.row').children('.links');
+                if(selectedValue == 2) { 
+                defaultValue.hide();
+                choice.show(); 
+                } 
+                else { 
+                defaultValue.show();
+                choice.hide();
+                choice.children('.nested-fields').remove(); 
+                }
+                });
+            });
+$('.node-option-type').on('change', function() {
+        selectedValue = $(this).val();
+        defaultValue = $(this).closest('.row').children('.node-option-default-value');
+        choice = $(this).closest('.row').children('.links');
+        if(selectedValue == 2) { 
+        defaultValue.hide();
+        choice.show(); 
+        } 
+        else { 
+        defaultValue.show();
+        choice.hide();
+        choice.children('.nested-fields').remove(); 
+        }
+
+        });
+    </script>

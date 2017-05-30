@@ -1,0 +1,20 @@
+<%= form_for :upload, :html => {:class => "form-horizontal", :role => "form"}, url: user_picture_update_path do |f|%>
+    <div class="form-inputs">
+        <div class="col-md-12">
+            <%= f.file_field :file, :label => "Upload user picture"%>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-actions">
+            <%= f.submit "Update" %>
+        </div>
+    </div>
+<% end %>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
