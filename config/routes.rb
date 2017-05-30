@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
     root 'home#index'
 
+    post 'pannel/new', to: 'properties_panel#new'
+
     resources :workflow_informations do
         resources :workflow_privileges
         resources :workflow_comments
