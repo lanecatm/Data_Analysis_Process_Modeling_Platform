@@ -1,8 +1,10 @@
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
     <% @node = @page.homeland_nodes.first%>
+    <!--
     <% if @node != nil %>
         <%= link_to( wt( 'Forum' ), homeland.node_topics_path(@node.id), class:"btn btn-default btn-sm", role:"button") %>
     <% end %>
+    -->
     <%= link_to( wt( 'List all' ), tasks_all_path, class:"btn btn-info btn-sm", role:"button") %>
     <% if edit_allowed? %>
         <%= link_to( wt( 'Edit' ), wiki_page_edit_path(@page), class:"btn btn-primary btn-sm", role:"button" ) %>

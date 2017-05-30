@@ -16,7 +16,7 @@
                 <%= form_for (@topic), url: homeland.topics_path do |f| %>
                     <%= f.hidden_field :node_id %>
                     <div class="form-group">
-                        <label>Task </label>
+                        <label>Analytics Application </label>
                         <%= f.select :node_id, Homeland::Node.all.collect { |n| [n.name, n.id] }, {}, { class: 'form-control' } %>
                     </div>
 

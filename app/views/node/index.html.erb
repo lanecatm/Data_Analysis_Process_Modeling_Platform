@@ -37,48 +37,68 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <div class="row">
-                <% workflow_information_id = 54 %>
-                <% name = "task_" + "test_hel" %>
-                <% node_information = NodeInformation.where(:workflow_information_id => workflow_information_id, :name => name).first%>
-                <% if node_information != nil %>
-                    <% node_function_exist = node_information.node_function %>
-                <% else %>
-                    <% node_function_exist = NodeFunction.all.first %>
-                <% end %>
-
-                <%= form_for :node, :url => node_save_all_path, :method => :post,:html => {:class => "form-horizontal", :role => "form"}  do |f_node|%>
-                    <%= f_node.hidden_field :workflow_information_id, :value => workflow_information_id %>
-                    <%= f_node.hidden_field :name, :value =>name %>
-                    <%= f_node.select :node_function_id, NodeFunction.all.collect{|c|[ c.name, c.id ]}, 
-                        {:selected => node_function_exist.id},
-                        { class: "form-control node-function-selector" } 
-                    %>
-                    <% NodeFunction.all.each do |node_function|%>
-                        <% if node_function.id == node_function_exist.id %>
-                            <div class="node_fields" id="<%= name %>_<%=node_function.id %>" >
-                                <%= render "node/node_fields", :node_information => node_information, :node_function => node_function, :f_node => f_node %>
-                            </div>
+                <% nameList = ["task_0", "task_1"] %>
+                <% active_name = "task_0" %>
+                <!-- 生成标签页 -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <% nameList.each do |name| %>
+                        <% if name == active_name %>
+                            <li role="presentation" class="active"><a href="#<%=name%>" aria-controls="<%=name%>" role="tab" data-toggle="tab"><%=name%></a></li>
                         <% else %>
-                            <div class="node_fields" id="<%= name %>_<%=node_function.id %>" hidden="hidden" >
-                                <%= render "node/node_fields", :node_information => nil, :node_function => node_function, :f_node => f_node %>
-                            </div>
+                            <li role="presentation"><a href="#<%=name %>" aria-controls="<%=name%>" role="tab" data-toggle="tab"><%=name%></a></li>
                         <% end %>
                     <% end %>
-                    <script>
-                        $('.node-function-selector').on('change', function() {
-                            selectedValue = $(this).val();
-                            allDivs = $(this).closest('form').children(".node_fields");
-                            allDivs.hide();
-                            inputDiv = $(this).closest('form').children("#<%= name %>_"+ selectedValue);
-                            inputDiv.show();
-                        });
+                </ul>
 
+                <div class="tab-content">
+                    <% nameList.each do |name| %>
+                        <% if name == active_name %>
+                        <div role="tabpanel" class="tab-pane active" id="<%=name%>">
+                        <% else %>
+                        <div role="tabpanel" class="tab-pane " id="<%=name%>">
+                        <% end %>
+                        <br/>
+                            <% workflow_information_id = 54 %>
+                            <% node_information = NodeInformation.where(:workflow_information_id => workflow_information_id, :name => name).first%>
+                            <% if node_information != nil %>
+                                <% node_function_exist = node_information.node_function %>
+                            <% else %>
+                                <% node_function_exist = NodeFunction.all.first %>
+                            <% end %>
 
-                    </script>
-                    <%= f_node.button :save, :class => "btn btn-primary" %>
-                <% end %>
-
-
+                            <%= form_for :node, :url => node_save_all_path, :method => :post,:html => {:class => "form-horizontal", :role => "form"}  do |f_node|%>
+                                <%= f_node.hidden_field :workflow_information_id, :value => workflow_information_id %>
+                                <%= f_node.hidden_field :name, :value =>name %>
+                                <label>Choose Function</label>
+                                <%= f_node.select :node_function_id, NodeFunction.all.collect{|c|[ c.name, c.id ]}, 
+                                    {:selected => node_function_exist.id},
+                                    { class: "form-control node-function-selector" } 
+                                %>
+                                <% NodeFunction.all.each do |node_function|%>
+                                    <% if node_function.id == node_function_exist.id %>
+                                        <div class="<%=name %>_fields" id="<%= name %>_<%=node_function.id %>" >
+                                            <%= render "node/node_fields", :node_information => node_information, :node_function => node_function, :f_node => f_node %>
+                                        </div>
+                                    <% else %>
+                                        <div class="<%= name %>_fields" id="<%= name %>_<%=node_function.id %>" hidden="hidden" >
+                                            <%= render "node/node_fields", :node_information => nil, :node_function => node_function, :f_node => f_node %>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                                <script>
+                                    $('.node-function-selector').on('change', function() {
+                                        selectedValue = $(this).val();
+                                        allDivs = $(this).closest('form').children(".<%= name %>_fields");
+                                        allDivs.hide();
+                                        inputDiv = $(this).closest('form').children("#<%= name %>_"+ selectedValue);
+                                        inputDiv.show();
+                                    });
+                                </script>
+                                <%= f_node.button :save, :class => "btn btn-primary" %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>
