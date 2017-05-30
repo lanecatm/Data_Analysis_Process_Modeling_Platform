@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :task do
         post 'create_page', to: 'task#create_page'
         post 'create_performance', to: 'task#create_performance'
+        post 'create_relationship', to: 'task#create_relationship'
     end
     devise_for :users
     get 'home/index'
