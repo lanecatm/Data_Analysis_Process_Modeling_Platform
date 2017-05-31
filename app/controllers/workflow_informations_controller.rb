@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class WorkflowInformationsController < ApplicationController
     WORKFLOW_INFO_INIT = 1
     WORKFLOW_INFO_PUBLISH = 2
@@ -24,8 +25,23 @@ class WorkflowInformationsController < ApplicationController
         redirect_to edit_workflow_information_path(@workflow_information.id)
     end
 
+require 'nokogiri'
+=begin
+GraphNode.incomings, Array of STRING(SequenceFlow ID)
+GraphNode.outgoings, Array of STRING(SequenceFlow ID)
+=end
+    GraphNode = Struct.new :id_str, :name, :type, :incomings, :outgoings
+    GraphEdge = Struct.new :id_str, :name, :source, :target, :event_type
+
     def edit
         @workflow_information = WorkflowInformation.find(params[:id])
+        @workflow_information_id = params[:id]
+        if @workflow_information.xml != nil
+            @nodes, @edges = parseBpmn(@workflow_information.xml)
+        else
+            @nodes = nil
+            @edges = nil
+        end
         if @workflow_information.status == WORKFLOW_INFO_PUBLISH
             workflow_information_hash = @workflow_information.attributes
             workflow_information_hash.delete("id")
@@ -143,8 +159,16 @@ class WorkflowInformationsController < ApplicationController
     end
 
     def show
-        @active_page = params[:active_page] == nil ? "preview" : params[:active_page]
         @workflow_information = WorkflowInformation.find(params[:id])
+        @workflow_information_id = params[:id]
+        if @workflow_information.xml != nil
+            @nodes, @edges = parseBpmn(@workflow_information.xml)
+        else
+            @nodes = nil
+            @edges = nil
+        end
+
+        @active_page = params[:active_page] == nil ? "preview" : params[:active_page]
         @version_workflow_informations = WorkflowInformation.where(:name => @workflow_information.name, :status => WORKFLOW_INFO_PUBLISH)
         @process_informations = ProcessInformation.where(:workflow_information_id => @workflow_information.id)
     end
@@ -180,5 +204,35 @@ class WorkflowInformationsController < ApplicationController
     def wiki_params
         params.require(:workflow_information).permit(wiki_and_workflow_information:[:wiki_page_id])
     end
+    def parseBpmn(xml)
+        nodes = Array.new
+        edges = Array.new
 
+        doc = Nokogiri::XML.parse(xml)
+
+        doc.xpath('//bpmn2:process').children.each do |element|
+            id = element["id"]
+            if id != nil
+                name = element["name"]
+                type = element.name
+                if type == "sequenceFlow"
+                    source = element["sourceRef"]
+                    target = element["targetRef"]
+                    #event_type = element["magic:event-type"]
+                    edges.push(GraphEdge.new id, name, source, target, nil)
+                else
+                    incomings = Array.new
+                    outgoings = Array.new
+                    element.xpath('bpmn2:incoming').each do |incoming|
+                        incomings.push(incoming.text)
+                    end
+                    element.xpath('bpmn2:outgoing').each do |outgoing|
+                        outgoings.push(outgoing.text)
+                    end
+                    nodes.push(GraphNode.new id, name, type, incomings, outgoings)
+                end
+            end
+        end
+        return nodes, edges
+    end
 end

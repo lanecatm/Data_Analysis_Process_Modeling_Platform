@@ -40,7 +40,19 @@ class TaskController < WikiPagesController
         wiki_pages_controller.create(params)
     end
 
+    def create_relationship
+        WikiRelationship.create(relationship_params)
+        redirect_to :back
+    end
+
+    def destroy_relationship
+        # TODO 删除关联关系
+    end
+
     private
+    def relationship_params
+        params.require(:wiki_relationship).permit(:wiki_page_id, :related_wiki_page_id)
+    end
     def task_params
         params.require(:task).permit(:name, :task_category, :content, :comment)
     end

@@ -1,45 +1,126 @@
-<input hidden="hidden" id="show_xml" type="text" value=''>
+
+<% if @workflow_information.xml == nil %>
+    <input id="show_xml" type="hidden" value='<?xml version="1.0" encoding="UTF-8"?><bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn"><bpmn2:process id="Process_1" isExecutable="false"><bpmn2:startEvent id="StartEvent_1"/></bpmn2:process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1"><bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1"><dc:Bounds height="36.0" width="36.0" x="412.0" y="240.0"/></bpmndi:BPMNShape></bpmndi:BPMNPlane></bpmndi:BPMNDiagram>n</bpmn2:definitions>'>
+<% else %>
+    <input id="show_xml" type="hidden" value=' <%= @workflow_information.xml %> '>
+<% end %>
 
 
+<div class="row">
+    <div class="col-md-9">
+        <div style="width:700px; height:600px">
+            <div class="content" id="js-drop-zone">
 
-<div style="width:1100px; height:600px">
-  <div class="content" id="js-drop-zone">
+                <!--    <div class="message intro">
+                    <div class="note">
+                        Please choose a diagramme to charge: <br><a id="js-create-diagram" value ="This is the value" href>Diagramme 1</a><br><a id="js-create-diagram2" value="This is the value" href>Diagramme 2</a>
+                    </div>
+                </div> -->
 
-<!--    <div class="message intro">
-      <div class="note">
-        Please choose a diagramme to charge: <br><a id="js-create-diagram" value ="This is the value" href>Diagramme 1</a><br><a id="js-create-diagram2" value="This is the value" href>Diagramme 2</a>
-      </div>
-    </div> -->
+                <div class="message error">
+                    <div class="note">
+                        <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
 
-    <div class="message error">
-      <div class="note">
-        <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
+                        <div class="details">
+                    <span>cause of the problem</span> <pre></pre>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="details">
-          <span>cause of the problem</span>
-          <pre></pre>
+                <div class="canvas" id="js-canvas" style="width:100%; height:100%"></div>
+                <div id="js-properties-panel"></div>
+            </div>
         </div>
-      </div>
     </div>
+    <div class="col-md-3">
+        <% active_node_str = params[:active_tab] == nil ? "": params[:active_tab] %>
+        <% if @nodes != nil %>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="dropdown active">
+                    <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">Nodes <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+                        <% @nodes.each do |node| %>
+                            <% if node.id_str == active_node_str %>
+                                <li role="presentation" class="active"><a href="#<%=node.id_str%>" aria-controls="<%=node.id_str%>" role="tab" data-toggle="tab"><%=node.name == nil ? node.id_str : node.name %></a></li>
+                            <% else %>
+                                <li role="presentation"><a href="#<%=node.id_str %>" aria-controls="<%=node.id_str%>" role="tab" data-toggle="tab"><%=node.name==nil ? node.id_str : node.name%></a></li>
+                            <% end %>
+                        <% end %>
 
-    <div class="canvas" id="js-canvas" style="width:100%; height:100%"></div>
-    <div id="js-properties-panel"></div>
-  </div>
-</div>
-  <ul class="buttons">
-    <li>
-      download
-    </li>
-    <li>
-      <a id="js-download-diagram" href title="download BPMN diagram">
-        BPMN diagram
-      </a>
-    </li>
-    <li>
-      <a id="js-download-svg" href title="download as SVG image">
-        SVG image
-      </a>
-    </li>
-  </ul>
-<%= render "/workflow_informations/show_diagram_js" %>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <% @nodes.each do |node| %>
+                    <% if node.id_str == active_node_str %>
+                        <div role="tabpanel" class="tab-pane active" id="<%=node.id_str%>">
+                        <% else %>
+                            <div role="tabpanel" class="tab-pane " id="<%=node.id_str%>">
+                            <% end %>
+                            <br/>
+                            <% node_information = NodeInformation.where(:workflow_information_id => @workflow_information_id, :name => node.id_str).first%>
+                            <% if node_information != nil %>
+                                <% node_function_exist = node_information.node_function %>
+                            <% else %>
+                                <% node_function_exist = NodeFunction.all.first %>
+                            <% end %>
+
+                            <h4><%= node.name == nil ? node.id_str : node.name %></h4>
+                            <hr/>
+                            <%= form_for :node, :url => node_save_all_path, :method => :post,:html => {:class => "form-horizontal", :role => "form"}  do |f_node|%>
+                                <%= f_node.hidden_field :workflow_information_id, :value => @workflow_information_id %>
+                                <%= f_node.hidden_field :name, :value =>node.id_str %>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Choose Function</label>
+                                        <%= f_node.select :node_function_id, NodeFunction.all.collect{|c|[ c.name, c.id ]}, 
+                                            {:selected => node_function_exist.id},
+                                            { class: "form-control node-function-selector", disabled: "disabled" } 
+                                        %>
+                                    </div>
+                                </div>
+                                <% NodeFunction.all.each do |node_function|%>
+                                    <% if node_function.id == node_function_exist.id %>
+                                        <div class="<%=node.id_str %>_fields" id="<%= node.id_str %>_<%=node_function.id %>" >
+                                            <%= render "node/node_fields", :node_information => node_information, :node_function => node_function, :f_node => f_node %>
+                                        </div>
+                                    <% else %>
+                                        <div class="<%= node.id_str %>_fields" id="<%= node.id_str %>_<%=node_function.id %>" hidden="hidden" >
+                                            <%= render "node/node_fields", :node_information => nil, :node_function => node_function, :f_node => f_node %>
+                                        </div>
+                                    <% end %>
+                                <% end %><!--for node_function_all-->
+                                <script>
+                                    $('.node-function-selector').on('change', function() {
+                                        selectedValue = $(this).val();
+                                        allDivs = $(this).closest('form').children(".<%= node.id_str %>_fields");
+                                        allDivs.hide();
+                                        inputDiv = $(this).closest('form').children("#<%= node.id_str %>_"+ selectedValue);
+                                        inputDiv.show();
+                                    });
+                                </script>
+                            <% end %><!-- for form -->
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <ul class="buttons">
+        <li>
+        download
+        </li>
+        <li>
+        <a id="js-download-diagram" href title="download BPMN diagram">
+            BPMN diagram
+        </a>
+        </li>
+        <li>
+        <a id="js-download-svg" href title="download as SVG image">
+            SVG image
+        </a>
+        </li>
+    </ul>
+    <%= render "/workflow_informations/show_diagram_js" %>
 

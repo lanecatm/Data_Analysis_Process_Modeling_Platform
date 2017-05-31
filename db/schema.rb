@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528164223) do
+ActiveRecord::Schema.define(version: 20170530063256) do
 
   create_table "arff_types", force: :cascade do |t|
     t.text     "name",        limit: 65535
@@ -623,6 +623,16 @@ ActiveRecord::Schema.define(version: 20170528164223) do
   add_index "wiki_pages", ["creator_id"], name: "index_wiki_pages_on_creator_id", using: :btree
   add_index "wiki_pages", ["path"], name: "index_wiki_pages_on_path", unique: true, using: :btree
 
+  create_table "wiki_relationships", force: :cascade do |t|
+    t.integer  "wiki_page_id",         limit: 4
+    t.integer  "related_wiki_page_id", limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "wiki_relationships", ["related_wiki_page_id"], name: "index_wiki_relationships_on_related_wiki_page_id", using: :btree
+  add_index "wiki_relationships", ["wiki_page_id"], name: "index_wiki_relationships_on_wiki_page_id", using: :btree
+
   create_table "workflow_categories", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
@@ -858,4 +868,5 @@ ActiveRecord::Schema.define(version: 20170528164223) do
   add_foreign_key "user_pictures", "users"
   add_foreign_key "wiki_and_workflow_informations", "wiki_pages"
   add_foreign_key "wiki_and_workflow_informations", "workflow_informations"
+  add_foreign_key "wiki_relationships", "wiki_pages"
 end

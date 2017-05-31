@@ -39,6 +39,7 @@
             <div class="row">
                 <% nameList = ["task_0", "task_1"] %>
                 <% active_name = "task_0" %>
+                <% workflow_information_id = 54 %>
                 <!-- 生成标签页 -->
                 <ul class="nav nav-tabs" role="tablist">
                     <% nameList.each do |name| %>
@@ -58,7 +59,6 @@
                         <div role="tabpanel" class="tab-pane " id="<%=name%>">
                         <% end %>
                         <br/>
-                            <% workflow_information_id = 54 %>
                             <% node_information = NodeInformation.where(:workflow_information_id => workflow_information_id, :name => name).first%>
                             <% if node_information != nil %>
                                 <% node_function_exist = node_information.node_function %>

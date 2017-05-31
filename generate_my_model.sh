@@ -68,5 +68,6 @@
 #rails generate model EdgeAttribute name:text
 #rails g model TaskPerformance name:text description:text wiki_page:references
 
-rails generate model NodeInformation name:text node_function:references workflow_information:references
-rails generate model NodeOptionValue node_option:references value:string node_information:references
+#rails generate model NodeInformation name:text node_function:references workflow_information:references
+#rails generate model NodeOptionValue node_option:references value:string node_information:references
+rails generate model WikiRelationship wiki_page:references related_wiki_page:references

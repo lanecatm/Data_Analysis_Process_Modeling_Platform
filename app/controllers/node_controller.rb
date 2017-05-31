@@ -63,7 +63,7 @@ class NodeController < ApplicationController
         params[:node][:option].each { |node_id,node_value| 
             node_option_value = NodeOptionValue.create(:node_option_id => node_id, :value => node_value, :node_information_id =>@node_information.id)
         }
-        redirect_to node_index_path
+        redirect_to :back
     end
 
     private

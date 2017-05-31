@@ -1,7 +1,12 @@
 <div class="media">
     <div class="media-left">
         <a href="#">
-            <img src="/assets/user.png" alt="" style="width: 40px; height: 40px;">
+            <% if topic.user.user_picture != nil %>
+                <img src="/assets/<%= topic.user.user_picture.name %>" alt="" style="width: 40px; height: 40px;">
+            <% else %>
+                <img src="/assets/user.png" alt="" style="width: 40px; height: 40px;">
+            <% end %>
+
         </a>
     </div>
     <div class="media-body">
